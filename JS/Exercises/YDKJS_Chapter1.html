@@ -1,0 +1,66 @@
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <script>
+            var PHONE_PRICE = 100;
+            var TAX_AMOUNT = 0.10;
+            var ACCESSORY_AMOUNT = 10;
+
+            var accountBalance = "input expected";
+
+            accountBalance = prompt("What is your account balance ?");
+
+            while(isNaN(accountBalance) || accountBalance < (getTaxAmount(PHONE_PRICE) + PHONE_PRICE)) {
+                accountBalance = prompt("What is your account balance ?");
+                console.log("Input was: " + accountBalance);
+            }
+
+            var nextTotalIncludingTax = 0;
+            var currentTotalWithoutTax = 0;
+            var numberOfPhonesBought = 0;
+            var numberOfAccessoriesBought = 0;
+
+            while(accountBalance >= nextTotalIncludingTax) {
+                currentTotalWithoutTax += PHONE_PRICE;
+                numberOfPhonesBought++;
+                var updatedTotalWithTax = getUpdatedTotalIncludingTax(ACCESSORY_AMOUNT);
+                if(accountBalance >= updatedTotalWithTax) {
+                    numberOfAccessoriesBought++;
+                    currentTotalWithoutTax += ACCESSORY_AMOUNT;
+                }
+
+                nextTotalIncludingTax = getUpdatedTotalIncludingTax(PHONE_PRICE);
+            }
+
+            var totalIncludingTax = getTaxAmount(currentTotalWithoutTax) + currentTotalWithoutTax;
+            accountBalance = accountBalance - totalIncludingTax;
+            console.log("You bought " + numberOfPhonesBought + "phones and " + numberOfAccessoriesBought + " accessories");
+            console.log("The total price without tax was " + formatNumber(currentTotalWithoutTax));
+            console.log("The total price with tax was " + formatNumber(totalIncludingTax));
+            console.log("Your account balance is now " + formatNumber(accountBalance));
+            
+            function getUpdatedTotalIncludingTax(number) {
+                var updatedTotal = currentTotalWithoutTax + number;
+                return updatedTotal + getTaxAmount(updatedTotal);
+            }
+
+            function getTaxAmount(number) {
+                if(!isNaN(number)) {
+                    var taxAmount = number * TAX_AMOUNT;
+                    return taxAmount;
+                }
+                console.error("ERROR: not a number was passed " + number);
+                return number;
+            }
+
+            function formatNumber(number) {
+                return "$" + number.toFixed(2);
+            }
+            
+        </script>
+    </body>
+
+</html>
