@@ -1,0 +1,231 @@
+ <html>
+
+<head>
+	<style>
+		body {
+			background-color: black;
+			color: white;
+			font-family: monospace;
+		}
+		h3 {
+			font-size: 30px; 
+		}
+		p {
+			font-size: 15px; 
+			color: #605d53;
+		}
+		.page-wrap {
+			margin: 25px;
+		}
+		.banner {
+			background-color: #151515;
+			width: 100%;
+			height: 300px;
+			display: flex;
+			flex-flow: column nowrap;
+			justify-content: center;
+			align-items: center;
+		}
+		.banner__title {
+			margin: 5px;
+			font-size: 70px;
+		}
+		.banner__manchet {
+			margin: 5px;
+			font-size: 25px;
+			color: #605d53;
+		}
+		.columns {
+			display: flex;
+			margin-top: 20px;
+		}
+		.columns__column {
+			display: flex;
+		}
+		.columns__column--medium {
+			width: 33%;
+		}
+		.pricing {
+			display: flex;
+			flex-flow: column nowrap;
+			height: 315px;
+		}
+		.pricing__prices {
+			font-size: 25px;
+			margin-bottom: 10px;
+			margin-top: 0px;
+		}
+		.pricing__text {
+			margin: 7px;
+		}
+		.pricing__bottom {
+			display: flex;
+			align-items: flex-end;
+			height: 100%;
+		}
+		.button {
+			color: white;
+			border-width: 0px;
+			border-radius: 4px;
+			padding: 10px;
+		}
+		.button--blue {
+			background-color: #2f698a;			
+		}
+		.button--green {
+			background-color: #59700d;
+		}
+		.signup {
+			margin-top: 75px;
+		}
+		.signup__title {
+			margin-bottom: 0px;
+		}
+		.signup__manchet {
+			margin-top: 0px;
+			margin-bottom: 25px;
+		}
+		.signup__form {
+			padding: 25px;
+			background-color: #151515;
+			border-radius: 4px;
+		}		
+		.signup__inputs {
+			margin-top: 10px;
+			margin-bottom: 10px;
+			display: flex;
+			justify-content: space-between;
+		}
+		.signup-input {
+			width: 49%;
+			border-radius: 4px;
+			height: 40px;
+		}
+		.signup__button {
+			color: white;
+			background-color: #2f698a;	
+			border-width: 0px;
+		}
+		.footer {
+			border-top: 1px solid white;
+			margin-top: 75px;
+			display: flex;
+			justify-content: space-between;
+			font-size: 20px;
+			height: 100px;
+			align-items: center;
+		}
+		.footer__dot {
+			width: 20px;
+			height: 20px;
+			background-color: #605d53;
+			border-radius: 10px;
+			color: #605d53;
+			display: inline-block;
+		}		
+		.footer__company {
+			margin-left: 30px;
+			margin-right: 5px;
+			color: #2f698a;	 
+		}
+		.footer__year {
+			color: #605d53;;	 
+		}
+		.footer__link {
+			display: inline;
+			color: #2f698a;	
+		}
+		.old-price {
+			text-decoration: line-through;
+		}
+	</style>
+</head>
+
+<body>	
+	<div class="page-wrap">
+		<div class="banner">
+			<h2 class="banner__title">Pagesnap</h2>
+			<h5 class="banner__manchet">Take monthly screenshots of any URL - automatically</h5>
+		</div>
+		<div class="columns">
+		
+			<div class="columns__column columns__column--medium">
+				<div class="pricing">
+					<h3 class="pricing__title">Basic</h3>
+					<h5 class="pricing__prices"><span class="old-price">$10</span> $5 per year</h5>
+					<p class="pricing__text">Monthly snaps</p>
+					<p class="pricing__text">Up to two URLs</p>
+					<p class="pricing__text">Perfect for occasional bloggers</p>
+					
+					<div class="pricing__bottom">
+						<button class="button button--blue">Start Now</button>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="columns__column columns__column--medium">
+				<div class="pricing">
+					<h3 class="pricing__title">Pro</h3>
+					<h5 class="pricing__prices"><span class="old-price">$59</span> $49 per year</h5>
+					<p class="pricing__text">Daily, Weekly or Monthly snaps</p>
+					<p class="pricing__text">Up to 50 URLs</p>
+					<p class="pricing__text">Great for professional blogs, news sites, and more</p>
+					
+					<div class="pricing__bottom">
+						<button class="button button--green">Start Now</button>
+					</div>
+				</div>				
+			</div>
+			
+			<div class="columns__column columns__column--medium">
+				<div class="pricing">
+					<h3 class="pricing__title">Business</h3>
+					<h5 class="pricing__prices"><span class="old-price">$299</span> $249 per year</h5>
+					<p class="pricing__text">Daily, Weekly or Monthly snaps</p>
+					<p class="pricing__text">Up to 500 URLs</p>
+					<p class="pricing__text">Designed with businesses and agencies in mind. Upsell your clients by giving them a piece of their history.</p>
+					
+					<div class="pricing__bottom">
+						<button class="button button--blue">Start Now</button>
+					</div>
+				</div>				
+			</div>
+			
+		</div>
+		
+		<div class="signup">
+			<h3 class="signup__title">Signup</h3>
+			<p class="signup__manchet">we're not quite ready for people to sign up yet. If you'd like to get an email when we go live, put your address in below</p>
+			
+			<div class="signup__form">
+				<label class="signup__label">Email address</label>
+				
+				<div class="signup__inputs">
+					<input class="signup__email signup-input" type="textfield" name="email"/>
+					<input class="signup__button signup-input" type="submit" name="submitbutton" value="Tell me when pagesnap is ready"/>
+				</div>
+				
+				<p class="signup__text">We won't send you spam. Unsubscribe at any time.</p>
+			</div>
+			
+		</div>
+		
+		<footer class="footer">
+			<div class="footer__content">
+				<div class="footer__dot"></div><span class="footer__company">Pagesnap</span><span class="footer__year">2014</span>
+			</div>
+			<div class="footer__links">
+				<ul>
+					<li class="footer__link">Pricing & Signup</li>
+					<li class="footer__link">Contact</li>
+					<li class="footer__link">Twitter</li>
+				</ul>
+			</div>
+		</footer>
+		
+	</div>
+
+</body>
+
+</html>

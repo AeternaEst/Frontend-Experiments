@@ -1,0 +1,70 @@
+<html>
+
+<head>
+	<style>
+		.container {
+			display: flex;
+			flex-flow: column nowrap;
+			background-color: black;
+			height: 800px;
+			justify-content: space-evenly;
+		}
+		.container-inner {
+			display: flex;
+			height: 250px;
+			background-color: red;
+		}
+		.container-inner-wrap {
+			flex-flow: row wrap;
+			align-items: center;
+		}
+		.container-inner-wrap > .item {
+			height: 100px;	
+		}
+		.container-inner-nowrap {
+			flex-flow: row nowrap;	
+		}
+		.item {			
+			background-color: blue;		
+		}
+		.item-small {
+			width: 15%;		
+		}
+		.item-medium {
+			width: 40%;
+		}
+		.item-large {
+			width: 30%;
+			height: 200px !important;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="container container-inner container-inner-nowrap">
+			<div class="item item-small"></div>
+			<div class="item item-small"></div>
+			<div class="item item-small"></div>
+			<div class="item item-small"></div>
+			<div class="item item-small"></div>
+		</div>
+		<div class="container container-inner container-inner-wrap">
+			<div class="item item-small"></div>
+			<div class="item item-small"></div>
+			<div class="item item-small"></div>
+			<div class="item item-small"></div>
+			<div class="item item-small"></div>
+			<div class="item item-medium"></div>
+			<div class="item item-medium"></div>
+		</div>
+		<div class="container container-inner container-inner-wrap">
+			<div class="item item-large"></div>
+			<div class="item item-large"></div>
+		</div>
+	</div>
+
+</body>
+
+</html>
