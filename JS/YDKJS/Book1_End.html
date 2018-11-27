@@ -1,0 +1,88 @@
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <script>
+            var carRentalService = (function() {
+                var availableCars = initializeCars();
+
+                function initializeCars() {
+                    var cars = [];
+                    cars.push(createCar("VW UP", 10, 1));
+                    cars.push(createCar("Renault Captur", 100, 2));
+                    cars.push(createCar("Audi A4", 1000, 3));
+
+                    function createCar(name, price, distanceModifier) {
+                        return {
+                            name: name,
+                            price: price,
+                            distanceMod: distanceModifier
+                        };
+                    }
+
+                    return cars;
+                }
+
+                function buyInsurance(carType) {
+                    insurancePolicy = {};
+                    switch (carType) {
+                        case "VW UP":
+                            insurancePolicy.price = 500.00;
+                            insurancePolicy.terms = 'bla bla VW UP';
+                        break;
+                        case "Renault Captur":
+                            insurancePolicy.price = 800.00;
+                            insurancePolicy.terms = 'bla bla Renault Captur';
+                        break;
+                        case "Audi A4":
+                            insurancePolicy.price = 1000.00;
+                            insurancePolicy.terms = 'bla bla Audi A4';
+                        break;
+                    }
+                    return insurancePolicy;
+                }
+
+                function calculatePrice(car, distanceNeeded, insurancePolicy) {
+                    var price = (distanceNeeded * car.distanceMod) * car.price;
+                    if(insurancePolicy) {
+                        price = price + insurancePolicy.price;
+                    }
+                    return price;
+                }
+
+                function rentCar() {
+                    console.log("Please select one of the following available cars:")
+                    for(var i = 0; i < availableCars.length; i++) {
+                        console.log(availableCars[i].name);
+                    }
+                    
+                    var selectedCar;
+                    while(!selectedCar) {
+                        var selectedCarName = prompt("What is your choice?");
+                        for(var i = 0; i < availableCars.length; i++) {
+                            if(availableCars[i].name === selectedCarName) {
+                                selectedCar = availableCars[i];
+                                break;
+                            }
+                        }
+                    }
+
+                    return selectedCar;
+                }
+
+                return {
+                    cars: availableCars,
+                    calculatePrice: calculatePrice,
+                    buyInsurance: buyInsurance,
+                    rentCar: rentCar    
+                };
+            })();
+                                        
+            var selectedCar = carRentalService.rentCar();
+            var insurance = carRentalService.buyInsurance(selectedCar.name);
+            var totalPrice = carRentalService.calculatePrice(selectedCar, 100, insurance);
+            console.log("Successfully rented a " + selectedCar.name + " with a total cost of " + totalPrice);
+        </script>
+    </body>
+</html>
