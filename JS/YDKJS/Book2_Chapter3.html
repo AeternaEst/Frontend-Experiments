@@ -1,0 +1,110 @@
+<html>
+
+<head></head>
+
+<body>
+    <script>
+        function nameGeneratorFactory() {
+            const MALE = "male";
+            const FEMALE = "female";
+            const AGE_DIVIDER = 50;
+
+            function getGenerator(gender, age) {
+                var isMale;
+                var isOld;
+
+                if(!verifyGender(gender)) {
+                    throw "Invalid Gender";
+                }
+
+                isMale = gender === MALE;
+
+                if(!verifyAge(age)) {
+                    throw "Invalid Age";
+                }
+
+                isOld = age >= 50;
+
+                function verifyGender(gender) {
+                    if (gender === MALE || gender === FEMALE) {
+                        return true;
+                    }
+                    return false;
+                }
+
+                function verifyAge(age) {
+                    if (age >= 0 && age < 100) {
+                        return true;
+                    }
+                    return false;
+                }
+
+                function generateName() {
+                    var name = "";
+                    var factory = getFactory();
+
+                    function getFactory() {
+                        var nameFactory;
+                        if (nameFactory)
+                            return nameFactory;
+
+                        nameFactory = {};
+                        nameFactory.male = {
+                            young: ["MYoung1", "MYoung2", "MYoung3"],
+                            old: ["MOld1", "MOld2", "MOld3"]
+                        };
+                        nameFactory.female = {
+                            young: ["FYoung1", "FYoung2", "FYoung3"],
+                            old: ["FOld1", "FOld2", "FOld3"]
+                        }
+                        console.log("initialized Name Factory");
+                        return nameFactory;
+                    }
+
+                    function getGenderObj(factory, isMale) {
+                        return isMale ? factory.male : factory.female;
+                    }
+
+                    function getAgeObj(genderObj, isOld) {
+                        return isOld ? genderObj.old : genderObj.young;
+                    }
+
+                    var genderObj = getGenderObj(factory, isMale);
+                    var ageObj = getAgeObj(genderObj, isOld);
+
+                    var randomNumber = Math.floor(Math.random() * 3);
+                    return ageObj[randomNumber];
+                }
+
+                return {
+                    generateName: generateName,
+                    verifyGender: verifyGender,
+                    verifyAge: verifyAge
+                }
+            }
+
+            return {
+                getGenerator: getGenerator,
+                genders: [MALE, FEMALE],
+                ageDivider: AGE_DIVIDER
+            }
+        }
+
+        var generatorFactory = nameGeneratorFactory();
+        console.log(generatorFactory.ageDivider);
+        for(let i = 0; i < generatorFactory.genders.length; i++) {
+            console.log(generatorFactory.genders[i]);
+        }
+
+        var generator = generatorFactory.getGenerator("male", 29);
+        console.log(generator.verifyGender("male") + " " + generator.verifyAge(29));
+        var name = generator.generateName();
+        console.log(name);
+
+        var secondGenerator = generatorFactory.getGenerator("female", 88);
+        var secondName = secondGenerator.generateName();
+        console.log(secondName);
+    </script>
+</body>
+
+</html>
