@@ -1,0 +1,40 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script>
+
+            var obj = {
+                number: 10,
+                writeNum: function() {
+                    console.log(this.number);
+                },
+                anotherObj: {
+                    anotherFunc: function() {
+                        console.log(this.number);
+                    },
+                    number: 50
+                }
+            }
+            
+            obj.writeNum();
+
+            // function meet() {
+            //     console.log("meet");
+            //     your.call(your);
+            // }
+
+            // function your() {
+            //     console.log("your");
+            //     makers.call(makers);
+            // }
+
+            // function makers() {
+            //     console.log("makers");
+            // }
+
+            // meet.call(meet);
+        </script>
+    </body>
+</html>

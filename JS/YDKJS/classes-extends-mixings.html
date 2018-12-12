@@ -1,0 +1,126 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script>
+            //Mixing
+            function extend(src, target) {
+                for(var key in src) {
+                    if(target[key] === undefined) {
+                        target[key] = src[key];
+                    }
+                }
+                return target;
+            }
+
+            var base = {
+                a: "BaseA",
+                b: function() {
+                    console.log("BaseB");
+                },
+                c: "BaseC"
+            }
+            
+            var sub = extend(base, {
+                c: "SubC"
+            });
+
+            // console.log(sub.a);
+            // sub.b();
+            // console.log(sub.c);
+
+            //Linked
+            var animal = {
+                race: "Animal",
+                food: "Food",
+                name: "Name",
+                info: function() {
+                    console.log("Race: " + this.race + ". Loves to eat " + this.food);
+                },
+                attack: function() {
+                    console.log(this.name + " does a vicious attack");
+                 }   
+            }
+
+            function Cat(name, food) {
+                var cat = Object.create(animal);
+                cat.race = "Cat";
+                cat.name = name;
+                cat.food = food;
+                return cat;
+            }
+            
+            // var gråmissen = new Cat("Gråmissen", "Tuna")
+            // gråmissen.info();
+            // gråmissen.attack();
+            
+            // var sortemissen = new Cat("Sortemissen", "Milk")
+            // sortemissen.info();
+            // sortemissen.attack();
+
+            //Prototype Inheritance
+            function Veichle(modelNo, modelName) {
+                this.modelNo = modelNo;
+                this.modelName = modelName;
+            }
+            Veichle.prototype.startEngine = function() {
+                console.log(this.modelName + " is starting the engine");
+            }
+            Veichle.prototype.printInfo = function() {
+                console.log("ModelNumber: " + this.modelNo + ". ModelName: " + this.modelName);
+            }
+
+            function Car(maxSpeed, numOfGears, modelName) {
+                Veichle.call( this, "VX810", modelName);
+                //var b = Veichle.bind(this);
+                //b("VX810", modelName);
+                this.maxSpeed = maxSpeed;
+                this.numOfGears = numOfGears;
+
+                this.printInfo = function() {
+                    Veichle.prototype.printInfo.call(this);
+                    console.log("Speed: " + this.maxSpeed + ". Gears: " + this.numOfGears)
+                }
+            }
+            //Car.prototype = Object.create(Veichle.prototype); 
+            Object.setPrototypeOf(Car.prototype, Veichle.prototype);
+
+            // var fordFiesta = new Car(200, 6, "Ford Fiesta");
+            // fordFiesta.printInfo();
+            // fordFiesta.startEngine();
+
+            // var vwUp = new Car(160, 4, "VW UP");
+            // vwUp.printInfo();
+            // vwUp.startEngine();
+
+            //ES6 class keyword
+            class Shape {
+                constructor(width, height) {
+                    this.width = width;
+                    this.height = height;
+                }
+                calculateArea() {
+                    return this.width * this.height;
+                }
+            }
+
+            class Square extends Shape {
+                constructor(width, height, message) {
+                    super(width, height);
+                    this.message = message;
+                }
+                printSquare() {
+                    var area = super.calculateArea();
+                    console.log("The calculated area is " + area + " and your message is " + this.message);
+                }
+            }
+            
+            var square = new Square(10, 5, "Square1");
+            square.printSquare();
+
+            var square2 = new Square(10, 10, "Square2");
+            square2.printSquare();
+        </script>
+    </body>
+</html>

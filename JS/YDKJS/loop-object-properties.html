@@ -1,0 +1,37 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script>
+            var myObj = {
+                a: "Hello",
+                b: "World",
+                c: "Bye"
+            }
+
+            Object.defineProperty(myObj, "d", { 
+                    configurable: false,
+                    enumerable: false,
+                    writable: true,
+                    value: "Bye",
+                })
+
+            myObj.d = "Base";
+            
+            // Object.defineProperty(myObj, "d", { 
+            //         enumerable: true
+            //     })
+
+            var props = Object.getOwnPropertyNames(myObj);
+
+            props.forEach(function(val, index, wtf) {
+                console.log(myObj[val]);
+            });
+
+             for (var k in myObj) {
+                console.log( myObj[k] );
+            }
+        </script>
+    </body>
+</html>
