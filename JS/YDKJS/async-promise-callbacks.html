@@ -1,0 +1,128 @@
+<html>
+    <head>
+            <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h3>Products</h3>
+        <div class="products">
+
+        </div>
+        <h3>Stores</h3>
+        <div class="stores">
+
+        </div>
+        <script>
+            var t = jQuery;
+            function request(url) {
+                return new Promise(function(resolve, reject) {
+                    jQuery.ajax(url, {
+                        success: function(data) {
+                            resolve(data);
+                        }
+                    });
+                }); 
+            }
+
+            var shoePromise = request("https://dk.ecco.com/api/search/find/?currentCategoryId=3b25ce36-a4b9-517b-989b-6b6ae6443d98");
+
+            shoePromise.then(function(data) {
+                var items = data.Results.splice(0, 5);
+                var convertedResults = [];
+                items.forEach(function(val, index, orig) {
+                    convertedResults.push({
+                        name: val.Title,
+                        price: val.Price,
+                        id: val.ProductId,
+                        link: val.ProductLink
+                    });
+                });
+                return convertedResults;
+            }).then(renderShoes).catch(function(error) {
+                console.log(error);
+            });
+
+            var storePromise = request("https://dk.ecco.com/api/store/search?latitudeMin=55.64566997522081&longitudeMin=12.044881937207037&latitudeMax=55.71071258668133&longitudeMax=12.843450662792975");
+
+            storePromise.then(function(data) {
+                var items = data.splice(0, 5);
+                var convertedResults = [];
+                items.forEach(function(val, index, orig) {
+                    convertedResults.push({
+                        name: val.Name,
+                        city: val.City,
+                        zip: val.PostalCode
+                    });
+                });
+                return convertedResults;
+            }).then(renderStores).catch(function(error) {
+                console.log(error);
+            });
+
+            function renderShoes(data) {
+                var shoeWidget = new ShoeWidget(100, 100);
+                shoeWidget.render(".products", data);
+            }
+
+            function renderStores(data) {
+                var storeWidget = new StoreWidget(100, 100);
+                storeWidget.render(".stores", data);
+            }
+
+            function WidgetBase(width, height) {
+                this.width = width;
+                this.height = height;
+            }
+            WidgetBase.prototype.render = function(selector) {
+                    var dimensionElement = "<p>Width: " + this.width + ", Height: " + this.height + "</p>"
+                    jQuery(selector).append(dimensionElement);
+                } 
+
+            function ShoeWidget(width, height) {
+                WidgetBase.call( this, width, height );
+            }
+            
+            function StoreWidget(width, height) {
+                WidgetBase.call( this, width, height );
+            }
+
+            ShoeWidget.prototype = Object.create( WidgetBase.prototype );
+            StoreWidget.prototype = Object.create( WidgetBase.prototype );
+
+            ShoeWidget.prototype.render = function(selector, items) {
+                WidgetBase.prototype.render.call(this, selector);
+                var element = "<ul>";
+                var listElement = "";
+                items.forEach(function(val, index, orig) {
+                    listElement = "<li>";
+                    listElement += val.name + " , ";
+                    listElement += val.price  + " , ";
+                    listElement += val.id  + " , ";
+                    listElement += val.link;
+                    listElement += "</li>";
+                    element += listElement;
+                });
+                element += "</ul>";
+                jQuery(selector).append(element);
+            }
+
+            StoreWidget.prototype.render = function(selector, items) {
+                WidgetBase.prototype.render.call(this, selector);
+                var element = "<ul>";
+                var listElement = "";
+                items.forEach(function(val, index, orig) {
+                    listElement = "<li>";
+                    listElement += val.name + " , ";
+                    listElement += val.city  + " , ";
+                    listElement += val.zip  + " , ";
+                    listElement += "</li>";
+                    element += listElement;
+                });
+                element += "</ul>";
+                jQuery(selector).append(element);
+            }
+        </script>
+    </body>
+</html>
