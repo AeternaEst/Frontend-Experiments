@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <script src="my-module.js" type="module"></script>
+    </head>
+    <body>
+        <script type="module">
+            //Import specifics
+            import {MyClass, getContent } from './module1.js';
+            
+            //Import everything into namespace
+            import * as mymodule from './module1.js';
+        
+            console.log(mymodule.getContent());
+            var myClass = new mymodule.MyClass("Nicholas");
+            myClass.greetings();
+               
+        </script>
+    </body>
+</html>
