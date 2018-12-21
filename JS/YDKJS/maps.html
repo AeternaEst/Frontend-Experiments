@@ -1,0 +1,72 @@
+<html>
+    <head></head>
+    <body>
+        <script>
+            //Oldschool object way
+            var dictionary = {};
+            
+            function updateDictionary(word, meaning) {
+                if(dictionary[word] == undefined) {
+                    dictionary[word] = [meaning];
+                } else {
+                    dictionary[word].push(meaning);
+                }
+            }
+
+            function showDictionary() {
+                for(var key in dictionary) {
+                    var values = dictionary[key];
+                    values.forEach((val, index, orig) => {
+                        console.log(val);
+                    });
+                }
+            }
+
+            function deleteDictionaryEntry(key, value) {
+                if(!value) {
+                    delete dictionary[key];
+                } else {
+                    var entries = dictionary[key];
+                    var entryIndex = entries.indexOf(value);
+                    entries.splice(entryIndex, 1); 
+                }
+            }
+
+            updateDictionary("Angel", "Wings");
+            updateDictionary("Angel", "Halo");
+            updateDictionary("Angel", "Blessed");
+            updateDictionary("Viking", "Northman");
+            updateDictionary("Troll", "Evil");
+            updateDictionary("Viking", "Asgard");
+            updateDictionary("Test", "Test");
+            
+            deleteDictionaryEntry("Test");
+            deleteDictionaryEntry("Angel", "Blessed");
+
+            //showDictionary();
+
+            //ES6 Maps
+            var map = new Map();
+
+            var key1 = { key: "Key1", function() { console.log("Key1"); } };
+            var key2 = { key: "Key2", function() { console.log("Key2"); } };
+            var key3 = "key3";
+
+            map.set(key1, "Key1Value");
+            map.set(key2, "Key1Value2");
+            map.set(key3, "Key1Value3");
+            map.set("Test", "Test");
+
+            map.delete("Test");
+
+            for(var mapKey of map.keys()) {
+                console.log(mapKey);
+            }
+
+            for(var mapValue of map.values()) {
+                console.log(mapValue);
+            }
+
+        </script>
+    </body>
+</html>
