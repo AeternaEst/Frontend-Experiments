@@ -1,0 +1,67 @@
+<html>
+    <head>
+            <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <ul>
+            <li class="element">Element 1</li>
+            <li class="element special">Element 2</li>
+            <li>Element 3</li>
+            <li class="element special" custom="something">Element 4</li>
+            <li class="element">Element 5</li>
+        </ul>
+        <script>
+            //Setup
+            var obj1 = { name: "Object1", number: 1, inner: { name: "Inner1", special: true }}
+            var obj2 = { name: "Object2", number: 2, inner: { name: "Inner2" }}
+            var obj3 = { name: "Object3", number: 3, inner: { name: "Inner3", special: false }}
+            var obj4 = { name: "Object4", number: 4, inner: { name: "Inner4" }}
+            var obj5 = { name: "Object5", number: 5, inner: { name: "Inner5", special: true }}
+            var objects = [obj1, obj2, obj3, obj4, obj5];
+            function loopResults(results, property) {
+                for(let result of results) {
+                    console.log(result[property]);
+                }
+            }
+
+            //Search Multiple
+            var r = objects.filter((val) => {
+                return val.number % 2 != 0 && val.inner.special;
+            });
+            //loopResults(r, "name");
+
+            var rr = document.querySelectorAll("li.element.special[custom=something]");
+            //loopResults(rr, "innerHTML")
+
+            //Search Single
+            var t = objects.find((val) => {
+                return val.number % 2 != 0 && !val.inner.special;
+            });
+            //console.log(t.name);
+
+            var tt = document.querySelector("li.element.special[custom=something]");
+            //console.log(tt.innerHTML);
+
+            //JQuery Search Multiple
+            var jqR = jQuery.grep(objects, (val) => {
+                return val.number % 2 != 0 && val.inner.special;
+            });
+            loopResults(jqR, "name");
+
+            var jqT = jQuery("li.element.special[custom=something]");
+            loopResults(jqT, "innerHTML");
+
+            //JQuery Search Single 
+            var jqT = jQuery.grep(objects, (val) => {
+                return val.number % 2 != 0 && !val.inner.special;
+            })[0];
+            console.log(jqT.name);
+
+            var jqTT = jQuery("li.element.special[custom=something]")[0];
+            console.log(jqTT.innerHTML);
+        </script>
+    </body>
+</html>

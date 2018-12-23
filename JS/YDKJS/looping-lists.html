@@ -1,0 +1,48 @@
+<html>
+    <head>
+            <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+            <ul>
+                    <li class="element">Element 1</li>
+                    <li class="element special">Element 2</li>
+                    <li>Element 3</li>
+                    <li class="element special" custom="something">Element 4</li>
+                    <li class="element">Element 5</li>
+                </ul>
+        <script>
+            //Setup
+            var obj1 = { name: "Object1", number: 1, inner: { name: "Inner1", special: true }}
+            var obj2 = { name: "Object2", number: 2, inner: { name: "Inner2" }}
+            var obj3 = { name: "Object3", number: 3, inner: { name: "Inner3", special: false }}
+            var obj4 = { name: "Object4", number: 4, inner: { name: "Inner4" }}
+            var obj5 = { name: "Object5", number: 5, inner: { name: "Inner5", special: true }}
+            var objects = [obj1, obj2, obj3, obj4, obj5];
+
+            //Original
+            for(let i = 0; i < objects.length; i++) {
+                var current = objects[i];
+                console.log(current.name);
+            }
+
+            //ES5 but not HTMLCollection
+            objects.forEach((element, index, orig) => {
+                console.log(element.name);
+            });
+
+            //ES6
+            for(let element of document.getElementsByTagName("li")) {
+                console.log(element.innerHTML);
+            }
+
+            //JQuery
+            jQuery.each(jQuery("li"), (index, element) => {
+                console.log(element.innerHTML);
+            });
+
+        </script>
+    </body>
+</html>

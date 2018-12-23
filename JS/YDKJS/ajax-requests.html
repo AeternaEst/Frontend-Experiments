@@ -1,0 +1,83 @@
+<html>
+    <head>
+            <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <script>
+            const FETCH_PREFIX = "FETCH";
+            function logShoeResults(data) {
+                var results = data.Results.splice(0, 5);
+                    results.forEach(function(val, index, orig) {
+                        console.log(`${FETCH_PREFIX} - ${val.Title}`);
+                    });
+            }
+            // ********** fetch() newest build in API ************
+
+            var fetchPromiseGet// = fetch("https://dk.ecco.com/api/search/find/?currentCategoryId=3b25ce36-a4b9-517b-989b-6b6ae6443d98");
+
+            if(fetchPromiseGet) {
+                fetchPromiseGet.
+                then((data) => data.json()).
+                then((data) => logShoeResults(data));
+            }
+
+            var addressInfo = {
+                Address: "sdfsdf",
+                AddressNumber: "33",
+                Carrier: ["0"],
+                City: "sdfds",
+                CountryCode: "DK",
+                Limit: 5,
+                ZipCode: 2720
+            }
+
+             var fetchPromisePost// = fetch("https://ubapimanagement.azure-api.net/droppoints/GetParcelShopsJSON", {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //         // "Content-Type": "application/x-www-form-urlencoded",
+            //     },
+            //     body: JSON.stringify(addressInfo)
+            // });
+
+            if(fetchPromisePost) {
+                fetchPromisePost.
+                then((data) => data.json()).
+                then((data) => {
+                    var results = data.Responses;
+                    console.log(results);
+                }).
+                catch((error) => {
+                    console.log(error)
+                });
+            }
+            
+            //************ jQuery way ***************
+
+            //var jQueryPromise = jQuery.ajax("https://dk.ecco.com/api/search/find/?currentCategoryId=3b25ce36-a4b9-517b-989b-6b6ae6443d98", {
+                // success: ((data) => logShoeResults(data))
+            //});
+
+            // Or
+
+            // jQueryPromise.then((data) => {
+            //     logShoeResults(data);
+            // });
+
+            // jQuery.ajax("https://ubapimanagement.azure-api.net/droppoints/GetParcelShopsJSON", {
+            //     success: ((data) => {
+            //         var results = data.Responses;
+            //         console.log(results);
+            //     }),
+            //     method: "POST",
+            //     accepts: "application/json",
+            //     contentType: "application/json",
+            //     data: JSON.stringify(addressInfo)
+            // });
+
+        </script>
+    </body>
+</html>
