@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <style>
+            .snippet {
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: space-between;
+                width: 600px;
+                height: 75px;
+                border: 1px solid darkgrey;
+                border-radius: 3px;
+            }
+            .snippet__content {
+                display: flex;
+            }
+            .snippet__buttons {
+                /* width: 45px; */
+                display: flex;
+            }
+            .snippet__image {
+                width: 125px;
+                height: 100%;
+                background-color: black;
+            }
+            .snippet__texts {
+                margin-left: 15px;
+            }
+            .snippet__title {
+                margin: 10px;
+                font-size: 20px;
+            }
+            .snippet__text  {
+                margin: 10px;
+                font-weight: bold;
+            }
+            .snippet__button {
+                width: 25px;
+                border: none;
+                border-width: 0px;
+                border-style: none;
+                border-color: white;
+                border-image: none;
+            }
+            .snippet__button--add {
+                font-size: 20px;
+                background-color: darkred;
+                color: white;
+            }
+            .snippet__button--remove {
+                background-color: white;
+                color: darkgreen;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="snippet">
+            <div class="snippet__content">
+                <div class="snippet__image">
+                    <!-- colored div instead of image -->
+                </div>
+                <div class="snippet__texts">
+                    <h5 class="snippet__title">My amazing title</h5>
+                    <p class="snippet__text">And a subtitle</p>
+                </div>
+            </div>
+            <div class="snippet__buttons">
+                <button class="snippet__button snippet__button--add">+</button>
+                <button class="snippet__button snippet__button--remove">X</button>
+            </div>
+        </div>
+    </body>
+</html>
