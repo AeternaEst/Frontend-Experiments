@@ -5,9 +5,10 @@ import App from './App';
 import SimpleComponentClassJSX from './MyComponent';
 import * as serviceWorker from './serviceWorker';
 import CarsModule from './Cars/CarsModule';
+import Updating from './LifeCycles/LifeCycles'
 
 ReactDOM.render(<App />, document.getElementById('root'));
-//ReactDOM.render(<FeaturedCar />, document.getElementById('testroot'));
+ReactDOM.render(<Updating />, document.getElementById('testroot'));
 // ReactDOM.render(<CarsModule />, document.getElementById('cars'));
 
 // If you want your app to work offline and load faster, you can change
