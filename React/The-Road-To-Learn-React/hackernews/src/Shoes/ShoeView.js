@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Button from './Button';
+import Checkbox from './Checkbox';
 
 var ShoeView = (props) => {
     const { shoe, classes } = props;
@@ -11,6 +12,7 @@ var ShoeView = (props) => {
             <Button classes="button" clickHandler={(event) => console.log(`${event.target.name} FEATURED BUY `)}>
                 Buy Featured
             </Button>
+            <Checkbox classes="checkbox"/>
         </div>
     );
 }
