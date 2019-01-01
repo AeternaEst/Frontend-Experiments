@@ -1,0 +1,17 @@
+{
+  "name": "npm-test",
+  "version": "1.0.0",
+  "description": "npm-test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "npm-test"
+  ],
+  "author": "Nicholas Lindboe",
+  "license": "ISC",
+  "dependencies": {
+    "uglify": "^0.1.5"
+  }
+}

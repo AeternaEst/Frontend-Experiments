@@ -1,0 +1,2 @@
+function outer(o){var t;t="world",console.log(o+" "+t)}function Cat(o){this.name=o,this.helloCat=function(){console.log("hello  "+this.name)}}outer("hello");var cat=new Cat("Kitty");cat.helloCat();
+//# sourceMappingURL=main.js.map

@@ -1,0 +1,3 @@
+CLI uglify command:
+uglifyjs ./src/helloworld.js ./src/anotherhello.js  --compress --mangle --source-map "root='./../',url='main.js.map'" --output ./dest/main.js
+NOTE: requires uglify to be installed globally
