@@ -4,7 +4,7 @@
   "description": "npm-test",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "uglify": "node uglify.js"
   },
   "keywords": [
     "npm-test"
@@ -12,6 +12,7 @@
   "author": "Nicholas Lindboe",
   "license": "ISC",
   "dependencies": {
+    "fs": "0.0.1-security",
     "uglify": "^0.1.5"
   }
 }

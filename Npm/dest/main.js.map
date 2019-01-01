@@ -1,1 +1,1 @@
-{"version":3,"sources":["./src/helloworld.js","./src/anotherhello.js"],"names":["outer","outerParam","innerParam","console","log","Cat","name","this","helloCat","cat"],"mappings":"AAAA,SAASA,MAAMC,GACX,IAAeC,EAAAA,EAGT,QAFFC,QAAQC,IAAIH,EAAa,IAAMC,GCDvC,SAASG,IAAIC,GACTC,KAAKD,KAAOA,EACZC,KAAKC,SAAW,WACZL,QAAQC,IAAI,UAAYG,KAAKD,ODGrCN,MAAM,SCCN,IAAIS,IAAM,IAAIJ,IAAI,SAElBI,IAAID","sourceRoot":"./../"}
+null

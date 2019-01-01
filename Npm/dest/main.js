@@ -1,2 +1,1 @@
-function outer(o){var t;t="world",console.log(o+" "+t)}function Cat(o){this.name=o,this.helloCat=function(){console.log("hello  "+this.name)}}outer("hello");var cat=new Cat("Kitty");cat.helloCat();
-//# sourceMappingURL=main.js.map
+function outer(o){function t(t){console.log(o+" "+t)}t("world")}function Cat(o){this.name=o,this.helloCat=function(){console.log("hello  "+this.name)}}outer("hello");var cat=new Cat("Kitty");cat.helloCat();
