@@ -1,0 +1,20 @@
+{
+  "name": "eslint-setup",
+  "version": "1.0.0",
+  "description": "eslint test and setup",
+  "main": "index.js",
+  "scripts": {
+    "eslint": "./node_modules/.bin/eslint ./src/*.js"
+  },
+  "keywords": [
+    "eslint",
+    "test",
+    "and",
+    "setup"
+  ],
+  "author": "Nicholas Lindboe",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^5.11.1"
+  }
+}
