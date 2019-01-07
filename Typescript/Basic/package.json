@@ -1,0 +1,19 @@
+{
+  "name": "basic-typescript",
+  "version": "1.0.0",
+  "description": "basic typescript",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "./node_modules/typescript/bin/tsc greeter.ts"
+  },
+  "keywords": [
+    "basic",
+    "typescript"
+  ],
+  "author": "Nicholas Lindboe",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^3.2.2"
+  }
+}
