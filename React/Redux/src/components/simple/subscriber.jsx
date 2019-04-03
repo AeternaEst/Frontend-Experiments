@@ -4,7 +4,15 @@ import store from './../../reducers/simple/counter';
 class Subscriber extends React.Component {
     constructor(props) {
         super(props);
-        store.subscribe(() => console.log("subscriber getting state " + store.getState()))
+        this.state = {
+            count: store.getState()
+        }
+        store.subscribe(() =>  {
+            console.log("subscriber getting state " + store.getState());
+            this.setState({
+                count: store.getState()
+            })
+        });
     }
 
     render() {
@@ -12,7 +20,7 @@ class Subscriber extends React.Component {
         return (
             <div className="creator">
                 <h2>{title}</h2>
-
+                <h5>{this.state.count}</h5>
                 <p>{message}</p>
             </div>
         )

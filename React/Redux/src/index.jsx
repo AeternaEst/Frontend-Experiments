@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom';
 import HelloWorld from './components/helloworld';
 import Creator from './components/simple/creator';
 import Subscriber from './components/simple/subscriber';
+import TodoList from './components/intermediate/todo-list';
 
-ReactDOM.render(<Creator title="Creator" message="Creating..."/>, 
-    document.getElementById("top"));
-
-ReactDOM.render(<Subscriber title="Subscribe" message="Subscribing..."/>, 
-    document.getElementById("mid"));
+ReactDOM.render(<TodoList />, document.getElementById("top"));
