@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
 import CurrentlyPlayingCharacter from './currently-playing-character';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
     return {
-      currentlyPlayingChar: state.currentlyPlaying
+      currentlyPlayingChar: state.currentlyPlaying,
+      labels: props.labels
     }
   }
 

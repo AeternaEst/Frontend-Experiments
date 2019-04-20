@@ -7,9 +7,9 @@ const CurrentlyPlayingCharacter = (props) => {
         <div className="currently-playing-char">
             {
                 currentlyPlayingChar ? 
-                (<div><h2>You are currently playing:</h2>
+                (<div><h2>{props.labels.currentlyPlayingLabel}:</h2>
                 <Character {...currentlyPlayingChar} /></div>) :
-                 <h2>No character selected</h2>
+                 <h2>{props.labels.noCharacterSelected}</h2>
             }
             
         </div>

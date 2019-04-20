@@ -6,9 +6,9 @@ const StrongestCharacter = (props) => {
     const strongestCharacter = props.characters.find(char => char.level === Math.max(...characterLevels));
     return (
         <div className="strongest-character">
-            <h2>This is your strongest character:</h2>
+            <h2>{props.labels.strongestCharacter}</h2>
             <Character {...strongestCharacter}/>
-            <h2>This is your strongest character:</h2>
+            <h2>{props.labels.strongestCharacter}</h2>
         </div>
     )
 }

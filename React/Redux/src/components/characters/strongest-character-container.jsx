@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
 import StrongestCharacter from './strongest-character';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
     return {
-      characters: state.characters
+      characters: state.characters,
+      labels: props.labels
     }
   }
 

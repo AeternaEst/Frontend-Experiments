@@ -9,7 +9,7 @@ const ListCharacters = (props) => {
             props.characters.map(character => (
                 <div key={character.id}>
                     <Character {...character} />
-                    <span>Set the character level here</span>
+                    <span>{props.labels.setCharacterLevel}</span>
                     <button onClick={event => props.increaseLevel(character.id)}>+</button>
                     <button onClick={event => props.decreaseLevel(character.id)}>-</button>
                     
