@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script>
+            const customers = ["Nicholas", "Andreja", "Kisser"];
+
+            const getCustomers = () => {
+                console.log("calling getCustomers");
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        console.log("resolving getCustomers");
+                        resolve(customers)
+                        }, 3000);
+                });
+            }
+
+            const assembleCustomers = (customers) => {
+                console.log("calling assembleCustomers: " + customers);
+                return new Promise((resolve, reject) => {
+                        const assembledCustomers = customers.map(c => ({name: c, isVIP: false}));
+                        console.log("resolving assembleCustomers: ");
+                        resolve(assembledCustomers);
+                    });
+            }
+
+            const printCustomers = (assembledCustomers) => {
+                for(let c of assembledCustomers) {
+                    console.log(`${c.name}:${c.isVIP}`);
+                }
+            }
+
+            function* customerGenerator() {
+                let customers = yield getCustomers();
+                let assembledCustomers = yield assembleCustomers(customers);
+                printCustomers(assembledCustomers);
+            }
+
+            //Manually invoked
+            // const generator = customerGenerator();
+            // let customersPromise = generator.next().value;
+
+            // let assemblePromise = customersPromise.then(result => {
+            //     console.log("Returned customers: " + result);
+            //     return generator.next(result).value;
+            // });
+
+            // assemblePromise.then(result => {
+            //     console.log("Returned assembled customers: ");
+            //     generator.next(result);
+            // });
+
+
+
+        //Automatically invoked
+        run(customerGenerator);
+        function run(gen) {
+            var args = [].slice.call(arguments, 1), it;
+
+            // initialize the generator in the current context
+            it = gen.apply(this, args);
+
+            // return a promise for the generator completing
+            return Promise.resolve()
+                .then(function handleNext(value) {
+                    // run to the next yielded value
+                    var next = it.next(value);
+
+                    return (function handleResult(next) {
+                        // generator has completed running?
+                        if (next.done) {
+                            return next.value;
+                        }
+                        // otherwise keep going
+                        else {
+                            return Promise.resolve(next.value)
+                                .then(
+                                    // resume the async loop on
+                                    // success, sending the resolved
+                                    // value back into the generator
+                                    handleNext,
+
+                                    // if `value` is a rejected
+                                    // promise, propagate error back
+                                    // into the generator for its own
+                                    // error handling
+                                    function handleErr(err) {
+                                        return Promise.resolve(
+                                            it.throw(err)
+                                        )
+                                            .then(handleResult);
+                                    }
+                                );
+                        }
+                    })(next);
+                });
+        }
+
+        </script>
+    </body>
+</html>
