@@ -11,14 +11,28 @@
                     setTimeout(() => {
                         console.log("resolving getCustomers");
                         resolve(customers)
-                        }, 3000);
+                        }, 4000);
                 });
             }
 
-            const assembleCustomers = (customers) => {
-                console.log("calling assembleCustomers: " + customers);
+            const getDiscountCode = () => {
+                console.log("calling getDiscountCode");
                 return new Promise((resolve, reject) => {
-                        const assembledCustomers = customers.map(c => ({name: c, isVIP: false}));
+                    setTimeout(() => {
+                        console.log("resolving getDiscountCode");
+                        resolve("VIP20");
+                    }, 2000);
+                });
+            }
+
+            const getCustomersAndDiscountCode = () => {
+                return Promise.all([getCustomers(), getDiscountCode()]);
+            }
+
+            const assembleCustomers = (customers, code) => {
+                console.log("calling assembleCustomers: " + customers + ". Code: " + code);
+                return new Promise((resolve, reject) => {
+                        const assembledCustomers = customers.map(c => ({name: c, discountCode: code}));
                         console.log("resolving assembleCustomers: ");
                         resolve(assembledCustomers);
                     });
@@ -26,34 +40,61 @@
 
             const printCustomers = (assembledCustomers) => {
                 for(let c of assembledCustomers) {
-                    console.log(`${c.name}:${c.isVIP}`);
+                    console.log(`${c.name}:${c.discountCode}`);
                 }
             }
 
             function* customerGenerator() {
-                let customers = yield getCustomers();
-                let assembledCustomers = yield assembleCustomers(customers);
+                //let result = yield getCustomersAndDiscountCode(); -> Handle both promises
+
+                let customerPromise = getCustomers();
+                let discountCodePromise = getDiscountCode();
+
+                let customers = yield customerPromise;
+                let discountCode = yield discountCodePromise;
+
+                let assembledCustomers = yield assembleCustomers(customers, discountCode);
                 printCustomers(assembledCustomers);
             }
 
             //Manually invoked
-            // const generator = customerGenerator();
-            // let customersPromise = generator.next().value;
+            const generator = customerGenerator();
 
-            // let assemblePromise = customersPromise.then(result => {
-            //     console.log("Returned customers: " + result);
-            //     return generator.next(result).value;
+            /* Handle both Promises  */
+            // const promise = generator.next().value;
+            // const assemblePromise = promise.then(result => {
+            //     const customers = result[0];
+            //     const discountCode = result [1];
+            //     return generator.next({customers: customers, discountCode: discountCode}).value;
             // });
 
             // assemblePromise.then(result => {
-            //     console.log("Returned assembled customers: ");
+            //     console.log("Returned assembled customers");
             //     generator.next(result);
             // });
+
+            //Handle promises individually
+            let customersPromise = generator.next().value;
+
+            let discountCodePromise = customersPromise.then(result => {
+                console.log("Returned customers: " + result);
+                return generator.next(result).value;
+            });
+
+            let assemblePromise = discountCodePromise.then(result => {
+                console.log("Returned discount code: " + result);
+                return generator.next(result).value;
+            });
+
+            assemblePromise.then(result => {
+                console.log("Returned assembled customers: ");
+                generator.next(result);
+            });
 
 
 
         //Automatically invoked
-        run(customerGenerator);
+        //run(customerGenerator);
         function run(gen) {
             var args = [].slice.call(arguments, 1), it;
 
