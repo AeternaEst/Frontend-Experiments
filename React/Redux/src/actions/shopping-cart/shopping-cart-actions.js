@@ -2,14 +2,14 @@
 const addToCart = productId => {
     return {
         type: 'ADD_TO_CART',
-        productid: productId
+        productId: productId
     }
 }
 
 const removeFromCart = productId => {
     return {
-        type: 'REMOE_FROM_CART',
-        productid: productId
+        type: 'REMOVE_FROM_CART',
+        productId: productId
     }
 }
 
