@@ -39,19 +39,18 @@ class ShoppingCartApi {
             setTimeout(() => {
                 console.log("Resolving products: " + this.products);
                 resolve(this.products);
-            }, 2000);
+            }, 200);
         });
     }
 
     getCart() {
         console.log("getCart api called");
-        return this.cart;
-        // return new Promise((resolve, reject) => {
-        //     setTimeout(() => {
-        //         console.log("Resolving cart: " + this.cart);
-        //         resolve(this.cart);
-        //     }, 2000);
-        // });
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log("Resolving cart: " + this.cart);
+                resolve(this.cart);
+            }, 200);
+        });
     }
 
     addToCart(productId) {
@@ -86,7 +85,7 @@ class ShoppingCartApi {
                 } else {
                     productAlreadyinCart.quantity = productAlreadyinCart.quantity + 1;
                 }
-                resolve(new ApiResponse(true, this.products));
+                resolve(new ApiResponse(true, "Product added successfully"));
             }, 2000);
         });
     }
@@ -116,7 +115,7 @@ class ShoppingCartApi {
                 } else {
                     cartProduct.quantity = cartProduct.quantity - 1;
                 }
-                resolve(new ApiResponse(true, this.products));
+                resolve(new ApiResponse(true, "Product removed successfully"));
             }, 2000);
         });
     }

@@ -13,4 +13,19 @@ const removeFromCart = productId => {
     }
 }
 
-export { addToCart, removeFromCart };
+const updatedCart = (products, cart) => {
+    return {
+        type: 'UPDATED_CART',
+        products: products,
+        cart: cart
+    }
+}
+
+const unsucessfullUpdatedCart = error => {
+    return {
+        type: 'UNSUCCESSFULL_UPDATED_CART',
+        error: error
+    }
+}
+
+export { addToCart, removeFromCart, updatedCart, unsucessfullUpdatedCart };

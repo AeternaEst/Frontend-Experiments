@@ -1,17 +1,12 @@
 import React from 'react';
+import ProductDetails from './product-details';
 
 const ProductList = props => {
-    const { products, addProduct } = props;
+    const { products, addProduct, isLoading, addProductLabel } = props;
     return (
         <div className="product-list">
             {products.map(product => (
-                <div key={product.id} className="product">
-                    <h4>{product.name}</h4>
-                    <p>{product.id}</p>
-                    <p>{product.price}</p>
-                    <p>{product.quantity}</p>
-                    <button onClick={() => addProduct(product.id)}>Add</button>
-                </div>
+                <ProductDetails key={product.id} product={product} addProduct={addProduct} isLoading={isLoading} addProductLabel={addProductLabel} />
             ))}
         </div>
     )

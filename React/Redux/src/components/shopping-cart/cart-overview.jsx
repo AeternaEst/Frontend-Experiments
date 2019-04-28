@@ -1,9 +1,15 @@
 import React from 'react';
+import Loader from './loader';
 
 const CartOverview = (props) => {
-    const { cart, cartOverviewLabels, removeProduct } = props;
+    const { cart, cartOverviewLabels, removeProduct, isLoading } = props;
     const totalPerCartItem = cart.map(cartItem => cartItem.product.price * cartItem.quantity);
     const cartTotal = totalPerCartItem.length ? totalPerCartItem.reduce((prev, next) => prev + next) : null;
+
+    if (isLoading) {
+        return <Loader loaderMessage="Loading" />
+    }
+
     return (
         cart.length != 0 &&
             (<div className="cart-overview">
