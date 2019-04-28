@@ -1,6 +1,6 @@
-import shoppingCartApi, { products } from './../../api/shopping-cart/shopping-cart-api';
-import shoppingCartStore from './../../stores/shopping-cart/shopping-cart-store';
-import { updatedCart, unsucessfullUpdatedCart } from './../../actions/shopping-cart/shopping-cart-actions';
+import shoppingCartApi, { products } from '../../api/shopping-cart/shopping-cart-api';
+import shoppingCartStore from '../../stores/shopping-cart/shopping-cart-store';
+import { updatedCart, unsucessfullUpdatedCart } from '../../actions/shopping-cart/shopping-cart-actions';
 
 const defaultState = {
     products: products,
@@ -12,7 +12,7 @@ const defaultState = {
     }
 }
 
-const updateCart = (state = defaultState, action) => {
+const updateCartPromiseReducer = (state = defaultState, action) => {
     switch (action.type) {
         case 'ADD_TO_CART':
             const addToCartPromise = shoppingCartApi.addToCart(action.productId);
@@ -99,4 +99,4 @@ const updateCart = (state = defaultState, action) => {
     }
 }
 
-export default updateCart;
+export default updateCartPromiseReducer;
