@@ -5,7 +5,8 @@ import Container from './components/Container-Presentation/Container';
 import DoubleSubs from './components/HOC/CounterSubscriptions';
 import Controlled from './components/Controlled/Controlled';
 import RenderCallbackApp from './components/RenderCallback/RenderCallbackApp';
+import PureApp from './components/Pure/PureApp';
 
 var injectTarget = document.querySelector('.root');
 
-ReactDOM.render(<RenderCallbackApp />, injectTarget);
+ReactDOM.render(<PureApp />, injectTarget);
