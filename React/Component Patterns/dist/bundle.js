@@ -385,39 +385,87 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 
 /***/ }),
 
-/***/ "./src/components/RenderCallback/DisplayScreen.jsx":
-/*!*********************************************************!*\
-  !*** ./src/components/RenderCallback/DisplayScreen.jsx ***!
-  \*********************************************************/
+/***/ "./src/components/RenderCallback/IsChrome/BrowserBox.jsx":
+/*!***************************************************************!*\
+  !*** ./src/components/RenderCallback/IsChrome/BrowserBox.jsx ***!
+  \***************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nvar DisplayScreen = function DisplayScreen(props) {\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"display-screen\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"p\", null, \"Width: \", props.width), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"p\", null, \"Height: \", props.height));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (DisplayScreen);\n\n//# sourceURL=webpack:///./src/components/RenderCallback/DisplayScreen.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _IdentifyChrome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./IdentifyChrome */ \"./src/components/RenderCallback/IsChrome/IdentifyChrome.jsx\");\n\n\n\nvar BrowserBox = function BrowserBox(props) {\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_IdentifyChrome__WEBPACK_IMPORTED_MODULE_1__[\"default\"], null, function (isChromeBrowser) {\n    return isChromeBrowser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"chrome-box\"\n    }, \"Hello Chrome\") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"not-chrome-box\"\n    }, \"This is not chrome\");\n  });\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (BrowserBox);\n\n//# sourceURL=webpack:///./src/components/RenderCallback/IsChrome/BrowserBox.jsx?");
 
 /***/ }),
 
-/***/ "./src/components/RenderCallback/RenderCallbackApp.jsx":
-/*!*************************************************************!*\
-  !*** ./src/components/RenderCallback/RenderCallbackApp.jsx ***!
-  \*************************************************************/
+/***/ "./src/components/RenderCallback/IsChrome/IdentifyChrome.jsx":
+/*!*******************************************************************!*\
+  !*** ./src/components/RenderCallback/IsChrome/IdentifyChrome.jsx ***!
+  \*******************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Responsive__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Responsive */ \"./src/components/RenderCallback/Responsive.jsx\");\n/* harmony import */ var _DisplayScreen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DisplayScreen */ \"./src/components/RenderCallback/DisplayScreen.jsx\");\n\n\n\n\nvar RenderCallbackApp = function RenderCallbackApp(props) {\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Responsive__WEBPACK_IMPORTED_MODULE_1__[\"default\"], null, function (width, height) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"ul\", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"li\", null, \"Width: \", width), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"li\", null, \"Height: \", height));\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Responsive__WEBPACK_IMPORTED_MODULE_1__[\"default\"], null, function (width, height) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DisplayScreen__WEBPACK_IMPORTED_MODULE_2__[\"default\"], {\n      width: width,\n      height: height\n    });\n  }));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (RenderCallbackApp);\n\n//# sourceURL=webpack:///./src/components/RenderCallback/RenderCallbackApp.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nvar IdentifyChrome = function IdentifyChrome(props) {\n  var children = props.children;\n  var isChromeBrowser = window.navigator.userAgent.indexOf(\"Chrome\") != -1;\n  return children(isChromeBrowser);\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (IdentifyChrome);\n\n//# sourceURL=webpack:///./src/components/RenderCallback/IsChrome/IdentifyChrome.jsx?");
 
 /***/ }),
 
-/***/ "./src/components/RenderCallback/Responsive.jsx":
-/*!******************************************************!*\
-  !*** ./src/components/RenderCallback/Responsive.jsx ***!
-  \******************************************************/
+/***/ "./src/components/RenderCallback/Responsive/DisplayScreen.jsx":
+/*!********************************************************************!*\
+  !*** ./src/components/RenderCallback/Responsive/DisplayScreen.jsx ***!
+  \********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nvar Responsive = function Responsive(props) {\n  var width = window.screen.width;\n  var height = window.screen.height;\n  var callback = props.children;\n  return callback(width, height);\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Responsive);\n\n//# sourceURL=webpack:///./src/components/RenderCallback/Responsive.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nvar DisplayScreen = function DisplayScreen(props) {\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"display-screen\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"p\", null, \"Width: \", props.width), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"p\", null, \"Height: \", props.height));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (DisplayScreen);\n\n//# sourceURL=webpack:///./src/components/RenderCallback/Responsive/DisplayScreen.jsx?");
+
+/***/ }),
+
+/***/ "./src/components/RenderCallback/Responsive/RenderCallbackApp.jsx":
+/*!************************************************************************!*\
+  !*** ./src/components/RenderCallback/Responsive/RenderCallbackApp.jsx ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Responsive__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Responsive */ \"./src/components/RenderCallback/Responsive/Responsive.jsx\");\n/* harmony import */ var _DisplayScreen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DisplayScreen */ \"./src/components/RenderCallback/Responsive/DisplayScreen.jsx\");\n\n\n\n\nvar RenderCallbackApp = function RenderCallbackApp(props) {\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Responsive__WEBPACK_IMPORTED_MODULE_1__[\"default\"], null, function (width, height) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"ul\", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"li\", null, \"Width: \", width), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"li\", null, \"Height: \", height));\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Responsive__WEBPACK_IMPORTED_MODULE_1__[\"default\"], null, function (width, height) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DisplayScreen__WEBPACK_IMPORTED_MODULE_2__[\"default\"], {\n      width: width,\n      height: height\n    });\n  }));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (RenderCallbackApp);\n\n//# sourceURL=webpack:///./src/components/RenderCallback/Responsive/RenderCallbackApp.jsx?");
+
+/***/ }),
+
+/***/ "./src/components/RenderCallback/Responsive/Responsive.jsx":
+/*!*****************************************************************!*\
+  !*** ./src/components/RenderCallback/Responsive/Responsive.jsx ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nvar Responsive = function Responsive(props) {\n  var width = window.screen.width;\n  var height = window.screen.height;\n  var callback = props.children;\n  return callback(width, height);\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Responsive);\n\n//# sourceURL=webpack:///./src/components/RenderCallback/Responsive/Responsive.jsx?");
+
+/***/ }),
+
+/***/ "./src/components/RenderProps/MyForm.jsx":
+/*!***********************************************!*\
+  !*** ./src/components/RenderProps/MyForm.jsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _RandomForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RandomForm */ \"./src/components/RenderProps/RandomForm.jsx\");\n\n\n\nvar MyForm = function MyForm(props) {\n  var onSubmit = function onSubmit(event) {\n    event.preventDefault();\n    console.log(\"Submit success\");\n  };\n\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"my-form\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RandomForm__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n    onSubmit: onSubmit,\n    render: function render(handleSubmit) {\n      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"form\", {\n        onSubmit: handleSubmit\n      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n        type: \"submit\"\n      }, \"Submit Form\"));\n    }\n  }));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (MyForm);\n\n//# sourceURL=webpack:///./src/components/RenderProps/MyForm.jsx?");
+
+/***/ }),
+
+/***/ "./src/components/RenderProps/RandomForm.jsx":
+/*!***************************************************!*\
+  !*** ./src/components/RenderProps/RandomForm.jsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nvar RandomForm = function RandomForm(_ref) {\n  var onSubmit = _ref.onSubmit,\n      render = _ref.render;\n\n  var randomSubmit = function randomSubmit(event) {\n    var result = Math.random(10) * 100;\n    console.log(\"The result was \".concat(result));\n\n    if (result < 50) {\n      alert(\"Sorry no dice\");\n    } else {\n      onSubmit(event);\n    }\n  };\n\n  return render(randomSubmit);\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (RandomForm);\n\n//# sourceURL=webpack:///./src/components/RenderProps/RandomForm.jsx?");
 
 /***/ }),
 
@@ -429,7 +477,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _components_HelloWorld__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/HelloWorld */ \"./src/components/HelloWorld.jsx\");\n/* harmony import */ var _components_Container_Presentation_Container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Container-Presentation/Container */ \"./src/components/Container-Presentation/Container.jsx\");\n/* harmony import */ var _components_HOC_CounterSubscriptions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/HOC/CounterSubscriptions */ \"./src/components/HOC/CounterSubscriptions.jsx\");\n/* harmony import */ var _components_Controlled_Controlled__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Controlled/Controlled */ \"./src/components/Controlled/Controlled.jsx\");\n/* harmony import */ var _components_RenderCallback_RenderCallbackApp__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/RenderCallback/RenderCallbackApp */ \"./src/components/RenderCallback/RenderCallbackApp.jsx\");\n/* harmony import */ var _components_Pure_PureApp__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Pure/PureApp */ \"./src/components/Pure/PureApp.jsx\");\n\n\n\n\n\n\n\n\nvar injectTarget = document.querySelector('.root');\nreact_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Pure_PureApp__WEBPACK_IMPORTED_MODULE_7__[\"default\"], null), injectTarget);\n\n//# sourceURL=webpack:///./src/index.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _components_HelloWorld__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/HelloWorld */ \"./src/components/HelloWorld.jsx\");\n/* harmony import */ var _components_Container_Presentation_Container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Container-Presentation/Container */ \"./src/components/Container-Presentation/Container.jsx\");\n/* harmony import */ var _components_HOC_CounterSubscriptions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/HOC/CounterSubscriptions */ \"./src/components/HOC/CounterSubscriptions.jsx\");\n/* harmony import */ var _components_Controlled_Controlled__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Controlled/Controlled */ \"./src/components/Controlled/Controlled.jsx\");\n/* harmony import */ var _components_RenderCallback_Responsive_RenderCallbackApp__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/RenderCallback/Responsive/RenderCallbackApp */ \"./src/components/RenderCallback/Responsive/RenderCallbackApp.jsx\");\n/* harmony import */ var _components_Pure_PureApp__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Pure/PureApp */ \"./src/components/Pure/PureApp.jsx\");\n/* harmony import */ var _components_RenderCallback_IsChrome_BrowserBox__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/RenderCallback/IsChrome/BrowserBox */ \"./src/components/RenderCallback/IsChrome/BrowserBox.jsx\");\n/* harmony import */ var _components_RenderProps_MyForm__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/RenderProps/MyForm */ \"./src/components/RenderProps/MyForm.jsx\");\n\n\n\n\n\n\n\n\n\n\nvar injectTarget = document.querySelector('.root');\nreact_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_RenderProps_MyForm__WEBPACK_IMPORTED_MODULE_9__[\"default\"], null)), injectTarget);\n\n//# sourceURL=webpack:///./src/index.jsx?");
 
 /***/ }),
 
