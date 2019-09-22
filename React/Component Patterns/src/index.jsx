@@ -11,4 +11,4 @@ import MyForm from './components/RenderProps/MyForm';
 
 var injectTarget = document.querySelector('.root');
 
-ReactDOM.render(<><MyForm/></>, injectTarget);
+ReactDOM.render(<><PureApp /></>, injectTarget);
