@@ -9,7 +9,8 @@ import PureApp from './components/Pure/PureApp';
 import BrowserBox from './components/RenderCallback/IsChrome/BrowserBox';
 import MyForm from './components/RenderProps/MyForm';
 import UserApp from './components/HOC/ApiUsers/UserApp';
+import ContextApp from './components/Context/ContextApp';
 
 var injectTarget = document.querySelector('.root');
 
-ReactDOM.render(<><UserApp /></>, injectTarget);
+ReactDOM.render(<><ContextApp /></>, injectTarget);
