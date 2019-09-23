@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   entry: ['./src/index.jsx'],
-  watch: true,
+  devtool: 'inline-source-map',
   watchOptions: {
     ignored: /node_modules/
   },
@@ -12,12 +12,12 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['ts-loader']
       }
     ]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx', 'ts', 'tsx']
   },
   output: {
     path: __dirname + '/dist',
