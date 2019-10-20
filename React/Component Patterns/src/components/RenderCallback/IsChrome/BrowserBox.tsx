@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import IdentifyChrome from './IdentifyChrome';
 
-const BrowserBox = props => (
+const BrowserBox: FunctionComponent = (props: any) => (
     <IdentifyChrome>
         {(isChromeBrowser) => (
             isChromeBrowser ? (

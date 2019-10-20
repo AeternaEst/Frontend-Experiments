@@ -7,10 +7,10 @@ import Controlled from './components/Controlled/Controlled';
 import RenderCallbackApp from './components/RenderCallback/Responsive/RenderCallbackApp';
 import PureApp from './components/Pure/PureApp';
 import BrowserBox from './components/RenderCallback/IsChrome/BrowserBox';
-import MyForm from './components/RenderProps/MyForm';
 import UserApp from './components/HOC/ApiUsers/UserApp';
 import ContextApp from './components/Context/ContextApp';
+import MyForm from './components/RenderProps/MyForm';
 
-var injectTarget = document.querySelector('.root');
+const injectTarget = document.querySelector('.root');
 
-ReactDOM.render(<><ContextApp /></>, injectTarget);
+ReactDOM.render(<Container />, injectTarget);
