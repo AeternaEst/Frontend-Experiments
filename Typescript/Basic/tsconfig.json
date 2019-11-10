@@ -4,7 +4,8 @@
         "module": "es6",
         "allowJs": true,
         "sourceMap": true,
-        "outDir": "./dist"
+        "outDir": "./dist",
+        "lib": ["dom", "es6", "dom.iterable", "scripthost"]
     },
     "exclude": [
         "./node_modules/**/*",
