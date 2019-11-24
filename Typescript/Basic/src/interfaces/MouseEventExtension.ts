@@ -1,0 +1,3 @@
+interface MouseEvent {
+  myCustomProperty: string;
+}

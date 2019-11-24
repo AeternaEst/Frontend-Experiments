@@ -1,5 +1,8 @@
+//import useTypeDeclarations from "./type-declarations/typeDeclarations";
+import run from "./types/intersection-and-unions";
+//import typeChecking from "./types/typing-checking";
 //import indexedAccessTypes from "./access-types/indexed-access-type";
-import structuralTyping from "./types/structural-typing";
+//import interfaceAppend from "./interfaces/interface-append";
 //import typeGuards from "./types/type-guards";
 //import genericTypeGuard from "./generics/type-guards";
 //import constraints from "./generics/constraints";
@@ -8,4 +11,4 @@ import structuralTyping from "./types/structural-typing";
 //import automap from './classes/automap';
 //import assertion from './types/assertion';
 
-structuralTyping();
+run();

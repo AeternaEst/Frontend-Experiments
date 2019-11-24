@@ -5,7 +5,8 @@
         "allowJs": true,
         "sourceMap": true,
         "outDir": "./dist",
-        "lib": ["dom", "es6", "dom.iterable", "scripthost"]
+        "lib": ["dom", "es6", "dom.iterable", "scripthost"],
+        "noImplicitAny": true
     },
     "exclude": [
         "./node_modules/**/*",

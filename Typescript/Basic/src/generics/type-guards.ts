@@ -11,11 +11,11 @@ class University implements Institution {
   constructor(public name: string, public address: string) {}
 }
 
-function isOfType<T>(type: any, property: keyof T): type is T {
+export function isOfType<T>(type: any, property: keyof T): type is T {
   return (type as T)[property] !== undefined;
 }
 
-const ofType = <T>(type: any, property: keyof T): type is T => (type as T)[property] !== undefined;
+export const ofType = <T>(type: any, property: keyof T): type is T => (type as T)[property] !== undefined;
 
 function genericTypeGuard(): void {
   const bank = new Bank("Danske Bank", 10000000) as Institution;
