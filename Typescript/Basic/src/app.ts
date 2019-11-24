@@ -1,5 +1,6 @@
 //import useTypeDeclarations from "./type-declarations/typeDeclarations";
-import run from "./types/intersection-and-unions";
+//import run from "./types/intersection-and-unions";
+import mixins from "./mixins/mixins";
 //import typeChecking from "./types/typing-checking";
 //import indexedAccessTypes from "./access-types/indexed-access-type";
 //import interfaceAppend from "./interfaces/interface-append";
@@ -11,4 +12,4 @@ import run from "./types/intersection-and-unions";
 //import automap from './classes/automap';
 //import assertion from './types/assertion';
 
-run();
+mixins();
