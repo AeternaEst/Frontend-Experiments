@@ -1,5 +1,9 @@
 import { logProps } from "../utils";
 
+/**
+ * Partial makes all properties on the type optional
+ */
+
 interface User {
   id: number;
   name: string;

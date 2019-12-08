@@ -1,3 +1,3 @@
-import runPartial from "./utility-types/partial";
+import runReadonly from "./utility-types/readonly";
 
-runPartial();
+runReadonly();
