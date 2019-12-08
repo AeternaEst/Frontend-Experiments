@@ -1,6 +1,8 @@
+import runExtension from "./native-extensions/string-extensions";
+
 //import useTypeDeclarations from "./type-declarations/typeDeclarations";
 //import run from "./types/intersection-and-unions";
-import mixins from "./mixins/mixins";
+//import mixins from "./mixins/mixins";
 //import typeChecking from "./types/typing-checking";
 //import indexedAccessTypes from "./access-types/indexed-access-type";
 //import interfaceAppend from "./interfaces/interface-append";
@@ -12,4 +14,4 @@ import mixins from "./mixins/mixins";
 //import automap from './classes/automap';
 //import assertion from './types/assertion';
 
-mixins();
+runExtension();

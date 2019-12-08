@@ -1,0 +1,3 @@
+interface String {
+  toLower: () => string;
+}

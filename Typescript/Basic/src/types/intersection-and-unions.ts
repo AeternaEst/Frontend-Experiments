@@ -31,7 +31,7 @@ function union(param: Human | Loggable): void {
   }
 }
 
-function intersection(human: Human, loggable: Loggable): Human & Loggable {
+function returnIntersection(human: Human, loggable: Loggable): Human & Loggable {
   const intersectionType: Human & Loggable = {
     ...human,
     ...loggable,
@@ -40,6 +40,12 @@ function intersection(human: Human, loggable: Loggable): Human & Loggable {
 
 
   return intersectionType;
+}
+
+const receiveIntersection = (combined: Human & Loggable): void => {
+  console.log("Combined object: ");
+  console.log(`My name is ${combined.name}, i am ${combined.age} years old and i work as a ${combined.job}`);
+  combined.print();
 }
 
 function run(): void {
@@ -53,9 +59,8 @@ function run(): void {
   union(human);
   union(loggable);
 
-  const combined = intersection(human, loggable);
-  console.log(combined.job);
-  combined.print();
+  const combined = returnIntersection(human, loggable);
+  receiveIntersection(combined);
 }
 
 export default run;

@@ -30,11 +30,11 @@ class Scan {
   }
 }
 
-class SuperPrinter implements Print, Copy, Scan {}
+class SuperPrinter {}
 
 interface SuperPrinter extends Print, Copy, Scan {}
 
-class BasicPrinter implements Print {}
+class BasicPrinter {}
 
 interface BasicPrinter extends Print, Copy {}
 

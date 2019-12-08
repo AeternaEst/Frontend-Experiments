@@ -49,6 +49,9 @@ function constraints(): void {
   const animalHabitat = new AnimalHabitat();
   animalHabitat.addAnimal(lion);
   animalHabitat.addAnimal(rhino);
+
+  // Can't add human
+  // animalHabitat.addAnimal(human);
   
   animalHabitat.animalAttacks();
 }
