@@ -1,4 +1,8 @@
 
+/**
+ * See index.d.ts in the folder root  for the definition.
+ * Typescript will throw an error without the type definition file
+ */
 String.prototype.toLower = function(): string {
   return this.toLowerCase();
 }
