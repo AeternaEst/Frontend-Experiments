@@ -1,4 +1,3 @@
-import runExtension from "./native-extensions/html-collection-extensions";
+import runPartial from "./utility-types/partial";
 
-
-runExtension();
+runPartial();
