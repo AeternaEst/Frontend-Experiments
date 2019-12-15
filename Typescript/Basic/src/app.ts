@@ -1,4 +1,5 @@
-import runRecord from "./utility-types/record";
+import runPick from "./utility-types/pick";
 
 
-runRecord();
+
+runPick();
