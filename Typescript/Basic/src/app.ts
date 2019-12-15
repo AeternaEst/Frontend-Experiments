@@ -1,4 +1,4 @@
-import runExtension from "./native-extensions/mouse-event-extensions";
+import run from "./access-types/indexed-access-type-keyof";
 
 
-runExtension();
+run();
