@@ -1,4 +1,4 @@
-import runExcludeAndExtract from "./utility-types/exclude";
+import runExtract from "./utility-types/extract";
 
 
-runExcludeAndExtract();
+runExtract();

@@ -17,7 +17,7 @@ type Age = Exclude<keyof Person, "job" | "name">; /* Removes job and name proper
 /* This is how exclude is used in the Omit utility type */
 type MyOmit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
 
-const runExcludeAndExtract = (): void => {
+const runExclude = (): void => {
   const name: Name = "name";
   const onlyThree: OnlyThree = 3;
 
@@ -34,4 +34,4 @@ const runExcludeAndExtract = (): void => {
   console.log(`${personWithoutJob.name} is ${personWithoutJob.age} and dosen't have a job`);
 }
 
-export default runExcludeAndExtract;
+export default runExclude;
