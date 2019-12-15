@@ -1,5 +1,4 @@
-import runPick from "./utility-types/pick-and-omit";
+import runExcludeAndExtract from "./utility-types/exclude";
 
 
-
-runPick();
+runExcludeAndExtract();
