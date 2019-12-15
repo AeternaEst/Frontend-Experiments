@@ -1,4 +1,4 @@
-import runPick from "./utility-types/pick";
+import runPick from "./utility-types/pick-and-omit";
 
 
 

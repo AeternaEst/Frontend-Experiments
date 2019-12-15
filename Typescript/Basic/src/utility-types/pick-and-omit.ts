@@ -1,4 +1,4 @@
-import { logPropsDeep } from "../utils"
+import { logPropsDeep, logProps } from "../utils"
 
 interface Amount {
   withDecimals: number;
@@ -14,6 +14,7 @@ interface BankAccount {
 }
 
 type SimpleAccount = Pick<BankAccount, "balance" | "iBan">
+type AccountSettings = Omit<BankAccount, "balance" | "iBan">
 
 const runPick = (): void => {
   const simpleAccount: SimpleAccount = {
@@ -24,8 +25,13 @@ const runPick = (): void => {
     },
     iBan: "DK123456789"
   }
+  const accountSettings: AccountSettings = {
+    allowOverdraft: true,
+    isActive: false
+  }
 
   logPropsDeep(simpleAccount);
+  logProps(accountSettings);
 }
 
 export default runPick;
