@@ -1,3 +1,4 @@
-import runReadonly from "./utility-types/readonly";
+import runExtension from "./native-extensions/mouse-event-extensions";
 
-runReadonly();
+
+runExtension();
