@@ -1,4 +1,4 @@
-import run from "./access-types/indexed-access-type-keyof";
+import runRecord from "./utility-types/record";
 
 
-run();
+runRecord();

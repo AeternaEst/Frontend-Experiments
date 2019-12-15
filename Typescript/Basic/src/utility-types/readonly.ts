@@ -18,7 +18,7 @@ function runReadonly(): void {
   console.log(lion.name);
 
   const readonlyLion = createReadonlyAnimal(lion);
-  //No longer allowed to reasing variables
+  //No longer allowed to update variables
   // readonlyLion.name = "Updated";
 
   console.log(readonlyLion.name);
