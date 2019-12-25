@@ -1,4 +1,4 @@
-import runParameters from "./utility-types/parameters-and-constructor-parameters";
+import runReturnAndInstanceType from "./utility-types/return-and-instance-type";
 
 
-runParameters();
+runReturnAndInstanceType();
