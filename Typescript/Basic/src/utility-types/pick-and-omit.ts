@@ -1,5 +1,9 @@
 import { logPropsDeep, logProps } from "../utils"
 
+/**
+ * Picks and omits properties from a type
+ */
+
 interface Amount {
   withDecimals: number;
   plainNumber: number;

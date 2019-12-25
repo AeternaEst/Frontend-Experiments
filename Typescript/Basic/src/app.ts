@@ -1,4 +1,4 @@
-import runExtract from "./utility-types/extract";
+import runNonNullable from "./utility-types/non-nullable";
 
 
-runExtract();
+runNonNullable();

@@ -1,4 +1,8 @@
 
+/**
+ * Returns a type that can no longer be modified
+ */
+
 interface Animal {
   species: "lion" | "rhino" | "elephant";
   name: string;
