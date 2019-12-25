@@ -1,4 +1,4 @@
-import runNonNullable from "./utility-types/non-nullable";
+import runParameters from "./utility-types/parameters-and-constructor-parameters";
 
 
-runNonNullable();
+runParameters();
