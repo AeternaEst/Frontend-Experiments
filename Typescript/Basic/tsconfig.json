@@ -6,7 +6,8 @@
         "sourceMap": true,
         "outDir": "./dist",
         "lib": ["dom", "es6", "dom.iterable", "scripthost"],
-        "noImplicitAny": true
+        "noImplicitAny": true,
+        "strictNullChecks": true
     },
     "exclude": [
         "./node_modules/**/*",

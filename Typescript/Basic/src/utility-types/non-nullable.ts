@@ -8,18 +8,18 @@ type Phone = {
 }
 
 const runNonNullable = (): void => {
-  let phone: Phone = {
+  const phone: Phone = {
     model: "IPhone X",
     isSmartPhone: true
   };
-  let nonNullablePhone: NonNullable<Phone> = {
+  const nonNullablePhone: NonNullable<Phone> = {
     model: "Samsung Galaxy 7",
     isSmartPhone: true
   };
 
-  phone = undefined;
+  //phone = undefined;
   /* This should not be possible */
-  nonNullablePhone = null;
+  //nonNullablePhone = null;
 
   console.log(phone);
   console.log(nonNullablePhone);
