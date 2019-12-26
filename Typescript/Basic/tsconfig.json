@@ -7,7 +7,7 @@
         "outDir": "./dist",
         "lib": ["dom", "es6", "dom.iterable", "scripthost"],
         "noImplicitAny": true,
-        "strictNullChecks": true
+        "strictNullChecks": false
     },
     "exclude": [
         "./node_modules/**/*",

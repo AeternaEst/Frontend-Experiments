@@ -1,4 +1,5 @@
-import runReturnAndInstanceType from "./utility-types/return-and-instance-type";
+import runStrictFunctionTypes from "./compiler-flags/strict-function-types";
 
 
-runReturnAndInstanceType();
+
+runStrictFunctionTypes();

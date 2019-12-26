@@ -2,18 +2,19 @@ import { logProps } from "../utils";
 
 /**
  * Partial makes all properties on the type optional
+ * Required makes all properties on the type required
  */
 
 interface User {
   id: number;
-  name: string;
-  lastLogin: Date;
+  name?: string;
+  lastLogin?: Date;
 }
 
 class UserRepository {
   private users: User[] = [];
 
-  addUser(user: User): void {
+  addUser(user: Required<User>): void {
     this.users.push(user);
   }
 
