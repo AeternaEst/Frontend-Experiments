@@ -1,19 +1,20 @@
 {
   "files.autoSave": "off",
-  "eslint.autoFixOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
   "javascript.format.enable": false,
   "eslint.validate": [
 	  "javascript",
-	  {"language": "typescript", "autoFix": true },
-    {"language": "typescriptreact", "autoFix": true }
+	  "typescript",
+    "typescriptreact"
   ],
   "typescript.tsdk": "./node_modules/typescript/lib",
   "editor.detectIndentation": false,
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "files.exclude": {
-    "node_modules/": true
-	".vscode/": true,
+    "node_modules/": true,
 	"dist/": true
   }
 }

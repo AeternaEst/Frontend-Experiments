@@ -1,4 +1,6 @@
 /* eslint-disable */
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   mode: 'development',
@@ -23,5 +25,10 @@ module.exports = {
     path: `${__dirname}/dist`,
     publicPath: '/',
     filename: 'main.js',
-  }
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      $clamp: path.resolve(path.join(__dirname, 'node_modules/clamp-js/clamp.js')),
+    })
+  ]
 };

@@ -1,5 +1,5 @@
-import runStrictFunctionTypes from "./compiler-flags/strict-function-types";
+import runDeclare from "./keywords/declare";
 
 
 
-runStrictFunctionTypes();
+runDeclare();
