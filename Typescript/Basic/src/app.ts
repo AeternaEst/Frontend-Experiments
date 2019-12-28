@@ -1,5 +1,5 @@
-import runDeclare from "./keywords/declare";
+import assertion from "./types/assertion";
 
 
 
-runDeclare();
+assertion();

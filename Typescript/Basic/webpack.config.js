@@ -24,7 +24,7 @@ module.exports = {
   output: {
     path: `${__dirname}/dist`,
     publicPath: '/',
-    filename: 'main.js',
+    filename: 'webpack.js',
   },
   plugins: [
     new webpack.ProvidePlugin({
