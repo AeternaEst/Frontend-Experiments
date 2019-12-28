@@ -1,5 +1,3 @@
-import assertion from "./types/assertion";
+import typeGuards from "./types/type-guards";
 
-
-
-assertion();
+typeGuards();

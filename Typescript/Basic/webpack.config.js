@@ -5,7 +5,6 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   entry: ['./src/App.ts'],
-  devtool: 'inline-source-map',
   watchOptions: {
     ignored: /node_modules/,
   },

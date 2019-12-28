@@ -1,16 +1,20 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "module": "es6",
+        "module": "es6", /* Change to amd to build with tsc */
         "allowJs": true,
         "sourceMap": true,
         "outDir": "./dist",
         "lib": ["dom", "es6", "dom.iterable", "scripthost"],
         "noImplicitAny": true,
-        "strictNullChecks": false
+        "strictNullChecks": false,
+        // "outFile": "./dist/typescript.js" /* Comment in to build with tsc */
     },
     "exclude": [
         "./node_modules/**/*",
         "definitions"
-    ]
+    ],
+    "include": [
+      "./src/**/*"
+    ],
 }
