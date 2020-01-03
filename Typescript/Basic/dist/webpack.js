@@ -94,19 +94,19 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _types_type_guards__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types/type-guards */ \"./src/types/type-guards.ts\");\n\r\nObject(_types_type_guards__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\r\n\n\n//# sourceURL=webpack:///./src/App.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _es7_use_es7__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./es7/use-es7 */ \"./src/es7/use-es7.ts\");\n\r\nObject(_es7_use_es7__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\r\n\n\n//# sourceURL=webpack:///./src/App.ts?");
 
 /***/ }),
 
-/***/ "./src/types/type-guards.ts":
-/*!**********************************!*\
-  !*** ./src/types/type-guards.ts ***!
-  \**********************************/
+/***/ "./src/es7/use-es7.ts":
+/*!****************************!*\
+  !*** ./src/es7/use-es7.ts ***!
+  \****************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nvar Orc = /** @class */ (function () {\r\n    function Orc(name, hitpoints, damage) {\r\n        this.name = name;\r\n        this.hitpoints = hitpoints;\r\n        this.damage = damage;\r\n    }\r\n    Orc.prototype.attack = function () {\r\n        console.log(this.name + \" attacks for \" + this.damage);\r\n    };\r\n    return Orc;\r\n}());\r\nvar Dragon = /** @class */ (function () {\r\n    function Dragon(name, hitpoints, damage) {\r\n        this.name = name;\r\n        this.hitpoints = hitpoints;\r\n        this.damage = damage;\r\n    }\r\n    Dragon.prototype.attack = function () {\r\n        console.log(this.name + \" attacks for \" + this.damage);\r\n    };\r\n    Dragon.prototype.breatheFire = function () {\r\n        console.log(this.name + \" does a fire breath attack\");\r\n    };\r\n    return Dragon;\r\n}());\r\nfunction isDragon(monster) {\r\n    return monster.breatheFire !== undefined;\r\n}\r\nvar MonsterController = /** @class */ (function () {\r\n    function MonsterController() {\r\n        this.monsters = [];\r\n    }\r\n    MonsterController.prototype.addMonster = function (monster) {\r\n        this.monsters.push(monster);\r\n    };\r\n    MonsterController.prototype.monsterAttacks = function () {\r\n        this.monsters.forEach(function (monster) {\r\n            monster.attack();\r\n            if (isDragon(monster)) {\r\n                monster.breatheFire();\r\n            }\r\n        });\r\n    };\r\n    return MonsterController;\r\n}());\r\nfunction typeGuards() {\r\n    var orc = new Orc(\"Orc\", 10, 3);\r\n    var dragon = new Dragon(\"Dragon\", 100, 15);\r\n    var controller = new MonsterController();\r\n    controller.addMonster(orc);\r\n    controller.addMonster(dragon);\r\n    controller.monsterAttacks();\r\n}\r\n/* harmony default export */ __webpack_exports__[\"default\"] = (typeGuards);\r\n\n\n//# sourceURL=webpack:///./src/types/type-guards.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\nvar runUseEs7 = function () {\r\n    var myString = '21';\r\n    var myStringResult = myString.padStart(8, '0');\r\n    console.log(myStringResult);\r\n};\r\n/* harmony default export */ __webpack_exports__[\"default\"] = (runUseEs7);\r\n\n\n//# sourceURL=webpack:///./src/es7/use-es7.ts?");
 
 /***/ }),
 

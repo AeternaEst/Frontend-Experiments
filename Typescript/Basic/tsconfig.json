@@ -1,14 +1,27 @@
 {
     "compilerOptions": {
+        "moduleResolution": "node", /* More advanced resolution for non relative imports. Looks in node_modules folders */
         "target": "es5",
-        "module": "es6", /* Change to amd to build with tsc */
+        "module": "es6", /* Change to amd to build with tsc. #4 */
+        "allowSyntheticDefaultImports": false, /* #1 */
+        "esModuleInterop": false, /* #2 */
         "allowJs": true,
         "sourceMap": true,
         "outDir": "./dist",
-        "lib": ["dom", "es6", "dom.iterable", "scripthost"],
-        "noImplicitAny": true,
+        "lib": ["dom", "es6", "dom.iterable", "scripthost", "es2017"], /* Passes compiler checks, but does not supply polyfills  */
+        "noImplicitAny": true, /* any have to be declared explicitly */
         "strictNullChecks": false,
         // "outFile": "./dist/typescript.js" /* Comment in to build with tsc */
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "alwaysStrict": false, /* #3 */
+        "baseUrl": "./", /* Primarily used for non relative imports. Not required if imports are located in root/node_modules */
+        "charset": "utf8",
+        "checkJs": false, /* Used together with allowJs */
+        "downlevelIteration": true, /* Makes sure iterating and destructuring works properly */ 
+        "inlineSourceMap": false,
+        //"jsx": "react" /* perserve -> *.jsx files , react -> *.js with react.createElement */
+        "noEmit": false, /* set to true if only used for type checking */
     },
     "exclude": [
         "./node_modules/**/*",
@@ -18,3 +31,14 @@
       "./src/**/*"
     ],
 }
+
+/**
+  #1 Setting this to true allows you to use this import syntax:
+  import React from 'react' instead of import * as React from 'react'
+
+  #2 Emits runtime helpers for import compatibility
+
+  #3 Helps prevents common erros like foo = "bar". Without strict mode a global variable would be created
+
+  #4 Determines which module loader you will need after the compilation is finished. 
+*/

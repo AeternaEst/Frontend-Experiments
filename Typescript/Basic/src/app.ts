@@ -1,3 +1,5 @@
-import typeGuards from "./types/type-guards";
+import runUseEs7 from "./es7/use-es7";
 
-typeGuards();
+
+
+runUseEs7();
