@@ -1,10 +1,12 @@
-import React from 'react';
+import React from "react";
 
 interface ResponsiveProps {
-  children: (width: number, height: number) => React.ReactElement
+  children: (width: number, height: number) => React.ReactElement;
 }
 
-const Responsive: React.FunctionComponent<ResponsiveProps> = (props: ResponsiveProps) => {
+const Responsive: React.FunctionComponent<ResponsiveProps> = (
+  props: ResponsiveProps
+) => {
   const { width } = window.screen;
   const { height } = window.screen;
   const { children: callback } = props;

@@ -1,9 +1,9 @@
-import React from 'react';
-import SimplePureClass from './SimplePureClass';
-import SimplePureFunctionComponent from './SimplePureFunctionComponent';
-import CustomPureClass from './CustomPureClass';
+import React from "react";
+import CustomPureClass from "./CustomPureClass";
+import SimplePureClass from "./SimplePureClass";
+import SimplePureFunctionComponent from "./SimplePureFunctionComponent";
 
-const messages = ['Hello World', 'Deus Vult', 'Horatius, Captain of the gate'];
+const messages = ["Hello World", "Deus Vult", "Horatius, Captain of the gate"];
 // const messages = ['Hello World', 'Hello World', 'Hello World'];
 
 interface PureAppState {
@@ -16,14 +16,14 @@ class PureApp extends React.Component<{}, PureAppState> {
     super(props);
     this.state = {
       message: messages[0],
-      number: 0,
+      number: 0
     };
   }
 
   componentDidMount() {
     // Change State
     setInterval(() => {
-      console.log('updating state');
+      console.log("updating state");
       let newMessage: string;
       let newNumber: number;
       if (this.state.number === 2) {
@@ -35,7 +35,7 @@ class PureApp extends React.Component<{}, PureAppState> {
       }
       this.setState({
         message: newMessage,
-        number: newNumber,
+        number: newNumber
       });
     }, 5000);
   }

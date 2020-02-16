@@ -1,6 +1,6 @@
-import React from 'react';
-import { ConfigContext } from './ContextService';
-import Layer4 from './Layer4';
+import React from "react";
+import { ConfigContext } from "./ContextService";
+import Layer4 from "./Layer4";
 
 class Layer3 extends React.Component {
   render() {
@@ -8,7 +8,11 @@ class Layer3 extends React.Component {
     return (
       <div>
         <h2>Layer 3</h2>
-        <span><strong>is authenticated: {context.isAuthenticated.toString()}</strong></span>
+        <span>
+          <strong>
+            is authenticated: {context.isAuthenticated.toString()}
+          </strong>
+        </span>
         <Layer4 />
       </div>
     );

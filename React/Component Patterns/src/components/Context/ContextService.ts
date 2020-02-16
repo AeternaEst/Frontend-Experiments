@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export interface ConfigContext {
   language: string;
@@ -11,15 +11,19 @@ export interface ThemeContext {
 }
 
 const defaultConfigContext: ConfigContext = {
-  language: 'DK',
-  isAuthenticated: false,
+  language: "DK",
+  isAuthenticated: false
 };
 
 const defaultThemeContext: ThemeContext = {
-  theme: 'Dark',
-  setTheme: (theme: string) => console.log(theme),
+  theme: "Dark",
+  setTheme: (theme: string) => console.log(theme)
 };
 
-export const ConfigContext = React.createContext<ConfigContext>(defaultConfigContext);
+export const ConfigContext = React.createContext<ConfigContext>(
+  defaultConfigContext
+);
 
-export const ThemeContext = React.createContext<ThemeContext>(defaultThemeContext);
+export const ThemeContext = React.createContext<ThemeContext>(
+  defaultThemeContext
+);

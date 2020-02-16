@@ -1,32 +1,33 @@
-import React, { useState, memo, FunctionComponent } from 'react';
+import React, { FunctionComponent, memo, useState } from "react";
 
 interface SimplePureFunctionComponent {
   message: string;
 }
 
-const SimplePureFunctionComponent: FunctionComponent<SimplePureFunctionComponent> = (props: SimplePureFunctionComponent) => {
+const SimplePureFunctionComponent: FunctionComponent<SimplePureFunctionComponent> = (
+  props: SimplePureFunctionComponent
+) => {
   const { message } = props;
   const [isOpen, setIsOpen] = useState(true);
-  console.log('SimplePureFunctionComponent rerender');
+  console.log("SimplePureFunctionComponent rerender");
 
   return (
     <div className="simpe-pure-function-component">
       <p>SimplePureFunctionComponent</p>
-      {
-        isOpen && (
-          <>
-            <p>{message}</p>
-            <button type="button" onClick={() => setIsOpen(false)}>Close</button>
-          </>
-        )
-      }
+      {isOpen && (
+        <>
+          <p>{message}</p>
+          <button type="button" onClick={() => setIsOpen(false)}>
+            Close
+          </button>
+        </>
+      )}
 
-      {
-        !isOpen && (
-          <button type="button" onClick={() => setIsOpen(true)}>Open</button>
-        )
-      }
-
+      {!isOpen && (
+        <button type="button" onClick={() => setIsOpen(true)}>
+          Open
+        </button>
+      )}
     </div>
   );
 };

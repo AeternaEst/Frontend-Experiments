@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import Presentation from './Presentation';
+import React, { Component } from "react";
+import Presentation from "./Presentation";
 
 interface ContainerState {
   count: number;
@@ -11,14 +11,14 @@ class Container extends Component<{}, ContainerState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      count: 0,
+      count: 0
     };
   }
 
   componentDidMount() {
     this.intervalId = setInterval(() => {
       this.setState(prevState => ({
-        count: prevState.count + 1,
+        count: prevState.count + 1
       }));
     }, 1000);
   }
@@ -29,7 +29,7 @@ class Container extends Component<{}, ContainerState> {
 
   render() {
     const { count } = this.state;
-    return (<Presentation count={count} />);
+    return <Presentation count={count} />;
   }
 }
 

@@ -1,5 +1,5 @@
-import React from 'react';
-import { ConfigContext, ThemeContext } from './ContextService';
+import React from "react";
+import { ConfigContext, ThemeContext } from "./ContextService";
 
 const Layer4 = () => (
   <ConfigContext.Consumer>
@@ -8,15 +8,19 @@ const Layer4 = () => (
         {({ theme, setTheme }) => (
           <div>
             <h2>Layer 4 - Recap layer</h2>
-            <span><strong>{language} - {theme} - {isAuthenticated.toString()}</strong></span>
+            <span>
+              <strong>
+                {language} - {theme} - {isAuthenticated.toString()}
+              </strong>
+            </span>
             <button
               type="button"
               onClick={() => {
-                console.log('changing themes:');
-                setTheme(theme === 'Dark' ? 'Light' : 'Dark');
+                console.log("changing themes:");
+                setTheme(theme === "Dark" ? "Light" : "Dark");
               }}
             >
-                Change Theme
+              Change Theme
             </button>
           </div>
         )}
