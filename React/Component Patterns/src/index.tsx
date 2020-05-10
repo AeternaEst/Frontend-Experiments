@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Container from "./components/Container-Presentation/Container";
+import MousePositionConstumer from "./logic-sharing/RenderProps/MousePositionConsumer";
 
 const injectTarget = document.querySelector(".root");
 
-ReactDOM.render(<Container />, injectTarget);
+ReactDOM.render(<MousePositionConstumer />, injectTarget);
