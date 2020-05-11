@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable prettier/prettier */
 import React from "react";
 
 interface MousePositionState {
@@ -9,14 +7,14 @@ interface MousePositionState {
 
 export interface WithMousePositionProps {
   mousePosition: MousePositionState;
-};
+}
 
 const WithMousePosition = <P extends WithMousePositionProps>(
   Component: React.ComponentType<P>
 ) => {
   return class MousePosition extends React.Component<
-  P & WithMousePositionProps,
-  MousePositionState
+    P & WithMousePositionProps,
+    MousePositionState
   > {
     constructor(props: Readonly<P & WithMousePositionProps>) {
       super(props);
@@ -43,7 +41,6 @@ const WithMousePosition = <P extends WithMousePositionProps>(
     }
 
     render() {
-      // @ts-ignore
       return <Component {...this.props} mousePosition={this.state} />;
     }
   };
