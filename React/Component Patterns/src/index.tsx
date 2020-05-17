@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import UseMousePositionConsumer from "./logic-sharing/Hook/mouse-position/UseMousePositionConsumer";
+import UseResponsiveConsumer from "./logic-sharing/Hook/responsive/UseResponsiveConsumer";
 
 const injectTarget = document.querySelector(".root");
 
-ReactDOM.render(<UseMousePositionConsumer />, injectTarget);
+ReactDOM.render(<UseResponsiveConsumer />, injectTarget);
