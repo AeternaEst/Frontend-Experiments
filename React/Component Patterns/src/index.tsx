@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import UseResponsiveConsumer from "./logic-sharing/Hook/responsive/UseResponsiveConsumer";
+import ResponsiveConsumer from "./logic-sharing/RenderProps/responsive/ResponsiveConsumer";
 
 const injectTarget = document.querySelector(".root");
 
-ReactDOM.render(<UseResponsiveConsumer />, injectTarget);
+ReactDOM.render(<ResponsiveConsumer />, injectTarget);
