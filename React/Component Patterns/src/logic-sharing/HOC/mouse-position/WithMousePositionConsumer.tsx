@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import WithMousePosition, {
-  WithMousePositionProps
-} from "./mouse-position/WithMousePosition";
+import WithMousePosition, { WithMousePositionProps } from "./WithMousePosition";
 
 interface WithMousePositionConstumerProps extends WithMousePositionProps {}
 
