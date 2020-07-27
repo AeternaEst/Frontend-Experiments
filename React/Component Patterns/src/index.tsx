@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import RerenderWithKeyContainer from "./misc/rerender-with-key";
+import ForwardRef from "./components/Refs/ForwardRef";
 
 const injectTarget = document.querySelector(".root");
 
-ReactDOM.render(<RerenderWithKeyContainer />, injectTarget);
+ReactDOM.render(<ForwardRef />, injectTarget);
