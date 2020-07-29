@@ -1,5 +1,9 @@
 import React from "react";
 
+/** 
+ * To use state you have to add create-react-class module. See: https://reactjs.org/docs/react-without-es6.html
+*/
+
 const NoJsx = React.createElement(
   "div",
   {
