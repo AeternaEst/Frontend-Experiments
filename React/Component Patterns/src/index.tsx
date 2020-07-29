@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ProfilerWithMemo from "./performance/profiler-use-memo/ProfilerWithMemo";
+import RerenderFunction from "./performance/rerender-function/RerenderFunction";
 
 const injectTarget = document.querySelector(".root");
 
-ReactDOM.render(<ProfilerWithMemo />, injectTarget);
+ReactDOM.render(<RerenderFunction />, injectTarget);
