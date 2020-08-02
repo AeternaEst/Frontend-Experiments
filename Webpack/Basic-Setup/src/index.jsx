@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import txt from "./hello.txt";
 import classnames from "classnames";
 import SharedComponent from './shared-component';
+import "./styles.css";
 
 const App = () => {
     return <div className={classnames("app", {
