@@ -1,0 +1,34 @@
+{
+  "name": "basic-webpack",
+  "version": "1.0.0",
+  "description": "Basic webpack setup",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AeternaEst/Frontend-Experiments.git"
+  },
+  "author": "Nicholas Lindboe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AeternaEst/Frontend-Experiments/issues"
+  },
+  "homepage": "https://github.com/AeternaEst/Frontend-Experiments#readme",
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "raw-loader": "^4.0.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
