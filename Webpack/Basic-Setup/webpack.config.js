@@ -1,8 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
-  entry: {
+/* Use function instead of object to receive env variable */
+module.exports = env => {
+  console.log(env);
+
+  const isProductionBuild = env && env.production;
+
+  return { entry: {
     main: './src/index.jsx',
     admin: './src/admin.jsx'
   },
@@ -10,6 +15,8 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash].js' /* Generates hash in the filename */
   },
+  watch: !isProductionBuild,
+  devtool: isProductionBuild ? 'none' : 'source-map',
   module: {
     rules: [
       { test: /\.txt$/, use: 'raw-loader' },
@@ -21,7 +28,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx'] /* Avoid specifing file extensions when importing. e.g import SharedComponent from './shared-component'; */
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -30,10 +37,11 @@ module.exports = {
       hash: false /* Generates hash as as query string */
     })
   ],
-  mode: "development",
+  mode: isProductionBuild ? "production" : "development",
   optimization: {
     splitChunks: {
       chunks: 'all',
     }
   }
+}
 };
