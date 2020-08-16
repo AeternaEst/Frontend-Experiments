@@ -13,12 +13,13 @@ module.exports = env => {
     entry: {
       main: "./src/index.jsx",
       admin: "./src/admin.jsx",
+      dynamic: "./src/dynamic.js"
     },
     output: {
-      path: path.resolve(__dirname, "dist"),
+      path: path.resolve(__dirname, "dist"), /* Filesystem path */
       filename:
         "[name].[contenthash].js" /* contenthash creates a new hash per entry & asset type */,
-      publicPath: __dirname + "/dist/",
+      publicPath: __dirname + "/dist/", /* Browser path */
     },
     watch: !isProductionBuild,
     devtool: isProductionBuild ? "none" : "inline-source-map",
