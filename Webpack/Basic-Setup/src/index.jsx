@@ -21,10 +21,6 @@ const App = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <DynamicComponent />
       </Suspense>
-      {/* {import("./dynamic-imports/dynamic-console").then((Component) => {
-        console.log(Component);
-        return <Component />;
-      })} */}
     </div>
   );
 };
