@@ -13,12 +13,13 @@ module.exports = env => {
     entry: {
       main: "./src/index.jsx",
       admin: "./src/admin.jsx",
-      dynamic: "./src/dynamic.js"
+      contextSync: "./src/require-context/with-sync-imports.js",
+      contextAsync: "./src/require-context/with-async-imports.js"
     },
     output: {
       path: path.resolve(__dirname, "dist"), /* Filesystem path */
-      filename:
-        "[name].[contenthash].js" /* contenthash creates a new hash per entry & asset type */,
+      filename: "[name].js" /* No [hash] leaves entry file names untouched */,
+      chunkFilename: "[name].[contenthash].js", /* Only hash non entry chunks. Contenthash creates a new hash per entry & asset type */
       publicPath: __dirname + "/dist/", /* Browser path */
     },
     watch: !isProductionBuild,
@@ -68,9 +69,15 @@ module.exports = env => {
     ],
     mode: isProductionBuild ? "production" : "development",
     optimization: {
-      /* Will split all nodes modules into a vendors chunk */
       splitChunks: {
+      /* Will split all nodes modules into a vendors chunk */
         chunks: "all",
+        cacheGroups: {
+          defaultVendors: {
+            /* Override chunk hash so vendors can be referenced */
+            filename: 'vendors.js'
+          }
+        }
       },
     },
   };
