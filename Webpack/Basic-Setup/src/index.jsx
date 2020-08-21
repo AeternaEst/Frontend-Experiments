@@ -10,6 +10,10 @@ const DynamicComponent = React.lazy(() =>
 );
 
 const App = () => {
+  /* Log environment variables made available through webpack.DefinePlugin */
+  console.log("environment variable PRODUCTION", process.env.NODE_ENV);
+  console.log("environment variable DEBUG", DEBUG);
+
   return (
     <div
       className={classnames("app", {

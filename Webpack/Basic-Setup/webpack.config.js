@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -57,6 +58,13 @@ module.exports = env => {
       ] /* Avoid specifing file extensions when importing. e.g import SharedComponent from './shared-component'; */,
     },
     plugins: [
+      /* DefinePlugin takes compile time variables and makes them available runtime */
+      new webpack.DefinePlugin({
+        "process.env": {
+          NODE_ENV: !!production,
+        },
+        DEBUG: !!analyze,
+      }),
       /* HtmlWebpackPlugin will create a new html file with javascript embedded at the bottom of the body tag &
        css in the header tag */
       new HtmlWebpackPlugin({
@@ -73,7 +81,7 @@ module.exports = env => {
       /* Cleans the dist folder before copying new files */
       new CleanWebpackPlugin(),
       new BundleAnalyzerPlugin({
-        analyzerMode: analyze ? "server" : "disabled"
+        analyzerMode: analyze ? "server" : "disabled",
       }),
     ],
     mode: production ? "production" : "development",
