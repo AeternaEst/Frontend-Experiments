@@ -1,38 +1,25 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useCallback } from "react";
 import { deprecatedReducerTwoActions } from "../../reducers/app-setup/deprecated-reducer-two";
 import { State } from "../../reducers/root-reducer";
-import { Dispatch } from "redux";
+import { useDispatch, useSelector } from "react-redux";
 
-interface MessageDispatcherProps {
-  setMessage: (message: string) => void;
-  counter: number;
-}
+const MessageDispatcher: React.FC = () => {
+  const dispatch = useDispatch();
+  const counter = useSelector((state: State) => state.counterState.counter);
 
-const MessageDispatcher: React.FC<MessageDispatcherProps> = (props) => {
+  const setMessage = useCallback(() => {
+    dispatch(deprecatedReducerTwoActions.setMessage("Hello World"));
+  }, []);
+
   return (
     <div className="message-dispatcher">
       <h3>Message Dispatcher</h3>
-      <p>Current Counter: {props.counter}</p>
-      <button type="button" onClick={() => props.setMessage("Hello World")}>
+      <p>Current Counter: {counter}</p>
+      <button type="button" onClick={setMessage}>
         Set Message
       </button>
     </div>
   );
 };
 
-const mapStateToProps = (state: State) => {
-  console.log("mapStateToProps", state);
-  return {
-    counter: state.counterState.counter,
-  };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch) => {
-  return {
-    setMessage: (message: string) =>
-      dispatch(deprecatedReducerTwoActions.setMessage(message)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MessageDispatcher);
+export default MessageDispatcher;
