@@ -1,38 +1,40 @@
 const increment = {
-    type: "INCREMENT"
-}
+  type: "INCREMENT",
+};
 
 const decrement = {
-    type: "INCREMENT"
-}
+  type: "INCREMENT",
+};
 
 export const deprecatedReducerOneActions = {
-    increment: increment,
-    decrement: decrement
-}
+  increment: increment,
+  decrement: decrement,
+};
 
-interface DeprecatedReducerOneState {
-    counter: number; 
+export interface DeprecatedReducerOneState {
+  counter: number;
 }
 
 const defaultState: DeprecatedReducerOneState = {
-    counter: 0
-}
+  counter: 0,
+};
 
-const deprecatedReducerOne = (state = defaultState, action: { type: string }) => {
-    console.log("dispatch deprecatedReducerOne", action);
-    switch(action.type) {
-        case "INCREMENT":
-            return {
-                counter: state.counter + 1
-            }
-        case "DECREMENT":
-            return {
-                counter: state.counter - 1 
-            }
-        default:
-            return state;
-    }
-}
+const deprecatedReducerOne = (
+  state = defaultState,
+  action: { type: string }
+) => {
+  switch (action.type) {
+    case "INCREMENT":
+      return {
+        counter: state.counter + 1,
+      };
+    case "DECREMENT":
+      return {
+        counter: state.counter - 1,
+      };
+    default:
+      return state;
+  }
+};
 
 export default deprecatedReducerOne;
