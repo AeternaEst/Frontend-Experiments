@@ -2,13 +2,14 @@ import React, { useCallback } from "react";
 import { deprecatedReducerTwoActions } from "../../reducers/app-setup/deprecated-reducer-two";
 import { State } from "../../reducers/root-reducer";
 import { useDispatch, useSelector } from "react-redux";
+import { deperactedSagaActions } from "../../sagas/app-setup/deprecated-saga";
 
 const MessageDispatcher: React.FC = () => {
   const dispatch = useDispatch();
   const counter = useSelector((state: State) => state.counterState.counter);
 
   const setMessage = useCallback(() => {
-    dispatch(deprecatedReducerTwoActions.setMessage("Hello World"));
+    dispatch(deperactedSagaActions.requestMessage("Hello World"));
   }, []);
 
   return (

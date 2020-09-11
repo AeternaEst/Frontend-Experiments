@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { deprecatedReducerOneActions } from "../../reducers/app-setup/deprecated-reducer-one";
 import { State } from "../../reducers/root-reducer";
 import { Dispatch } from "redux";
+import { deperactedSagaActions } from "../../sagas/app-setup/deprecated-saga";
 
 interface CounterDispatcherProps {
   increment: () => void;
@@ -29,7 +29,7 @@ const mapStateToProps = (state: State) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    increment: () => dispatch(deprecatedReducerOneActions.increment),
+    increment: () => dispatch(deperactedSagaActions.requestIncrement),
   };
 };
 

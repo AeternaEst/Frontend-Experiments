@@ -1,5 +1,5 @@
 {
-  "name": "redux-saga",
+  "name": "react-redux-saga",
   "version": "1.0.0",
   "description": "basic setup and implementation of redux, react-redux and sagas",
   "main": "index.jsx",
@@ -20,7 +20,8 @@
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.8"
+    "redux-devtools-extension": "^2.13.8",
+    "redux-saga": "^1.1.3"
   },
   "devDependencies": {
     "@types/react": "^16.9.49",

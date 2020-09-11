@@ -1,5 +1,12 @@
 import { rootReducer } from "./reducers/root-reducer";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
+import createSagaMiddleware from "@redux-saga/core";
+import deprecatedSaga from "./sagas/app-setup/deprecated-saga";
 
-export const store = createStore(rootReducer, composeWithDevTools());
+const devTools = composeWithDevTools();
+const sagaMiddleware = createSagaMiddleware()
+
+export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(deprecatedSaga);
