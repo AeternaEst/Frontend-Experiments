@@ -1,10 +1,11 @@
+import { AnyAction } from "redux";
 
 /* Actions */
 const SET_MESSAGE = "SET_MESSAGE";
 const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 
 /* Action creators */
-const setMessage = (message: string) => {
+const setMessage = (message: string): AnyAction & { message: string} => {
   return {
     type: SET_MESSAGE,
     message: message,

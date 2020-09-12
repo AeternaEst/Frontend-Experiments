@@ -12,7 +12,7 @@ const requestIncrement: AnyAction = {
     type: REQUEST_INCREMENT
 }
 
-const requestMessage = (message: string): AnyAction => {
+const requestMessage = (message: string): AnyAction & { message: string} => {
     return {
         type: REQUEST_SET_MESSAGE,
         message: message
