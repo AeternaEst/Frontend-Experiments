@@ -19,7 +19,7 @@ const setProperties = (properties: Property[]): SetPropertiesAction => {
     }
 }
 
-const propertyReducerActions = {
+export const propertyReducerActions = {
     setProperties
 }
 
@@ -33,7 +33,7 @@ const defaultState: PropertyState = {
 }
 
 /* Reducer */
-const propertyReducer = (state: PropertyState, action: PropertyActions): PropertyState => {
+const propertyReducer = (state = defaultState, action: PropertyActions): PropertyState => {
     switch(action.type) {
         case SET_PROPERTIES:
             return {
