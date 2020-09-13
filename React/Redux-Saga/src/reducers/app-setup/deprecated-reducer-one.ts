@@ -42,7 +42,7 @@ const defaultState: DeprecatedReducerOneState = {
 const deprecatedReducerOne = (
   state = defaultState,
   action: DeprecatedReducerOneActions
-) => {
+): DeprecatedReducerOneState => {
   switch (action.type) {
     case INCREMENT:
       return {

@@ -46,7 +46,7 @@ const defaultState: DeprecatedReducerTwoState = {
 const deprecatedReducerTwo = (
   state = defaultState,
   action: DeprecatedReducerTwoActions
-) => {
+): DeprecatedReducerTwoState => {
   switch (action.type) {
     case SET_MESSAGE:
       return {

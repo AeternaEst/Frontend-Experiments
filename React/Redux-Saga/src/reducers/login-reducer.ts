@@ -47,15 +47,15 @@ const defaultState: LoginState = {
 const loginReducer = (
   state = defaultState,
   action: LoginActions
-) => {
+): LoginState => {
   switch (action.type) {
     case SET_ACTIVE_USER:
       return {
-        user: action.user,
+        activeUser: action.user,
       };
     case CLEAR_ACTIVE_USER:
       return {
-        user: undefined,
+        activeUser: undefined,
       };
     default:
       return state;
