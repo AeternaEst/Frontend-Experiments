@@ -6,13 +6,16 @@ const SET_ACTIVE_USER = "SET_ACTIVE_USER";
 const CLEAR_ACTIVE_USER = "CLEAR_ACTIVE_USER";
 
 /* Action types */
-interface SetUserAction extends AnyAction {
+interface SetUserAction {
+    type: typeof SET_ACTIVE_USER
     user: AppUser;
 }
 
-interface ClearUserAction extends AnyAction {}
+interface ClearUserAction {
+  type: typeof CLEAR_ACTIVE_USER
+}
 
-type LoginActionTypes = SetUserAction | ClearUserAction;
+type LoginActions = SetUserAction | ClearUserAction;
 
 /* Action creators */
 const setUser = (user: AppUser): SetUserAction => {
@@ -31,6 +34,7 @@ export const loginReducerActions = {
   clearUser: clearUser,
 };
 
+/* State */
 export interface LoginState {
   activeUser?: AppUser
 }
@@ -39,9 +43,10 @@ const defaultState: LoginState = {
   activeUser: undefined,
 };
 
+/* Reducer */
 const loginReducer = (
   state = defaultState,
-  action: LoginActionTypes
+  action: LoginActions
 ) => {
   switch (action.type) {
     case SET_ACTIVE_USER:

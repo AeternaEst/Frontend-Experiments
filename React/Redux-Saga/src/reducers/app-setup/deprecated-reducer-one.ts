@@ -4,12 +4,23 @@ import { AnyAction } from "redux";
 const INCREMENT = "INCREMENT";
 const DECREMENT = "DECREMENT";
 
+/* Action types */
+interface IncrementAction {
+  type: typeof INCREMENT;
+}
+
+interface DecrementAction {
+  type: typeof DECREMENT;
+}
+
+type DeprecatedReducerOneActions = IncrementAction | DecrementAction;
+
 /* Action creators */
-const increment: AnyAction = {
+const increment: IncrementAction = {
   type: INCREMENT,
 };
 
-const decrement: AnyAction = {
+const decrement: DecrementAction = {
   type: DECREMENT,
 };
 
@@ -18,6 +29,7 @@ export const deprecatedReducerOneActions = {
   decrement: decrement,
 };
 
+/* State */
 export interface DeprecatedReducerOneState {
   counter: number;
 }
@@ -26,9 +38,10 @@ const defaultState: DeprecatedReducerOneState = {
   counter: 0,
 };
 
+/* Reducer */
 const deprecatedReducerOne = (
   state = defaultState,
-  action: AnyAction
+  action: DeprecatedReducerOneActions
 ) => {
   switch (action.type) {
     case INCREMENT:
