@@ -34,3 +34,8 @@ body {
 .navigation__actions {
     display: flex;
 }
+
+.navigation__login {
+    display: flex;
+    flex-flow: column;
+}

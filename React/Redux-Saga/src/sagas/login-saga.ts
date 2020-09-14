@@ -42,9 +42,10 @@ const loginService = new LoginService();
 function* login(action: LoginAction) {
    try {
       const user = yield loginService.login(action.userName, action.password);
+      yield put(loginReducerActions.successfulLogin);
       yield put(loginReducerActions.setUser(user));
    } catch (e) {
-      throw new Error("Error during login");
+      yield put(loginReducerActions.unsuccessfulLogin);
    }
 }
 

@@ -4,6 +4,8 @@ import { AppUser } from "../types/app-user";
 /* Actions */
 const SET_ACTIVE_USER = "SET_ACTIVE_USER";
 const CLEAR_ACTIVE_USER = "CLEAR_ACTIVE_USER";
+const UNSUCCESSFUL_LOGIN = "UNSUCCESSFUL_LOGIN";
+const SUCCESSFUL_LOGIN = "SUCCESSFUL_LOGIN";
 
 /* Action types */
 interface SetUserAction {
@@ -15,7 +17,15 @@ interface ClearUserAction {
   type: typeof CLEAR_ACTIVE_USER
 }
 
-type LoginActions = SetUserAction | ClearUserAction;
+interface UnsuccessfulLoginAction {
+  type: typeof UNSUCCESSFUL_LOGIN
+}
+
+interface SuccessfulLoginAction {
+  type: typeof SUCCESSFUL_LOGIN
+}
+
+type LoginActions = SetUserAction | ClearUserAction | UnsuccessfulLoginAction | SuccessfulLoginAction;
 
 /* Action creators */
 const setUser = (user: AppUser): SetUserAction => {
@@ -29,18 +39,30 @@ const clearUser: ClearUserAction = {
   type: CLEAR_ACTIVE_USER,
 };
 
+const unsuccessfulLogin: UnsuccessfulLoginAction = {
+  type: UNSUCCESSFUL_LOGIN,
+};
+
+const successfulLogin: SuccessfulLoginAction = {
+  type: SUCCESSFUL_LOGIN,
+};
+
 export const loginReducerActions = {
   setUser: setUser,
   clearUser: clearUser,
+  unsuccessfulLogin,
+  successfulLogin
 };
 
 /* State */
 export interface LoginState {
   activeUser?: AppUser
+  unsuccessfulLogin?: boolean;
 }
 
 const defaultState: LoginState = {
   activeUser: undefined,
+  unsuccessfulLogin: false
 };
 
 /* Reducer */
@@ -51,12 +73,24 @@ const loginReducer = (
   switch (action.type) {
     case SET_ACTIVE_USER:
       return {
+        ...state,
         activeUser: action.user,
       };
     case CLEAR_ACTIVE_USER:
       return {
+        ...state,
         activeUser: undefined,
       };
+    case UNSUCCESSFUL_LOGIN:
+      return {
+        ...state,
+        unsuccessfulLogin: true
+      }
+    case SUCCESSFUL_LOGIN:
+      return {
+        ...state,
+        unsuccessfulLogin: false
+      }
     default:
       return state;
   }

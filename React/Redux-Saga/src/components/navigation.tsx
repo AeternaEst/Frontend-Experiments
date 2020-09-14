@@ -1,23 +1,44 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import { Property } from '../types/property';
 import { AppUser } from '../types/app-user';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { State } from '../reducers/root-reducer';
+import { loginActions } from '../sagas/login-saga';
 
 interface NavigationProps {
     properties: Property[];
     user?: AppUser;
+    unsuccessfulLogin?: boolean;
 }
 
 const Navigation: FC<NavigationProps> = (props) => {
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
     const numberOfComments = useMemo(() => props.properties.reduce<number>((prev, current) => prev + current.comments.length, 0), [props.properties]);
     const numberOfFavorites = useMemo(() => props.properties.filter(property => property.isFavorite).length, [props.properties]);
+
     return (
         <div className="navigation">
             <h2>Property King</h2>
             <div className="navigation__actions">
                 <div>Comments: {numberOfComments}</div>
                 <div>Favorites: {numberOfFavorites}</div>
+                {
+                    props.user && (<><div>Hello {props.user.userName}</div><button onClick={() => dispatch(loginActions.logout)}>Logout</button></>)
+                }
+                <div>
+                {
+                    !props.user && (<div className="navigation__login">
+                        <input onChange={(event) => setUserName(event.currentTarget.value)} type="text" value={userName} placeholder="username" />
+                        <input onChange={(event) => setPassword(event.currentTarget.value)} type="text" value={password} placeholder="password" />
+                        <button onClick={() => dispatch(loginActions.login(userName, password))}>Login</button>
+                        {
+                            props.unsuccessfulLogin && (<span>Incorrect username or password</span>)
+                        }
+                    </div>)
+                }
+                </div>
             </div>
         </div>
     )
@@ -26,7 +47,8 @@ const Navigation: FC<NavigationProps> = (props) => {
 function mapStateToProps(state: State): NavigationProps {
     return {
         properties: state.propertyState.properties,
-        user: state.loginState.activeUser
+        user: state.loginState.activeUser,
+        unsuccessfulLogin: state.loginState.unsuccessfulLogin
     }
 }
 
