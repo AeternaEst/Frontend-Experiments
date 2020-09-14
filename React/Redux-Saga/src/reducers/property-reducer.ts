@@ -37,7 +37,7 @@ const propertyReducer = (state = defaultState, action: PropertyActions): Propert
     switch(action.type) {
         case SET_PROPERTIES:
             return {
-                properties: action.properties
+                properties: [...action.properties]
             }
         default:
             return state;

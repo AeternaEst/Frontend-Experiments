@@ -16,3 +16,21 @@ body {
 .property:last-of-type {
     margin-right: 0px;
 }
+
+.property__actions {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid black;    
+}
+
+.navigation__actions {
+    display: flex;
+}
