@@ -1,0 +1,18 @@
+body {
+    margin: 0 10%;
+}
+
+/* Property list */
+.property-list__properties {
+    display: flex;
+}
+
+/* Property */
+.property {
+    flex-basis: 33%;
+    margin-right: 10px;
+}
+
+.property:last-of-type {
+    margin-right: 0px;
+}

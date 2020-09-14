@@ -48,7 +48,7 @@ export default class PropertyService {
                     resolve();
                 }
                 reject("Property not found")
-            }, 2000);
+            }, 2000);   
         });
     }
 
