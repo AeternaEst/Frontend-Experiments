@@ -1,41 +1,48 @@
 body {
-    margin: 0 10%;
+  margin: 0 10%;
+}
+
+.property-list {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Property list */
 .property-list__properties {
-    display: flex;
+  display: flex;
 }
 
 /* Property */
 .property {
-    flex-basis: 33%;
-    margin-right: 10px;
+  flex-basis: 33%;
+  margin-right: 10px;
 }
 
 .property:last-of-type {
-    margin-right: 0px;
+  margin-right: 0px;
 }
 
 .property__actions {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
 }
 
 .navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid black;    
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid black;
 }
 
 .navigation__actions {
-    display: flex;
+  display: flex;
 }
 
 .navigation__login {
-    display: flex;
-    flex-flow: column;
+  display: flex;
+  flex-flow: column;
 }
