@@ -9,7 +9,7 @@ import Loader from "./loader";
 interface NavigationProps {
   properties: Property[];
   isFetchingProperties: boolean;
-  isAddingFavorite: boolean;
+  favoritesBeingAdded: number[];
   isAddingComment: boolean;
   user?: AppUser;
   unsuccessfulLogin?: boolean;
@@ -36,27 +36,18 @@ const Navigation: FC<NavigationProps> = (props) => {
     <div className="navigation">
       <h2>Property King</h2>
       <div className="navigation__actions">
-        {props.isFetchingProperties && <Loader text="data not ready" />}
-        {!props.isFetchingProperties && (
-          <div className="navigation__action-status">
-            <div>
-              Comments:{" "}
-              {props.isAddingComment ? (
-                <Loader text="...loading" />
-              ) : (
-                numberOfComments
-              )}
+        {(props.isFetchingProperties ||
+          props.favoritesBeingAdded.length ||
+          props.isAddingComment) && <Loader text="getting latest data" />}
+
+        {!props.isFetchingProperties &&
+          !props.favoritesBeingAdded.length &&
+          !props.isAddingComment && (
+            <div className="navigation__action-status">
+              <div>Comments: {numberOfComments}</div>
+              <div>Favorites: {numberOfFavorites}</div>
             </div>
-            <div>
-              Favorites:{" "}
-              {props.isAddingFavorite ? (
-                <Loader text="...loading" />
-              ) : (
-                numberOfFavorites
-              )}
-            </div>
-          </div>
-        )}
+          )}
         {props.user && (
           <>
             <div>Hello {props.user.userName}</div>
@@ -103,7 +94,7 @@ function mapStateToProps(state: State): NavigationProps {
     user: state.loginState.activeUser,
     unsuccessfulLogin: state.loginState.unsuccessfulLogin,
     isAddingComment: state.propertyState.isAddingComment,
-    isAddingFavorite: state.propertyState.isAddingFavorite,
+    favoritesBeingAdded: state.propertyState.currentFavoritesBeingAdded,
   };
 }
 

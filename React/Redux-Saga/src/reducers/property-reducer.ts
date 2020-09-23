@@ -3,7 +3,7 @@ import { Property } from "../types/property";
 /* Actions */
 const SET_PROPERTIES = "SET_PROPERTIES";
 const IS_FETCHING_PROPERTIES = "IS_FETCHING_PROPERTIES";
-const IS_ADDING_FAVORITE = "IS_ADDING_FAVORITE";
+const CURRENT_FAVORITES_BEING_ADDED = "CURRENT_FAVORITES_BEING_ADDED";
 const IS_ADDING_COMMENT = "IS_ADDING_COMMENT";
 
 /* Action types */
@@ -17,9 +17,10 @@ interface IsFetchingPropertiesAction {
   isFetching: boolean;
 }
 
-interface IsAddingFavoriteAction {
-  type: typeof IS_ADDING_FAVORITE;
-  isAddingFavorite: boolean;
+interface CurrentFavoritesBeingAddedAction {
+  type: typeof CURRENT_FAVORITES_BEING_ADDED;
+  propertyId: number;
+  isCurrentlyAdding: boolean;
 }
 
 interface IsAddingCommentAction {
@@ -31,7 +32,7 @@ type PropertyActions =
   | SetPropertiesAction
   | IsFetchingPropertiesAction
   | IsAddingCommentAction
-  | IsAddingFavoriteAction;
+  | CurrentFavoritesBeingAddedAction;
 
 /* Action creators */
 const setProperties = (properties: Property[]): SetPropertiesAction => {
@@ -50,42 +51,43 @@ const isFetchingProperties = (
   };
 };
 
-const isAdding = (
-  addType: IsAddingFavoriteAction["type"] | IsAddingCommentAction["type"],
-  isAdding: boolean
-): IsAddingCommentAction | IsAddingFavoriteAction => {
-  if (addType === IS_ADDING_FAVORITE) {
-    return {
-      type: IS_ADDING_FAVORITE,
-      isAddingFavorite: isAdding,
-    };
-  }
-  if (addType === IS_ADDING_COMMENT) {
-    return {
-      type: IS_ADDING_COMMENT,
-      isAddingComment: isAdding,
-    };
-  }
+const isAddingComment = (isAdding: boolean): IsAddingCommentAction => {
+  return {
+    type: IS_ADDING_COMMENT,
+    isAddingComment: isAdding,
+  };
+};
+
+const currentFavoritesBeingAdded = (
+  propertyId: number,
+  isCurrentlyAdding: boolean
+): CurrentFavoritesBeingAddedAction => {
+  return {
+    type: CURRENT_FAVORITES_BEING_ADDED,
+    propertyId,
+    isCurrentlyAdding,
+  };
 };
 
 export const propertyReducerActions = {
   setProperties,
   isFetchingProperties,
-  isAdding,
+  isAddingComment,
+  currentFavoritesBeingAdded,
 };
 
 /* State */
 export interface PropertyState {
   properties: Property[];
   isFetching: boolean;
-  isAddingFavorite: boolean;
+  currentFavoritesBeingAdded: number[];
   isAddingComment: boolean;
 }
 
 const defaultState: PropertyState = {
   properties: [],
   isFetching: false,
-  isAddingFavorite: false,
+  currentFavoritesBeingAdded: [],
   isAddingComment: false,
 };
 
@@ -105,10 +107,28 @@ const propertyReducer = (
         ...state,
         isFetching: action.isFetching,
       };
-    case IS_ADDING_FAVORITE:
+    case CURRENT_FAVORITES_BEING_ADDED:
+      let updatedFavorites: number[] = [];
+      if (!action.isCurrentlyAdding) {
+        const indexToRemove = state.currentFavoritesBeingAdded.findIndex(
+          (id) => id === action.propertyId
+        );
+        updatedFavorites = [
+          ...state.currentFavoritesBeingAdded.slice(0, indexToRemove),
+          ...state.currentFavoritesBeingAdded.slice(
+            indexToRemove + 1,
+            state.currentFavoritesBeingAdded.length
+          ),
+        ];
+      } else {
+        updatedFavorites = [
+          ...state.currentFavoritesBeingAdded,
+          action.propertyId,
+        ];
+      }
       return {
         ...state,
-        isAddingFavorite: action.isAddingFavorite,
+        currentFavoritesBeingAdded: updatedFavorites,
       };
     case IS_ADDING_COMMENT:
       return {

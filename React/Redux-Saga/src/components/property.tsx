@@ -11,13 +11,16 @@ interface PropertyProps {
 
 const Property: FC<PropertyProps> = (props: PropertyProps) => {
   const [comment, setComment] = useState("");
-  const isAddingFavorite = useSelector(
-    (state: State) => state.propertyState.isAddingFavorite
+  const favoritesBeingAdded = useSelector(
+    (state: State) => state.propertyState.currentFavoritesBeingAdded
   );
   const isAddingComment = useSelector(
     (state: State) => state.propertyState.isAddingComment
   );
   const dispatch = useDispatch();
+
+  const isLoading = favoritesBeingAdded.includes(props.property.id);
+
   return (
     <div className="property">
       <img src={props.property.imageUrl} />
@@ -33,7 +36,7 @@ const Property: FC<PropertyProps> = (props: PropertyProps) => {
               dispatch(propertyActions.addToFavorite(props.property.id))
             }
           >
-            {isAddingFavorite ? <Loader text="updating" /> : "Add to favorites"}
+            {isLoading ? <Loader text="updating" /> : "Add to favorites"}
           </button>
         )}
         {props.property.isFavorite && <span>Is favorite</span>}

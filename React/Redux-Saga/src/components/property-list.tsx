@@ -21,7 +21,7 @@ const PropertyList: FC = () => {
   return (
     <div className="property-list">
       <h3>Properties</h3>
-      {isFetching && <Loader text="loading properties" />}
+      {isFetching && !properties.length && <Loader text="loading properties" />}
       {!isFetching && !properties.length && <p>No properties found</p>}
       <div className="property-list__properties">
         {properties.map((property) => (

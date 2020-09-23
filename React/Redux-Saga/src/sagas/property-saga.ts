@@ -74,10 +74,17 @@ function* fetchProperties(action: FetchPropertiesAction) {
 
 function* addFavoriteProperty(action: AddFavoritePropertyAction) {
   try {
-    yield put(propertyReducerActions.isAdding("IS_ADDING_FAVORITE", true));
+    yield put(
+      propertyReducerActions.currentFavoritesBeingAdded(action.propertyId, true)
+    );
     yield propertyService.addToFavorite(action.propertyId);
     yield put(propertyActions.fetch);
-    yield put(propertyReducerActions.isAdding("IS_ADDING_FAVORITE", false));
+    yield put(
+      propertyReducerActions.currentFavoritesBeingAdded(
+        action.propertyId,
+        false
+      )
+    );
   } catch (e) {
     throw new Error("Error adding favorite property");
   }
@@ -85,14 +92,14 @@ function* addFavoriteProperty(action: AddFavoritePropertyAction) {
 
 function* addPropertyComment(action: AddPropertyCommentAction) {
   try {
-    yield put(propertyReducerActions.isAdding("IS_ADDING_COMMENT", true));
+    yield put(propertyReducerActions.isAddingComment(true));
     const user = yield select((state: State) => state.loginState.activeUser);
     yield propertyService.addComment(action.propertyId, {
       text: action.comment,
       user: user,
     });
     yield put(propertyActions.fetch);
-    yield put(propertyReducerActions.isAdding("IS_ADDING_COMMENT", false));
+    yield put(propertyReducerActions.isAddingComment(false));
   } catch (e) {
     throw new Error("Error adding property comment");
   }
