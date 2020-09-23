@@ -9,6 +9,8 @@ import Loader from "./loader";
 interface NavigationProps {
   properties: Property[];
   isFetchingProperties: boolean;
+  isAddingFavorite: boolean;
+  isAddingComment: boolean;
   user?: AppUser;
   unsuccessfulLogin?: boolean;
 }
@@ -37,8 +39,22 @@ const Navigation: FC<NavigationProps> = (props) => {
         {props.isFetchingProperties && <Loader text="data not ready" />}
         {!props.isFetchingProperties && (
           <div className="navigation__action-status">
-            <div>Comments: {numberOfComments}</div>
-            <div>Favorites: {numberOfFavorites}</div>
+            <div>
+              Comments:{" "}
+              {props.isAddingComment ? (
+                <Loader text="...loading" />
+              ) : (
+                numberOfComments
+              )}
+            </div>
+            <div>
+              Favorites:{" "}
+              {props.isAddingFavorite ? (
+                <Loader text="...loading" />
+              ) : (
+                numberOfFavorites
+              )}
+            </div>
           </div>
         )}
         {props.user && (
@@ -86,6 +102,8 @@ function mapStateToProps(state: State): NavigationProps {
     isFetchingProperties: state.propertyState.isFetching,
     user: state.loginState.activeUser,
     unsuccessfulLogin: state.loginState.unsuccessfulLogin,
+    isAddingComment: state.propertyState.isAddingComment,
+    isAddingFavorite: state.propertyState.isAddingFavorite,
   };
 }
 

@@ -12,23 +12,3 @@ export const store = createStore(
 );
 
 sagaMiddleware.run(rootSaga);
-
-// let composeEnhancers = compose;
-
-// if (typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION__) {
-//   composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
-// }
-
-// const reduxStore = createStore(
-//   createRootReducer(),
-//   initiaState,
-//   composeEnhancers(applyMiddleware(sagaMiddleware))
-// );
-
-// const newStore: NeosStore = {
-//   ...reduxStore,
-//   runSaga: sagaMiddleware.run,
-//   close: () => newStore.dispatch(END),
-// };
-
-// const task = newStore.runSaga(rootSaga);

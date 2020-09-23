@@ -3,6 +3,8 @@ import { Property } from "../types/property";
 /* Actions */
 const SET_PROPERTIES = "SET_PROPERTIES";
 const IS_FETCHING_PROPERTIES = "IS_FETCHING_PROPERTIES";
+const IS_ADDING_FAVORITE = "IS_ADDING_FAVORITE";
+const IS_ADDING_COMMENT = "IS_ADDING_COMMENT";
 
 /* Action types */
 interface SetPropertiesAction {
@@ -15,7 +17,21 @@ interface IsFetchingPropertiesAction {
   isFetching: boolean;
 }
 
-type PropertyActions = SetPropertiesAction | IsFetchingPropertiesAction;
+interface IsAddingFavoriteAction {
+  type: typeof IS_ADDING_FAVORITE;
+  isAddingFavorite: boolean;
+}
+
+interface IsAddingCommentAction {
+  type: typeof IS_ADDING_COMMENT;
+  isAddingComment: boolean;
+}
+
+type PropertyActions =
+  | SetPropertiesAction
+  | IsFetchingPropertiesAction
+  | IsAddingCommentAction
+  | IsAddingFavoriteAction;
 
 /* Action creators */
 const setProperties = (properties: Property[]): SetPropertiesAction => {
@@ -34,20 +50,43 @@ const isFetchingProperties = (
   };
 };
 
+const isAdding = (
+  addType: IsAddingFavoriteAction["type"] | IsAddingCommentAction["type"],
+  isAdding: boolean
+): IsAddingCommentAction | IsAddingFavoriteAction => {
+  if (addType === IS_ADDING_FAVORITE) {
+    return {
+      type: IS_ADDING_FAVORITE,
+      isAddingFavorite: isAdding,
+    };
+  }
+  if (addType === IS_ADDING_COMMENT) {
+    return {
+      type: IS_ADDING_COMMENT,
+      isAddingComment: isAdding,
+    };
+  }
+};
+
 export const propertyReducerActions = {
   setProperties,
   isFetchingProperties,
+  isAdding,
 };
 
 /* State */
 export interface PropertyState {
   properties: Property[];
   isFetching: boolean;
+  isAddingFavorite: boolean;
+  isAddingComment: boolean;
 }
 
 const defaultState: PropertyState = {
   properties: [],
   isFetching: false,
+  isAddingFavorite: false,
+  isAddingComment: false,
 };
 
 /* Reducer */
@@ -65,6 +104,16 @@ const propertyReducer = (
       return {
         ...state,
         isFetching: action.isFetching,
+      };
+    case IS_ADDING_FAVORITE:
+      return {
+        ...state,
+        isAddingFavorite: action.isAddingFavorite,
+      };
+    case IS_ADDING_COMMENT:
+      return {
+        ...state,
+        isAddingComment: action.isAddingComment,
       };
     default:
       return state;
