@@ -1,29 +1,26 @@
 import { put, takeEvery, takeLatest, select } from "redux-saga/effects";
-import { AnyAction } from "redux";
-import LoginService from "../services/login-service";
-import { loginReducerActions } from "../reducers/login-reducer";
 import PropertyService from "../services/property-service";
 import { propertyReducerActions } from "../reducers/property-reducer";
 import { State } from "../reducers/root-reducer";
 import { actionCreator } from "../utils/redux-utils";
 
 /* Actions */
-const FETCH_PROPERTIES = "FETCH_PROPERTIES";
-const ADD_FAVORITE_PROPERTY = "ADD_FAVORITE_PROPERTY";
-const ADD_PROPERTY_COMMENT = "ADD_PROPERTY_COMMENT";
+export const FETCH_PROPERTIES_REQUEST = "FETCH_PROPERTIES_REQUEST";
+export const ADD_FAVORITE_PROPERTY_REQUEST = "ADD_FAVORITE_PROPERTY_REQUEST";
+export const ADD_PROPERTY_COMMENT_REQUEST = "ADD_PROPERTY_COMMENT_REQUEST";
 
 /* Action types */
-interface FetchPropertiesAction {
-  type: typeof FETCH_PROPERTIES;
+export interface FetchPropertiesRequestAction {
+  type: typeof FETCH_PROPERTIES_REQUEST;
 }
 
-interface AddFavoritePropertyAction {
-  type: typeof ADD_FAVORITE_PROPERTY;
+export interface AddFavoritePropertyRequestAction {
+  type: typeof ADD_FAVORITE_PROPERTY_REQUEST;
   propertyId: number;
 }
 
-interface AddPropertyCommentAction {
-  type: typeof ADD_PROPERTY_COMMENT;
+export interface AddPropertyCommentRequestAction {
+  type: typeof ADD_PROPERTY_COMMENT_REQUEST;
   propertyId: number;
   comment: string;
 }
@@ -31,76 +28,67 @@ interface AddPropertyCommentAction {
 /* Action creators*/
 const addFavoritePropertyAction = (
   propertyId: number
-): AddFavoritePropertyAction =>
-  actionCreator(ADD_FAVORITE_PROPERTY, { propertyId });
+): AddFavoritePropertyRequestAction =>
+  actionCreator(ADD_FAVORITE_PROPERTY_REQUEST, { propertyId });
 
 const addPropertyCommentAction = (
   propertyId: number,
   comment: string
-): AddPropertyCommentAction =>
-  actionCreator(ADD_PROPERTY_COMMENT, { propertyId, comment });
+): AddPropertyCommentRequestAction =>
+  actionCreator(ADD_PROPERTY_COMMENT_REQUEST, { propertyId, comment });
 
-const fetchPropertiesAction: FetchPropertiesAction = actionCreator(
-  FETCH_PROPERTIES
-);
+const fetchPropertiesRequestAction: FetchPropertiesRequestAction = {
+  type: FETCH_PROPERTIES_REQUEST,
+};
 
 export const propertyActions = {
   addToFavorite: addFavoritePropertyAction,
   addComment: addPropertyCommentAction,
-  fetch: fetchPropertiesAction,
+  fetch: fetchPropertiesRequestAction,
 };
 
 const propertyService = new PropertyService();
 
 /* Saga actions */
-function* fetchProperties(action: FetchPropertiesAction) {
+function* fetchProperties() {
   try {
-    yield put(propertyReducerActions.isFetchingProperties(true));
     const properties = yield propertyService.getProperties();
     yield put(propertyReducerActions.setProperties(properties));
-    yield put(propertyReducerActions.isFetchingProperties(false));
   } catch (e) {
     throw new Error("Error fetching properties");
   }
 }
 
-function* addFavoriteProperty(action: AddFavoritePropertyAction) {
+function* addFavoriteProperty(action: AddFavoritePropertyRequestAction) {
   try {
-    yield put(
-      propertyReducerActions.currentFavoritesBeingAdded(action.propertyId, true)
-    );
     yield propertyService.addToFavorite(action.propertyId);
     yield put(propertyActions.fetch);
     yield put(
-      propertyReducerActions.currentFavoritesBeingAdded(
-        action.propertyId,
-        false
-      )
+      propertyReducerActions.setAddFavoritePropertySuccess(action.propertyId)
     );
   } catch (e) {
     throw new Error("Error adding favorite property");
   }
 }
 
-function* addPropertyComment(action: AddPropertyCommentAction) {
+function* addPropertyComment(action: AddPropertyCommentRequestAction) {
   try {
-    yield put(propertyReducerActions.isAddingComment(true));
     const user = yield select((state: State) => state.loginState.activeUser);
     yield propertyService.addComment(action.propertyId, {
       text: action.comment,
       user: user,
     });
     yield put(propertyActions.fetch);
-    yield put(propertyReducerActions.isAddingComment(false));
+    yield put(propertyReducerActions.setAddPropertyCommentSuccess);
   } catch (e) {
     throw new Error("Error adding property comment");
   }
 }
 
 function* propertySaga() {
-  yield takeEvery(FETCH_PROPERTIES, fetchProperties);
-  yield takeEvery(ADD_FAVORITE_PROPERTY, addFavoriteProperty);
-  yield takeEvery(ADD_PROPERTY_COMMENT, addPropertyComment);
+  yield takeEvery(FETCH_PROPERTIES_REQUEST, fetchProperties);
+  yield takeEvery(ADD_FAVORITE_PROPERTY_REQUEST, addFavoriteProperty);
+  yield takeEvery(ADD_PROPERTY_COMMENT_REQUEST, addPropertyComment);
 }
 
 export default propertySaga;
