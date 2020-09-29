@@ -1,4 +1,5 @@
 import { Property } from "../types/property";
+import { actionCreator } from "../utils/redux-utils";
 
 /* Actions */
 const SET_PROPERTIES = "SET_PROPERTIES";
@@ -35,39 +36,25 @@ type PropertyActions =
   | CurrentFavoritesBeingAddedAction;
 
 /* Action creators */
-const setProperties = (properties: Property[]): SetPropertiesAction => {
-  return {
-    type: SET_PROPERTIES,
-    properties,
-  };
-};
+const setProperties = (properties: Property[]): SetPropertiesAction =>
+  actionCreator(SET_PROPERTIES, { properties });
 
 const isFetchingProperties = (
   isFetching: boolean
-): IsFetchingPropertiesAction => {
-  return {
-    type: IS_FETCHING_PROPERTIES,
-    isFetching,
-  };
-};
+): IsFetchingPropertiesAction =>
+  actionCreator(IS_FETCHING_PROPERTIES, { isFetching });
 
-const isAddingComment = (isAdding: boolean): IsAddingCommentAction => {
-  return {
-    type: IS_ADDING_COMMENT,
-    isAddingComment: isAdding,
-  };
-};
+const isAddingComment = (isAddingComment: boolean): IsAddingCommentAction =>
+  actionCreator(IS_ADDING_COMMENT, { isAddingComment });
 
 const currentFavoritesBeingAdded = (
   propertyId: number,
   isCurrentlyAdding: boolean
-): CurrentFavoritesBeingAddedAction => {
-  return {
-    type: CURRENT_FAVORITES_BEING_ADDED,
+): CurrentFavoritesBeingAddedAction =>
+  actionCreator(CURRENT_FAVORITES_BEING_ADDED, {
     propertyId,
     isCurrentlyAdding,
-  };
-};
+  });
 
 export const propertyReducerActions = {
   setProperties,

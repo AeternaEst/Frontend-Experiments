@@ -1,5 +1,5 @@
-import { AnyAction } from "redux";
 import { AppUser } from "../types/app-user";
+import { actionCreator } from "../utils/redux-utils";
 
 /* Actions */
 const SET_ACTIVE_USER = "SET_ACTIVE_USER";
@@ -9,60 +9,56 @@ const SUCCESSFUL_LOGIN = "SUCCESSFUL_LOGIN";
 
 /* Action types */
 interface SetUserAction {
-    type: typeof SET_ACTIVE_USER
-    user: AppUser;
+  type: typeof SET_ACTIVE_USER;
+  user: AppUser;
 }
 
 interface ClearUserAction {
-  type: typeof CLEAR_ACTIVE_USER
+  type: typeof CLEAR_ACTIVE_USER;
 }
 
 interface UnsuccessfulLoginAction {
-  type: typeof UNSUCCESSFUL_LOGIN
+  type: typeof UNSUCCESSFUL_LOGIN;
 }
 
 interface SuccessfulLoginAction {
-  type: typeof SUCCESSFUL_LOGIN
+  type: typeof SUCCESSFUL_LOGIN;
 }
 
-type LoginActions = SetUserAction | ClearUserAction | UnsuccessfulLoginAction | SuccessfulLoginAction;
+type LoginActions =
+  | SetUserAction
+  | ClearUserAction
+  | UnsuccessfulLoginAction
+  | SuccessfulLoginAction;
 
 /* Action creators */
-const setUser = (user: AppUser): SetUserAction => {
-  return {
-    type: SET_ACTIVE_USER,
-    user: user,
-  };
-};
+const setUser = (user: AppUser): SetUserAction =>
+  actionCreator(SET_ACTIVE_USER, { user });
 
-const clearUser: ClearUserAction = {
-  type: CLEAR_ACTIVE_USER,
-};
+const clearUser: ClearUserAction = actionCreator(CLEAR_ACTIVE_USER);
 
-const unsuccessfulLogin: UnsuccessfulLoginAction = {
-  type: UNSUCCESSFUL_LOGIN,
-};
+const unsuccessfulLogin: UnsuccessfulLoginAction = actionCreator(
+  UNSUCCESSFUL_LOGIN
+);
 
-const successfulLogin: SuccessfulLoginAction = {
-  type: SUCCESSFUL_LOGIN,
-};
+const successfulLogin: SuccessfulLoginAction = actionCreator(SUCCESSFUL_LOGIN);
 
 export const loginReducerActions = {
   setUser: setUser,
   clearUser: clearUser,
   unsuccessfulLogin,
-  successfulLogin
+  successfulLogin,
 };
 
 /* State */
 export interface LoginState {
-  activeUser?: AppUser
+  activeUser?: AppUser;
   unsuccessfulLogin?: boolean;
 }
 
 const defaultState: LoginState = {
   activeUser: undefined,
-  unsuccessfulLogin: false
+  unsuccessfulLogin: false,
 };
 
 /* Reducer */
@@ -84,13 +80,13 @@ const loginReducer = (
     case UNSUCCESSFUL_LOGIN:
       return {
         ...state,
-        unsuccessfulLogin: true
-      }
+        unsuccessfulLogin: true,
+      };
     case SUCCESSFUL_LOGIN:
       return {
         ...state,
-        unsuccessfulLogin: false
-      }
+        unsuccessfulLogin: false,
+      };
     default:
       return state;
   }

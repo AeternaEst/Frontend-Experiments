@@ -5,6 +5,7 @@ import { loginReducerActions } from "../reducers/login-reducer";
 import PropertyService from "../services/property-service";
 import { propertyReducerActions } from "../reducers/property-reducer";
 import { State } from "../reducers/root-reducer";
+import { actionCreator } from "../utils/redux-utils";
 
 /* Actions */
 const FETCH_PROPERTIES = "FETCH_PROPERTIES";
@@ -30,27 +31,18 @@ interface AddPropertyCommentAction {
 /* Action creators*/
 const addFavoritePropertyAction = (
   propertyId: number
-): AddFavoritePropertyAction => {
-  return {
-    type: ADD_FAVORITE_PROPERTY,
-    propertyId,
-  };
-};
+): AddFavoritePropertyAction =>
+  actionCreator(ADD_FAVORITE_PROPERTY, { propertyId });
 
 const addPropertyCommentAction = (
   propertyId: number,
   comment: string
-): AddPropertyCommentAction => {
-  return {
-    type: ADD_PROPERTY_COMMENT,
-    propertyId,
-    comment,
-  };
-};
+): AddPropertyCommentAction =>
+  actionCreator(ADD_PROPERTY_COMMENT, { propertyId, comment });
 
-const fetchPropertiesAction: FetchPropertiesAction = {
-  type: FETCH_PROPERTIES,
-};
+const fetchPropertiesAction: FetchPropertiesAction = actionCreator(
+  FETCH_PROPERTIES
+);
 
 export const propertyActions = {
   addToFavorite: addFavoritePropertyAction,
