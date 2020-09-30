@@ -3,27 +3,14 @@ import PropertyService from "../services/property-service";
 import { propertyReducerActions } from "../reducers/property-reducer";
 import { State } from "../reducers/root-reducer";
 import { actionCreator } from "../utils/redux-utils";
-
-/* Actions */
-export const FETCH_PROPERTIES_REQUEST = "FETCH_PROPERTIES_REQUEST";
-export const ADD_FAVORITE_PROPERTY_REQUEST = "ADD_FAVORITE_PROPERTY_REQUEST";
-export const ADD_PROPERTY_COMMENT_REQUEST = "ADD_PROPERTY_COMMENT_REQUEST";
-
-/* Action types */
-export interface FetchPropertiesRequestAction {
-  type: typeof FETCH_PROPERTIES_REQUEST;
-}
-
-export interface AddFavoritePropertyRequestAction {
-  type: typeof ADD_FAVORITE_PROPERTY_REQUEST;
-  propertyId: number;
-}
-
-export interface AddPropertyCommentRequestAction {
-  type: typeof ADD_PROPERTY_COMMENT_REQUEST;
-  propertyId: number;
-  comment: string;
-}
+import {
+  FETCH_PROPERTIES_REQUEST,
+  ADD_FAVORITE_PROPERTY_REQUEST,
+  ADD_PROPERTY_COMMENT_REQUEST,
+  AddFavoritePropertyRequestAction,
+  AddPropertyCommentRequestAction,
+  FetchPropertiesRequestAction,
+} from "../actions/property-actions";
 
 /* Action creators*/
 const addFavoritePropertyAction = (

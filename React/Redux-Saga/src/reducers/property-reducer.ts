@@ -1,33 +1,24 @@
 import { Property } from "../types/property";
-import { actionCreator } from "../utils/redux-utils";
 import {
+  actionCreator,
+  reducerCreator,
+  ReducerParams,
+  HandlerParams,
+} from "../utils/redux-utils";
+import {
+  FETCH_PROPERTIES_SUCCESS,
+  ADD_PROPERTY_COMMENT_SUCCESS,
+  ADD_FAVORITE_PROPERTY_SUCCESS,
+  FETCH_PROPERTIES_REQUEST,
+  FetchPropertiesSuccessAction,
+  AddPropertyCommentSuccessAction,
+  AddFavoritePropertySuccessAction,
+  FetchPropertiesRequestAction,
   AddFavoritePropertyRequestAction,
   AddPropertyCommentRequestAction,
   ADD_FAVORITE_PROPERTY_REQUEST,
   ADD_PROPERTY_COMMENT_REQUEST,
-  FetchPropertiesRequestAction,
-  FETCH_PROPERTIES_REQUEST,
-} from "../sagas/property-saga";
-
-/* Actions */
-const FETCH_PROPERTIES_SUCCESS = "FETCH_PROPERTIES_SUCCESS";
-const ADD_FAVORITE_PROPERTY_SUCCESS = "ADD_FAVORITE_PROPERTY_SUCCESS";
-const ADD_PROPERTY_COMMENT_SUCCESS = "ADD_PROPERTY_COMMENT_SUCCESS";
-
-/* Action types */
-interface FetchPropertiesSuccessAction {
-  type: typeof FETCH_PROPERTIES_SUCCESS;
-  properties: Property[];
-}
-
-interface AddPropertyCommentSuccessAction {
-  type: typeof ADD_PROPERTY_COMMENT_SUCCESS;
-}
-
-interface AddFavoritePropertySuccessAction {
-  type: typeof ADD_FAVORITE_PROPERTY_SUCCESS;
-  propertyId: number;
-}
+} from "../actions/property-actions";
 
 type PropertyActions =
   | FetchPropertiesSuccessAction
@@ -56,7 +47,7 @@ export const propertyReducerActions = {
   setAddFavoritePropertySuccess,
 };
 
-/* State */
+// /* State */
 export interface PropertyState {
   properties: Property[];
   isFetching: boolean;
@@ -71,25 +62,33 @@ const defaultState: PropertyState = {
   isAddingComment: false,
 };
 
-/* Reducer */
-const propertyReducer = (
-  state = defaultState,
-  action: PropertyActions
-): PropertyState => {
-  console.log("propertyReducer", action);
-  switch (action.type) {
-    case FETCH_PROPERTIES_REQUEST:
+// /* Reducer */
+const reducerMapping: ReadonlyArray<HandlerParams<
+  PropertyState,
+  PropertyActions
+>> = [
+  {
+    type: FETCH_PROPERTIES_REQUEST,
+    handle: (state, action) => {
       return {
         ...state,
         isFetching: true,
       };
-    case FETCH_PROPERTIES_SUCCESS:
+    },
+  },
+  {
+    type: FETCH_PROPERTIES_SUCCESS,
+    handle: (state, action: FetchPropertiesSuccessAction) => {
       return {
         ...state,
         properties: [...action.properties],
         isFetching: false,
       };
-    case ADD_FAVORITE_PROPERTY_REQUEST:
+    },
+  },
+  {
+    type: ADD_FAVORITE_PROPERTY_REQUEST,
+    handle: (state, action: AddFavoritePropertyRequestAction) => {
       return {
         ...state,
         currentFavoritesBeingAdded: [
@@ -97,7 +96,11 @@ const propertyReducer = (
           action.propertyId,
         ],
       };
-    case ADD_FAVORITE_PROPERTY_SUCCESS:
+    },
+  },
+  {
+    type: ADD_FAVORITE_PROPERTY_SUCCESS,
+    handle: (state, action: AddFavoritePropertySuccessAction) => {
       const indexToRemove = state.currentFavoritesBeingAdded.findIndex(
         (id) => id === action.propertyId
       );
@@ -112,19 +115,31 @@ const propertyReducer = (
         ...state,
         currentFavoritesBeingAdded: updatedFavorites,
       };
-    case ADD_PROPERTY_COMMENT_REQUEST:
+    },
+  },
+  {
+    type: ADD_PROPERTY_COMMENT_REQUEST,
+    handle: (state, action) => {
       return {
         ...state,
         isAddingComment: true,
       };
-    case ADD_PROPERTY_COMMENT_SUCCESS:
+    },
+  },
+  {
+    type: ADD_PROPERTY_COMMENT_SUCCESS,
+    handle: (state, action) => {
       return {
         ...state,
         isAddingComment: false,
       };
-    default:
-      return state;
-  }
-};
+    },
+  },
+];
+
+const propertyReducer = reducerCreator<PropertyState, PropertyActions>(
+  defaultState,
+  reducerMapping
+);
 
 export default propertyReducer;
