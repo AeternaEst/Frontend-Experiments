@@ -5,11 +5,13 @@ import { connect, useDispatch } from "react-redux";
 import { State } from "../reducers/root-reducer";
 import { loginActions } from "../sagas/login-saga";
 import Loader from "./loader";
+import { propertySelectors } from "../selectors/property-selectors";
 
 interface NavigationProps {
-  properties: Property[];
+  numberOfComments: number;
+  numberOfFavorites: number;
   isFetchingProperties: boolean;
-  favoritesBeingAdded: number[];
+  favoritesBeingAdded: boolean;
   isAddingComment: boolean;
   user?: AppUser;
   unsuccessfulLogin?: boolean;
@@ -19,33 +21,21 @@ const Navigation: FC<NavigationProps> = (props) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const numberOfComments = useMemo(
-    () =>
-      props.properties.reduce<number>(
-        (prev, current) => prev + current.comments.length,
-        0
-      ),
-    [props.properties]
-  );
-  const numberOfFavorites = useMemo(
-    () => props.properties.filter((property) => property.isFavorite).length,
-    [props.properties]
-  );
 
   return (
     <div className="navigation">
       <h2>Property King</h2>
       <div className="navigation__actions">
         {(props.isFetchingProperties ||
-          props.favoritesBeingAdded.length ||
+          props.favoritesBeingAdded ||
           props.isAddingComment) && <Loader text="getting latest data" />}
 
         {!props.isFetchingProperties &&
-          !props.favoritesBeingAdded.length &&
+          !props.favoritesBeingAdded &&
           !props.isAddingComment && (
             <div className="navigation__action-status">
-              <div>Comments: {numberOfComments}</div>
-              <div>Favorites: {numberOfFavorites}</div>
+              <div>Comments: {props.numberOfComments}</div>
+              <div>Favorites: {props.numberOfFavorites}</div>
             </div>
           )}
         {props.user && (
@@ -89,12 +79,13 @@ const Navigation: FC<NavigationProps> = (props) => {
 
 function mapStateToProps(state: State): NavigationProps {
   return {
-    properties: state.propertyState.properties,
-    isFetchingProperties: state.propertyState.isFetching,
+    numberOfFavorites: propertySelectors.favorites(state).length,
+    numberOfComments: propertySelectors.totalComments(state),
+    isFetchingProperties: propertySelectors.isFetching(state),
     user: state.loginState.activeUser,
     unsuccessfulLogin: state.loginState.unsuccessfulLogin,
     isAddingComment: state.propertyState.isAddingComment,
-    favoritesBeingAdded: state.propertyState.currentFavoritesBeingAdded,
+    favoritesBeingAdded: propertySelectors.isAddingFavorites(state),
   };
 }
 
