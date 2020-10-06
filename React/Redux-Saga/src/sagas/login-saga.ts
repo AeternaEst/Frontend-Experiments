@@ -1,34 +1,6 @@
-import { put, takeEvery, takeLatest } from "redux-saga/effects";
-import { AnyAction } from "redux";
+import { put, takeEvery } from "redux-saga/effects";
+import { LOGIN, LoginAction, loginActions, LOGOUT, LogoutAction } from "../actions/login-actions";
 import LoginService from "../services/login-service";
-import { loginReducerActions } from "../reducers/login-reducer";
-import { actionCreator } from "../utils/redux-utils";
-
-/* Actions */
-const LOGIN = "LOGIN";
-const LOGOUT = "LOGOUT";
-
-/* Action types */
-interface LoginAction {
-  type: typeof LOGIN;
-  userName: string;
-  password: string;
-}
-
-interface LogoutAction {
-  type: typeof LOGOUT;
-}
-
-/* Action creators*/
-const loginAction = (userName: string, password: string): LoginAction =>
-  actionCreator(LOGIN, { userName, password });
-
-const logoutAction: LogoutAction = actionCreator(LOGOUT);
-
-export const loginActions = {
-  login: loginAction,
-  logout: logoutAction,
-};
 
 const loginService = new LoginService();
 
@@ -36,16 +8,16 @@ const loginService = new LoginService();
 function* login(action: LoginAction) {
   try {
     const user = yield loginService.login(action.userName, action.password);
-    yield put(loginReducerActions.successfulLogin);
-    yield put(loginReducerActions.setUser(user));
+    yield put(loginActions.successfulLogin);
+    yield put(loginActions.setUser(user));
   } catch (e) {
-    yield put(loginReducerActions.unsuccessfulLogin);
+    yield put(loginActions.unsuccessfulLogin);
   }
 }
 
 function* logout(action: LogoutAction) {
   try {
-    yield put(loginReducerActions.clearUser);
+    yield put(loginActions.clearUser);
   } catch (e) {
     throw new Error("Error during logout");
   }

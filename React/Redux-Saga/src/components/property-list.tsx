@@ -2,8 +2,8 @@ import React, { FC, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { State } from "../reducers/root-reducer";
 import Property from "./property";
-import { propertyActions } from "../sagas/property-saga";
 import Loader from "./loader";
+import { propertyActions } from "../actions/property-actions";
 
 const PropertyList: FC = () => {
   const properties = useSelector((state: State) => {

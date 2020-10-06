@@ -1,8 +1,6 @@
 import { Property } from "../types/property";
 import {
-  actionCreator,
   reducerCreator,
-  ReducerParams,
   HandlerParams,
 } from "../utils/redux-utils";
 import {
@@ -11,43 +9,13 @@ import {
   ADD_FAVORITE_PROPERTY_SUCCESS,
   FETCH_PROPERTIES_REQUEST,
   FetchPropertiesSuccessAction,
-  AddPropertyCommentSuccessAction,
   AddFavoritePropertySuccessAction,
-  FetchPropertiesRequestAction,
   AddFavoritePropertyRequestAction,
-  AddPropertyCommentRequestAction,
   ADD_FAVORITE_PROPERTY_REQUEST,
   ADD_PROPERTY_COMMENT_REQUEST,
+  PropertyActions
 } from "../actions/property-actions";
 
-type PropertyActions =
-  | FetchPropertiesSuccessAction
-  | AddPropertyCommentSuccessAction
-  | FetchPropertiesRequestAction
-  | AddFavoritePropertyRequestAction
-  | AddFavoritePropertySuccessAction
-  | AddPropertyCommentRequestAction;
-
-/* Action creators */
-const setProperties = (properties: Property[]): FetchPropertiesSuccessAction =>
-  actionCreator(FETCH_PROPERTIES_SUCCESS, { properties });
-
-const setAddPropertyCommentSuccess: AddPropertyCommentSuccessAction = actionCreator(
-  ADD_PROPERTY_COMMENT_SUCCESS
-);
-
-const setAddFavoritePropertySuccess = (
-  propertyId: number
-): AddFavoritePropertySuccessAction =>
-  actionCreator(ADD_FAVORITE_PROPERTY_SUCCESS, { propertyId });
-
-export const propertyReducerActions = {
-  setProperties,
-  setAddPropertyCommentSuccess,
-  setAddFavoritePropertySuccess,
-};
-
-// /* State */
 export interface PropertyState {
   properties: Property[];
   isFetching: boolean;
@@ -62,7 +30,6 @@ const defaultState: PropertyState = {
   isAddingComment: false,
 };
 
-// /* Reducer */
 const reducerMapping: ReadonlyArray<HandlerParams<
   PropertyState,
   PropertyActions

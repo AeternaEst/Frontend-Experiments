@@ -1,38 +1,14 @@
-import { put, takeEvery, takeLatest, select } from "redux-saga/effects";
+import { put, takeEvery, select } from "redux-saga/effects";
 import PropertyService from "../services/property-service";
-import { propertyReducerActions } from "../reducers/property-reducer";
 import { State } from "../reducers/root-reducer";
-import { actionCreator } from "../utils/redux-utils";
 import {
   FETCH_PROPERTIES_REQUEST,
   ADD_FAVORITE_PROPERTY_REQUEST,
   ADD_PROPERTY_COMMENT_REQUEST,
   AddFavoritePropertyRequestAction,
   AddPropertyCommentRequestAction,
-  FetchPropertiesRequestAction,
+  propertyActions
 } from "../actions/property-actions";
-
-/* Action creators*/
-const addFavoritePropertyAction = (
-  propertyId: number
-): AddFavoritePropertyRequestAction =>
-  actionCreator(ADD_FAVORITE_PROPERTY_REQUEST, { propertyId });
-
-const addPropertyCommentAction = (
-  propertyId: number,
-  comment: string
-): AddPropertyCommentRequestAction =>
-  actionCreator(ADD_PROPERTY_COMMENT_REQUEST, { propertyId, comment });
-
-const fetchPropertiesRequestAction: FetchPropertiesRequestAction = {
-  type: FETCH_PROPERTIES_REQUEST,
-};
-
-export const propertyActions = {
-  addToFavorite: addFavoritePropertyAction,
-  addComment: addPropertyCommentAction,
-  fetch: fetchPropertiesRequestAction,
-};
 
 const propertyService = new PropertyService();
 
@@ -40,7 +16,7 @@ const propertyService = new PropertyService();
 function* fetchProperties() {
   try {
     const properties = yield propertyService.getProperties();
-    yield put(propertyReducerActions.setProperties(properties));
+    yield put(propertyActions.setProperties(properties));
   } catch (e) {
     throw new Error("Error fetching properties");
   }
@@ -51,7 +27,7 @@ function* addFavoriteProperty(action: AddFavoritePropertyRequestAction) {
     yield propertyService.addToFavorite(action.propertyId);
     yield put(propertyActions.fetch);
     yield put(
-      propertyReducerActions.setAddFavoritePropertySuccess(action.propertyId)
+      propertyActions.setAddFavoritePropertySuccess(action.propertyId)
     );
   } catch (e) {
     throw new Error("Error adding favorite property");
@@ -66,7 +42,7 @@ function* addPropertyComment(action: AddPropertyCommentRequestAction) {
       user: user,
     });
     yield put(propertyActions.fetch);
-    yield put(propertyReducerActions.setAddPropertyCommentSuccess);
+    yield put(propertyActions.setAddPropertyCommentSuccess);
   } catch (e) {
     throw new Error("Error adding property comment");
   }
