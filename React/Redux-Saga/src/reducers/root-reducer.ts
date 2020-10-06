@@ -11,4 +11,18 @@ export const rootReducer = combineReducers({
   propertyState: propertyReducer
 });
 
+/* Manual reducer mapping */
+// export const rootReducer = (state: any, action: any) => {
+//   const counterState = deprecatedReducerOne(state && state.counterState, action);
+//   const messageState = deprecatedReducerTwo(state && state.messageState, action);
+//   const loginState = loginReducer(state && state.loginState, action);
+//   const propertyState = propertyReducer(state && state.propertyState, action);
+//   return {
+//     counterState,
+//     messageState,
+//     loginState,
+//     propertyState
+//   }
+// }
+
 export type State = ReturnType<typeof rootReducer>;
