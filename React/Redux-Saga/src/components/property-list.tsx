@@ -4,19 +4,19 @@ import { State } from "../reducers/root-reducer";
 import Property from "./property";
 import { propertyActions } from "../sagas/property-saga";
 import Loader from "./loader";
+import { fetchAndSubscribe } from "../utils/react-redux-utils";
 
 const PropertyList: FC = () => {
-  const properties = useSelector((state: State) => {
-    return state.propertyState.properties;
-  });
-  const isFetching = useSelector((state: State) => {
-    return state.propertyState.isFetching;
-  });
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(propertyActions.fetch);
-  }, []);
+  const { data: properties, isLoading: isFetching } = fetchAndSubscribe(
+    propertyActions.fetch,
+    (state: State) => {
+      return state.propertyState.properties;
+    },
+    [],
+    (state: State) => {
+      return state.propertyState.isFetching;
+    }
+  );
 
   return (
     <div className="property-list">
