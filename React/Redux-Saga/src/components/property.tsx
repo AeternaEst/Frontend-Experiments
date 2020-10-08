@@ -1,10 +1,9 @@
-import React, { PureComponent, FC, useState } from "react";
+import React, { FC, useState } from "react";
 import { Property } from "../types/property";
-import { useDispatch, useSelector } from "react-redux";
-import { propertyActions } from "../sagas/property-saga";
 import Loader from "./loader";
 import { State } from "../reducers/root-reducer";
 import { triggerAndSubscribe } from "../utils/react-redux-utils";
+import { propertyActions } from "../actions/property-actions";
 
 interface PropertyProps {
   property: Property;

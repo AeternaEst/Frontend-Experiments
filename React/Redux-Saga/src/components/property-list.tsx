@@ -1,10 +1,9 @@
-import React, { FC, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { FC } from "react";
 import { State } from "../reducers/root-reducer";
 import Property from "./property";
-import { propertyActions } from "../sagas/property-saga";
 import Loader from "./loader";
 import { fetchAndSubscribe } from "../utils/react-redux-utils";
+import { propertyActions } from "../actions/property-actions";
 
 const PropertyList: FC = () => {
   const { data: properties, isLoading: isFetching } = fetchAndSubscribe(

@@ -3,9 +3,9 @@ import { Property } from "../types/property";
 import { AppUser } from "../types/app-user";
 import { connect, useDispatch } from "react-redux";
 import { State } from "../reducers/root-reducer";
-import { loginActions } from "../sagas/login-saga";
 import Loader from "./loader";
 import { propertySelectors } from "../selectors/property-selectors";
+import { loginActions } from "../actions/login-actions";
 
 interface NavigationProps {
   numberOfComments: number;
