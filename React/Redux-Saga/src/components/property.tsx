@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { propertyActions } from "../sagas/property-saga";
 import Loader from "./loader";
 import { State } from "../reducers/root-reducer";
+import { triggerAndSubscribe } from "../utils/react-redux-utils";
 
 interface PropertyProps {
   property: Property;
@@ -11,13 +12,17 @@ interface PropertyProps {
 
 const Property: FC<PropertyProps> = (props: PropertyProps) => {
   const [comment, setComment] = useState("");
-  const favoritesBeingAdded = useSelector(
+  const {
+    data: favoritesBeingAdded,
+    trigger: addToFavorite,
+  } = triggerAndSubscribe(
+    propertyActions.addToFavorite(props.property.id),
     (state: State) => state.propertyState.currentFavoritesBeingAdded
   );
-  const isAddingComment = useSelector(
+  const { data: isAddingComment, trigger: addComment } = triggerAndSubscribe(
+    propertyActions.addComment(props.property.id, comment),
     (state: State) => state.propertyState.isAddingComment
   );
-  const dispatch = useDispatch();
 
   const isLoading = favoritesBeingAdded.includes(props.property.id);
 
@@ -30,12 +35,7 @@ const Property: FC<PropertyProps> = (props: PropertyProps) => {
       <p>{props.property.description}</p>
       <div className="property__actions">
         {!props.property.isFavorite && (
-          <button
-            type="button"
-            onClick={() =>
-              dispatch(propertyActions.addToFavorite(props.property.id))
-            }
-          >
+          <button type="button" onClick={() => addToFavorite()}>
             {isLoading ? <Loader text="updating" /> : "Add to favorites"}
           </button>
         )}
@@ -50,7 +50,7 @@ const Property: FC<PropertyProps> = (props: PropertyProps) => {
           <button
             onClick={() => {
               setComment("");
-              dispatch(propertyActions.addComment(props.property.id, comment));
+              addComment();
             }}
           >
             {isAddingComment ? <Loader text="updating" /> : "Submit Comment"}

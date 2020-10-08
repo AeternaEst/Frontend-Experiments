@@ -19,3 +19,17 @@ export const fetchAndSubscribe = <T>(
     isLoading: isLoadingSelector ? useSelector(isLoadingSelector) : false,
   };
 };
+
+export const triggerAndSubscribe = <T>(
+  action: AnyAction,
+  selector: (state: State) => T
+) => {
+  const dispatch = useDispatch();
+
+  const triggerAction = () => dispatch(action);
+
+  return {
+    trigger: triggerAction,
+    data: useSelector(selector),
+  };
+};
