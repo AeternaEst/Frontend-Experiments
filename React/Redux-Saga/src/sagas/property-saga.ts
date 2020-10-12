@@ -9,6 +9,7 @@ import {
   AddPropertyCommentRequestAction,
   propertyActions,
 } from "../actions/property-actions";
+import { AppError, ErrorCode } from "../types/app-error";
 
 const propertyService = new PropertyService();
 
@@ -16,9 +17,9 @@ const propertyService = new PropertyService();
 function* fetchProperties() {
   try {
     const properties = yield call(propertyService.getProperties);
-    yield put(propertyActions.setProperties(properties));
+    yield put(propertyActions.setPropertiesAction(properties));
   } catch (e) {
-    throw new Error("Error fetching properties");
+    yield put(propertyActions.fetchPropertiesErrorAction(new AppError("fetchProperties", "Error fetching properties", ErrorCode.FETCH_PROPERTIES_ERROR)));
   }
 }
 
@@ -26,9 +27,9 @@ function* addFavoriteProperty(action: AddFavoritePropertyRequestAction) {
   try {
     yield call(propertyService.addToFavorite, action.propertyId);
     yield put(propertyActions.fetch);
-    yield put(propertyActions.setAddFavoritePropertySuccess(action.propertyId));
+    yield put(propertyActions.setAddFavoritePropertySuccessAction(action.propertyId));
   } catch (e) {
-    throw new Error("Error adding favorite property");
+    yield put(propertyActions.addFavoritePropertyErrorAction(new AppError("addFavoriteProperty", "Error adding favorite", ErrorCode.ADD_FAVORITES_ERROR)));
   }
 }
 
@@ -40,9 +41,9 @@ function* addPropertyComment(action: AddPropertyCommentRequestAction) {
       user,
     });
     yield put(propertyActions.fetch);
-    yield put(propertyActions.setAddPropertyCommentSuccess);
+    yield put(propertyActions.setAddPropertyCommentSuccessAction);
   } catch (e) {
-    throw new Error("Error adding property comment");
+    yield put(propertyActions.setAddPropertyCommentErrorAction(new AppError("addPropertyComment", "Error adding comment", ErrorCode.ADD_COMMENT_ERROR)));
   }
 }
 

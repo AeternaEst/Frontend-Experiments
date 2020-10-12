@@ -13,21 +13,28 @@ import {
   AddFavoritePropertyRequestAction,
   ADD_FAVORITE_PROPERTY_REQUEST,
   ADD_PROPERTY_COMMENT_REQUEST,
-  PropertyActions
+  PropertyActions, FETCH_PROPERTIES_ERROR, FetchPropertiesErrorAction, AddFavoritePropertyErrorAction, ADD_FAVORITE_PROPERTY_ERROR, ADD_PROPERTY_COMMENT_ERROR, AddPropertyCommentErrorAction
 } from "../actions/property-actions";
+import { AppError } from "../types/app-error";
 
 export interface PropertyState {
   properties: Property[];
   isFetching: boolean;
+  fetchError: AppError | undefined;
   currentFavoritesBeingAdded: number[];
+  favoritesError: AppError | undefined;
   isAddingComment: boolean;
+  commentError: AppError | undefined;
 }
 
 const defaultState: PropertyState = {
   properties: [],
   isFetching: false,
+  fetchError: undefined,
   currentFavoritesBeingAdded: [],
+  favoritesError: undefined,
   isAddingComment: false,
+  commentError: undefined
 };
 
 const reducerMapping: ReadonlyArray<HandlerParams<
@@ -50,6 +57,17 @@ const reducerMapping: ReadonlyArray<HandlerParams<
         ...state,
         properties: [...action.properties],
         isFetching: false,
+        fetchError: undefined
+      };
+    },
+  },
+  {
+    type: FETCH_PROPERTIES_ERROR,
+    handle: (state, action: FetchPropertiesErrorAction) => {
+      return {
+        ...state,
+        isFetching: false,
+        fetchError: action.error
       };
     },
   },
@@ -81,6 +99,17 @@ const reducerMapping: ReadonlyArray<HandlerParams<
       return {
         ...state,
         currentFavoritesBeingAdded: updatedFavorites,
+        favoritesError: undefined
+      };
+    },
+  },
+  {
+    type: ADD_FAVORITE_PROPERTY_ERROR,
+    handle: (state, action: AddFavoritePropertyErrorAction) => {
+      return {
+        ...state,
+        currentFavoritesBeingAdded: [], /* This should only remove the failed one*/
+        favoritesError: action.error
       };
     },
   },
@@ -99,6 +128,17 @@ const reducerMapping: ReadonlyArray<HandlerParams<
       return {
         ...state,
         isAddingComment: false,
+        commentError: undefined
+      };
+    },
+  },
+  {
+    type: ADD_PROPERTY_COMMENT_ERROR,
+    handle: (state, action: AddPropertyCommentErrorAction) => {
+      return {
+        ...state,
+        isAddingComment: false,
+        commentError: action.error
       };
     },
   },

@@ -4,18 +4,20 @@ import Property from "./property";
 import Loader from "./loader";
 import { fetchAndSubscribe } from "../utils/react-redux-utils";
 import { propertyActions } from "../actions/property-actions";
+import { propertySelectors } from "../selectors/property-selectors";
 
 const PropertyList: FC = () => {
-  const { data: properties, isLoading: isFetching } = fetchAndSubscribe(
+  const { data: properties, isLoading: isFetching, error } = fetchAndSubscribe(
     propertyActions.fetch,
-    (state: State) => {
-      return state.propertyState.properties;
-    },
-    [],
-    (state: State) => {
-      return state.propertyState.isFetching;
-    }
+    propertySelectors.properties,
+    propertySelectors.isFetching,
+    propertySelectors.fetchError,
+    []
   );
+
+  if(error) { /* TODO: Seperate error component or HOC */
+    return <h1>{error.message}</h1>
+  }
 
   return (
     <div className="property-list">

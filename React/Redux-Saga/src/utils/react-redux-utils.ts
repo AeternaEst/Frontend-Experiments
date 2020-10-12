@@ -2,12 +2,14 @@ import { AnyAction } from "redux";
 import { State } from "../reducers/root-reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { AppError } from "../types/app-error";
 
 export const fetchAndSubscribe = <T>(
   action: AnyAction,
   selector: (state: State) => T,
-  deps: React.DependencyList,
-  isLoadingSelector?: (state: State) => boolean
+  isLoadingSelector: (state: State) => boolean,
+  errorSelector: (state: State) => AppError,
+  deps: React.DependencyList
 ) => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -16,7 +18,8 @@ export const fetchAndSubscribe = <T>(
 
   return {
     data: useSelector(selector),
-    isLoading: isLoadingSelector ? useSelector(isLoadingSelector) : false,
+    isLoading: useSelector(isLoadingSelector),
+    error: useSelector(errorSelector)
   };
 };
 

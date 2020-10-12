@@ -29,4 +29,7 @@ export const propertySelectors = {
     state.propertyState.currentFavoritesBeingAdded,
   isFetching: (state: State) => state.propertyState.isFetching,
   isAddingComment: (state: State) => state.propertyState.isAddingComment,
+  fetchError: (state: State) => state.propertyState.fetchError,
+  favoritesError: (state: State) => state.propertyState.favoritesError,
+  commentError: (state: State) => state.propertyState.commentError
 };

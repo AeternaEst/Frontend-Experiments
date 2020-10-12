@@ -31,7 +31,7 @@ const propertyDatabase: Property[] = [
 export default class PropertyService {
 
     public getProperties(): Promise<Property[]> {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             setTimeout(() => {
                 const properties = propertyDatabase;
                 resolve(properties)
