@@ -1,4 +1,4 @@
-import { put, takeEvery, select } from "redux-saga/effects";
+import { put, takeEvery, select, takeLatest, call } from "redux-saga/effects";
 import PropertyService from "../services/property-service";
 import { State } from "../reducers/root-reducer";
 import {
@@ -7,7 +7,7 @@ import {
   ADD_PROPERTY_COMMENT_REQUEST,
   AddFavoritePropertyRequestAction,
   AddPropertyCommentRequestAction,
-  propertyActions
+  propertyActions,
 } from "../actions/property-actions";
 
 const propertyService = new PropertyService();
@@ -15,7 +15,7 @@ const propertyService = new PropertyService();
 /* Saga actions */
 function* fetchProperties() {
   try {
-    const properties = yield propertyService.getProperties();
+    const properties = yield call(propertyService.getProperties);
     yield put(propertyActions.setProperties(properties));
   } catch (e) {
     throw new Error("Error fetching properties");
@@ -24,11 +24,9 @@ function* fetchProperties() {
 
 function* addFavoriteProperty(action: AddFavoritePropertyRequestAction) {
   try {
-    yield propertyService.addToFavorite(action.propertyId);
+    yield call(propertyService.addToFavorite, action.propertyId);
     yield put(propertyActions.fetch);
-    yield put(
-      propertyActions.setAddFavoritePropertySuccess(action.propertyId)
-    );
+    yield put(propertyActions.setAddFavoritePropertySuccess(action.propertyId));
   } catch (e) {
     throw new Error("Error adding favorite property");
   }
@@ -37,9 +35,9 @@ function* addFavoriteProperty(action: AddFavoritePropertyRequestAction) {
 function* addPropertyComment(action: AddPropertyCommentRequestAction) {
   try {
     const user = yield select((state: State) => state.loginState.activeUser);
-    yield propertyService.addComment(action.propertyId, {
+    yield call(propertyService.addComment, action.propertyId, {
       text: action.comment,
-      user: user,
+      user,
     });
     yield put(propertyActions.fetch);
     yield put(propertyActions.setAddPropertyCommentSuccess);
@@ -49,7 +47,7 @@ function* addPropertyComment(action: AddPropertyCommentRequestAction) {
 }
 
 function* propertySaga() {
-  yield takeEvery(FETCH_PROPERTIES_REQUEST, fetchProperties);
+  yield takeLatest(FETCH_PROPERTIES_REQUEST, fetchProperties);
   yield takeEvery(ADD_FAVORITE_PROPERTY_REQUEST, addFavoriteProperty);
   yield takeEvery(ADD_PROPERTY_COMMENT_REQUEST, addPropertyComment);
 }
