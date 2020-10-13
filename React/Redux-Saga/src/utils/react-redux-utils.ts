@@ -8,8 +8,8 @@ export const fetchAndSubscribe = <T>(
   action: AnyAction,
   selector: (state: State) => T,
   isLoadingSelector: (state: State) => boolean,
-  errorSelector: (state: State) => AppError,
-  deps: React.DependencyList
+  deps: React.DependencyList,
+  errorSelector?: (state: State) => AppError
 ) => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -19,13 +19,14 @@ export const fetchAndSubscribe = <T>(
   return {
     data: useSelector(selector),
     isLoading: useSelector(isLoadingSelector),
-    error: useSelector(errorSelector)
+    error: errorSelector && useSelector(errorSelector),
   };
 };
 
 export const triggerAndSubscribe = <T>(
   action: AnyAction,
-  selector: (state: State) => T
+  selector: (state: State) => T,
+  errorSelector: (state: State) => AppError
 ) => {
   const dispatch = useDispatch();
 
@@ -34,5 +35,6 @@ export const triggerAndSubscribe = <T>(
   return {
     trigger: triggerAction,
     data: useSelector(selector),
+    error: useSelector(errorSelector),
   };
 };

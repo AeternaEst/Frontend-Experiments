@@ -1,27 +1,26 @@
 import React, { FC } from "react";
-import { State } from "../reducers/root-reducer";
 import Property from "./property";
 import Loader from "./loader";
 import { fetchAndSubscribe } from "../utils/react-redux-utils";
 import { propertyActions } from "../actions/property-actions";
 import { propertySelectors } from "../selectors/property-selectors";
+import withErrorHandling from "./hoc/with-error-handling";
 
-const PropertyList: FC = () => {
-  const { data: properties, isLoading: isFetching, error } = fetchAndSubscribe(
+interface PropertyListProps {
+  headline: string;
+}
+
+const PropertyList: FC<PropertyListProps> = (props) => {
+  const { data: properties, isLoading: isFetching } = fetchAndSubscribe(
     propertyActions.fetch,
     propertySelectors.properties,
     propertySelectors.isFetching,
-    propertySelectors.fetchError,
     []
   );
 
-  if(error) { /* TODO: Seperate error component or HOC */
-    return <h1>{error.message}</h1>
-  }
-
   return (
     <div className="property-list">
-      <h3>Properties</h3>
+      <h3>{props.headline}</h3>
       {isFetching && !properties.length && <Loader text="loading properties" />}
       {!isFetching && !properties.length && <p>No properties found</p>}
       <div className="property-list__properties">
@@ -33,4 +32,4 @@ const PropertyList: FC = () => {
   );
 };
 
-export default PropertyList;
+export default withErrorHandling(PropertyList, propertySelectors.fetchError);

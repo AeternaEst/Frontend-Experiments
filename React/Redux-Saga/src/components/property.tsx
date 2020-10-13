@@ -1,9 +1,9 @@
 import React, { FC, useState } from "react";
 import { Property } from "../types/property";
 import Loader from "./loader";
-import { State } from "../reducers/root-reducer";
 import { triggerAndSubscribe } from "../utils/react-redux-utils";
 import { propertyActions } from "../actions/property-actions";
+import { propertySelectors } from "../selectors/property-selectors";
 
 interface PropertyProps {
   property: Property;
@@ -14,13 +14,20 @@ const Property: FC<PropertyProps> = (props: PropertyProps) => {
   const {
     data: favoritesBeingAdded,
     trigger: addToFavorite,
+    error: favoritesError,
   } = triggerAndSubscribe(
     propertyActions.addToFavorite(props.property.id),
-    (state: State) => state.propertyState.currentFavoritesBeingAdded
+    propertySelectors.favoritesBeingAdded,
+    propertySelectors.favoritesError
   );
-  const { data: isAddingComment, trigger: addComment } = triggerAndSubscribe(
+  const {
+    data: isAddingComment,
+    trigger: addComment,
+    error: commentError,
+  } = triggerAndSubscribe(
     propertyActions.addComment(props.property.id, comment),
-    (state: State) => state.propertyState.isAddingComment
+    propertySelectors.isAddingComment,
+    propertySelectors.commentError
   );
 
   const isLoading = favoritesBeingAdded.includes(props.property.id);
@@ -34,9 +41,12 @@ const Property: FC<PropertyProps> = (props: PropertyProps) => {
       <p>{props.property.description}</p>
       <div className="property__actions">
         {!props.property.isFavorite && (
-          <button type="button" onClick={() => addToFavorite()}>
-            {isLoading ? <Loader text="updating" /> : "Add to favorites"}
-          </button>
+          <>
+            <button type="button" onClick={() => addToFavorite()}>
+              {isLoading ? <Loader text="updating" /> : "Add to favorites"}
+            </button>
+            {favoritesError && <span>{favoritesError.message}</span>}
+          </>
         )}
         {props.property.isFavorite && <span>Is favorite</span>}
         <div>
@@ -46,6 +56,7 @@ const Property: FC<PropertyProps> = (props: PropertyProps) => {
             value={comment}
             placeholder="comment property"
           />
+          {commentError && <span>{commentError.message}</span>}
           <button
             onClick={() => {
               setComment("");
