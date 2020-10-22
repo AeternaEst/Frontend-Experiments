@@ -38,6 +38,15 @@ body {
   border: 1px solid black;
 }
 
+.navigation > * {
+  width: 100%;
+}
+
+.navigation__right {
+  display: flex;
+  justify-content: space-between;
+}
+
 .navigation__actions {
   display: flex;
 }

@@ -11,6 +11,7 @@ export const ADD_PROPERTY_COMMENT_REQUEST = "ADD_PROPERTY_COMMENT_REQUEST";
 export const ADD_FAVORITE_PROPERTY_ERROR = "ADD_FAVORITE_PROPERTY_ERROR";
 export const FETCH_PROPERTIES_ERROR = "FETCH_PROPERTIES_ERROR";
 export const ADD_PROPERTY_COMMENT_ERROR = "ADD_PROPERTY_COMMENT_ERROR";
+export const ADD_FAVORITE_PROPERTY_MESSAGE = "ADD_FAVORITE_PROPERTY_MESSAGE";
 
 export interface FetchPropertiesRequestAction {
   type: typeof FETCH_PROPERTIES_REQUEST;
@@ -56,6 +57,10 @@ export interface AddPropertyCommentErrorAction {
   error: AppError;
 }
 
+export interface AddFavoritePropertyMessage {
+  type: typeof ADD_FAVORITE_PROPERTY_MESSAGE;
+}
+
 export type PropertyActions =
   | FetchPropertiesSuccessAction
   | AddPropertyCommentSuccessAction
@@ -65,7 +70,8 @@ export type PropertyActions =
   | AddPropertyCommentRequestAction
   | FetchPropertiesErrorAction
   | AddFavoritePropertyErrorAction
-  | AddPropertyCommentErrorAction;
+  | AddPropertyCommentErrorAction
+  | AddFavoritePropertyMessage;
 
 const setPropertiesAction = (properties: Property[]): FetchPropertiesSuccessAction =>
   actionCreator(FETCH_PROPERTIES_SUCCESS, { properties });
@@ -109,6 +115,8 @@ const setAddFavoritePropertySuccessAction = (
     { error }
   );
 
+  const addFavoritePropertyMessageAction = (): AddFavoritePropertyMessage => actionCreator(ADD_FAVORITE_PROPERTY_MESSAGE);
+
 export const propertyActions = {
   setPropertiesAction,
   setAddPropertyCommentSuccessAction,
@@ -118,5 +126,6 @@ export const propertyActions = {
   fetch: fetchPropertiesRequestAction,
   setAddPropertyCommentErrorAction,
   addFavoritePropertyErrorAction,
-  fetchPropertiesErrorAction
+  fetchPropertiesErrorAction,
+  addFavoritePropertyMessageAction
 };

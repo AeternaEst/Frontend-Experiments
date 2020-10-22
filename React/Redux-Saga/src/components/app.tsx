@@ -7,7 +7,7 @@ require("../styling/_root-styling.css"); /* Use require to avoid typescript chec
 const App: React.FC = () => {
   return (
     <div className="app-root">
-      <Navigation />
+      <Navigation texts={{favoritePropertiesMessage: "3 or more favorite properties!"}}/>
       <PropertyList headline="Properties" />
     </div>
   );

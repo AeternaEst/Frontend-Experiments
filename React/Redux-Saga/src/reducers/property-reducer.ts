@@ -13,7 +13,7 @@ import {
   AddFavoritePropertyRequestAction,
   ADD_FAVORITE_PROPERTY_REQUEST,
   ADD_PROPERTY_COMMENT_REQUEST,
-  PropertyActions, FETCH_PROPERTIES_ERROR, FetchPropertiesErrorAction, AddFavoritePropertyErrorAction, ADD_FAVORITE_PROPERTY_ERROR, ADD_PROPERTY_COMMENT_ERROR, AddPropertyCommentErrorAction
+  PropertyActions, FETCH_PROPERTIES_ERROR, FetchPropertiesErrorAction, AddFavoritePropertyErrorAction, ADD_FAVORITE_PROPERTY_ERROR, ADD_PROPERTY_COMMENT_ERROR, AddPropertyCommentErrorAction, ADD_FAVORITE_PROPERTY_MESSAGE, AddFavoritePropertyMessage
 } from "../actions/property-actions";
 import { AppError } from "../types/app-error";
 
@@ -25,6 +25,7 @@ export interface PropertyState {
   favoritesError: AppError | undefined;
   isAddingComment: boolean;
   commentError: AppError | undefined;
+  showFavoritePropertyMessage: boolean;
 }
 
 const defaultState: PropertyState = {
@@ -34,7 +35,8 @@ const defaultState: PropertyState = {
   currentFavoritesBeingAdded: [],
   favoritesError: undefined,
   isAddingComment: false,
-  commentError: undefined
+  commentError: undefined,
+  showFavoritePropertyMessage: false
 };
 
 const reducerMapping: ReadonlyArray<HandlerParams<
@@ -139,6 +141,15 @@ const reducerMapping: ReadonlyArray<HandlerParams<
         ...state,
         isAddingComment: false,
         commentError: action.error
+      };
+    },
+  },
+  {
+    type: ADD_FAVORITE_PROPERTY_MESSAGE,
+    handle: (state, action: AddFavoritePropertyMessage) => {
+      return {
+        ...state,
+        showFavoritePropertyMessage: true
       };
     },
   },

@@ -31,5 +31,6 @@ export const propertySelectors = {
   isAddingComment: (state: State) => state.propertyState.isAddingComment,
   fetchError: (state: State) => state.propertyState.fetchError,
   favoritesError: (state: State) => state.propertyState.favoritesError,
-  commentError: (state: State) => state.propertyState.commentError
+  commentError: (state: State) => state.propertyState.commentError,
+  showFavoritePropertiesMessage: (state: State) => state.propertyState.showFavoritePropertyMessage
 };

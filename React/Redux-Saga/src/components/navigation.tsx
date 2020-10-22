@@ -8,6 +8,9 @@ import { Dispatch } from "redux";
 import Loader from "./widgets/loader";
 
 interface NavigationProps {
+  texts: {
+    favoritePropertiesMessage: string;
+  }
   numberOfComments: number;
   numberOfFavorites: number;
   isFetchingProperties: boolean;
@@ -17,6 +20,7 @@ interface NavigationProps {
   unsuccessfulLogin?: boolean;
   onLogout: () => void;
   onLogin: (userName: string, password: string) => void;
+  showFavoritePropertiesMessage: boolean;
 }
 
 const Navigation: FC<NavigationProps> = (props) => {
@@ -25,51 +29,56 @@ const Navigation: FC<NavigationProps> = (props) => {
 
   return (
     <div className="navigation">
-      <h2>Property King</h2>
-      <div className="navigation__actions">
-        {(props.isFetchingProperties ||
-          props.favoritesBeingAdded ||
-          props.isAddingComment) && <Loader text="getting latest data" />}
-
-        {!props.isFetchingProperties &&
-          !props.favoritesBeingAdded &&
-          !props.isAddingComment && (
-            <div className="navigation__action-status">
-              <div>Comments: {props.numberOfComments}</div>
-              <div>Favorites: {props.numberOfFavorites}</div>
-            </div>
-          )}
-        {props.user && (
-          <>
-            <div>Hello {props.user.userName}</div>
-            <button onClick={props.onLogout}>Logout</button>
-          </>
-        )}
-        <div>
-          {!props.user && (
-            <div className="navigation__login">
-              <input
-                onChange={(event) => setUserName(event.currentTarget.value)}
-                type="text"
-                value={userName}
-                placeholder="username"
-              />
-              <input
-                onChange={(event) => setPassword(event.currentTarget.value)}
-                type="text"
-                value={password}
-                placeholder="password"
-              />
-              <button onClick={() => props.onLogin(userName, password)}>
-                Login
-              </button>
-              {props.unsuccessfulLogin && (
-                <span>Incorrect username or password</span>
-              )}
-            </div>
-          )}
-        </div>
+      <div className="navigation__left">
+        <h2>Property King</h2>
       </div>
+      <div className="navigation__right">
+        <div>{props.showFavoritePropertiesMessage && !props.favoritesBeingAdded && props.texts.favoritePropertiesMessage}</div>
+        <div className="navigation__actions">
+          {(props.isFetchingProperties ||
+            props.favoritesBeingAdded ||
+            props.isAddingComment) && <Loader text="getting latest data" />}
+
+          {!props.isFetchingProperties &&
+            !props.favoritesBeingAdded &&
+            !props.isAddingComment && (
+              <div className="navigation__action-status">
+                <div>Comments: {props.numberOfComments}</div>
+                <div>Favorites: {props.numberOfFavorites}</div>
+              </div>
+            )}
+          {props.user && (
+            <>
+              <div>Hello {props.user.userName}</div>
+              <button onClick={props.onLogout}>Logout</button>
+            </>
+          )}
+          <div>
+            {!props.user && (
+              <div className="navigation__login">
+                <input
+                  onChange={(event) => setUserName(event.currentTarget.value)}
+                  type="text"
+                  value={userName}
+                  placeholder="username"
+                />
+                <input
+                  onChange={(event) => setPassword(event.currentTarget.value)}
+                  type="text"
+                  value={password}
+                  placeholder="password"
+                />
+                <button onClick={() => props.onLogin(userName, password)}>
+                  Login
+                </button>
+                {props.unsuccessfulLogin && (
+                  <span>Incorrect username or password</span>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>     
     </div>
   );
 };
@@ -83,6 +92,7 @@ function mapStateToProps(state: State) {
     unsuccessfulLogin: state.loginState.unsuccessfulLogin,
     isAddingComment: state.propertyState.isAddingComment,
     favoritesBeingAdded: propertySelectors.isAddingFavorites(state),
+    showFavoritePropertiesMessage: propertySelectors.showFavoritePropertiesMessage(state)
   };
 }
 

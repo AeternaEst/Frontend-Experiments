@@ -1,4 +1,4 @@
-import { put, takeEvery, select, takeLatest, call } from "redux-saga/effects";
+import { put, takeEvery, select, takeLatest, call, take } from "redux-saga/effects";
 import PropertyService from "../services/property-service";
 import { State } from "../reducers/root-reducer";
 import {
@@ -71,6 +71,14 @@ export function* addPropertyComment(action: AddPropertyCommentRequestAction) {
       )
     );
   }
+}
+
+export function* favoriteCounter() {
+  for(let i = 0; i < 3; i++) {
+    const action = yield take(ADD_FAVORITE_PROPERTY_REQUEST);
+    console.log("favorite actions received: ", i);
+  }
+  yield put(propertyActions.addFavoritePropertyMessageAction())
 }
 
 function* propertySaga() {
