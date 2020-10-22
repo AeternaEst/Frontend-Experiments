@@ -14,26 +14,44 @@ import { AppError, ErrorCode } from "../types/app-error";
 const propertyService = new PropertyService();
 
 /* Saga actions */
-function* fetchProperties() {
+export function* fetchProperties() {
   try {
     const properties = yield call(propertyService.getProperties);
     yield put(propertyActions.setPropertiesAction(properties));
   } catch (e) {
-    yield put(propertyActions.fetchPropertiesErrorAction(new AppError("fetchProperties", "Error fetching properties", ErrorCode.FETCH_PROPERTIES_ERROR)));
+    yield put(
+      propertyActions.fetchPropertiesErrorAction(
+        new AppError(
+          "fetchProperties",
+          "Error fetching properties",
+          ErrorCode.FETCH_PROPERTIES_ERROR
+        )
+      )
+    );
   }
 }
 
-function* addFavoriteProperty(action: AddFavoritePropertyRequestAction) {
+export function* addFavoriteProperty(action: AddFavoritePropertyRequestAction) {
   try {
     yield call(propertyService.addToFavorite, action.propertyId);
     yield put(propertyActions.fetch);
-    yield put(propertyActions.setAddFavoritePropertySuccessAction(action.propertyId));
+    yield put(
+      propertyActions.setAddFavoritePropertySuccessAction(action.propertyId)
+    );
   } catch (e) {
-    yield put(propertyActions.addFavoritePropertyErrorAction(new AppError("addFavoriteProperty", "Error adding favorite", ErrorCode.ADD_FAVORITES_ERROR)));
+    yield put(
+      propertyActions.addFavoritePropertyErrorAction(
+        new AppError(
+          "addFavoriteProperty",
+          "Error adding favorite",
+          ErrorCode.ADD_FAVORITES_ERROR
+        )
+      )
+    );
   }
 }
 
-function* addPropertyComment(action: AddPropertyCommentRequestAction) {
+export function* addPropertyComment(action: AddPropertyCommentRequestAction) {
   try {
     const user = yield select((state: State) => state.loginState.activeUser);
     yield call(propertyService.addComment, action.propertyId, {
@@ -43,7 +61,15 @@ function* addPropertyComment(action: AddPropertyCommentRequestAction) {
     yield put(propertyActions.fetch);
     yield put(propertyActions.setAddPropertyCommentSuccessAction);
   } catch (e) {
-    yield put(propertyActions.setAddPropertyCommentErrorAction(new AppError("addPropertyComment", "Error adding comment", ErrorCode.ADD_COMMENT_ERROR)));
+    yield put(
+      propertyActions.setAddPropertyCommentErrorAction(
+        new AppError(
+          "addPropertyComment",
+          "Error adding comment",
+          ErrorCode.ADD_COMMENT_ERROR
+        )
+      )
+    );
   }
 }
 

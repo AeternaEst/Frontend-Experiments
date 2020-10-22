@@ -1,12 +1,11 @@
-import React, { FC, useMemo, useState } from "react";
-import { Property } from "../types/property";
+import React, { FC, useState } from "react";
 import { AppUser } from "../types/app-user";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { State } from "../reducers/root-reducer";
-import Loader from "./loader";
 import { propertySelectors } from "../selectors/property-selectors";
 import { loginActions } from "../actions/login-actions";
 import { Dispatch } from "redux";
+import Loader from "./widgets/loader";
 
 interface NavigationProps {
   numberOfComments: number;
@@ -17,12 +16,12 @@ interface NavigationProps {
   user?: AppUser;
   unsuccessfulLogin?: boolean;
   onLogout: () => void;
-  onLogin: (userName: string, password: string) => void; 
+  onLogin: (userName: string, password: string) => void;
 }
 
 const Navigation: FC<NavigationProps> = (props) => {
   const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");;
+  const [password, setPassword] = useState("");
 
   return (
     <div className="navigation">
@@ -43,9 +42,7 @@ const Navigation: FC<NavigationProps> = (props) => {
         {props.user && (
           <>
             <div>Hello {props.user.userName}</div>
-            <button onClick={props.onLogout}>
-              Logout
-            </button>
+            <button onClick={props.onLogout}>Logout</button>
           </>
         )}
         <div>
@@ -63,9 +60,7 @@ const Navigation: FC<NavigationProps> = (props) => {
                 value={password}
                 placeholder="password"
               />
-              <button
-                onClick={() => props.onLogin(userName, password)}
-              >
+              <button onClick={() => props.onLogin(userName, password)}>
                 Login
               </button>
               {props.unsuccessfulLogin && (
@@ -94,8 +89,9 @@ function mapStateToProps(state: State) {
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
     onLogout: () => dispatch(loginActions.logout),
-    onLogin: (userName: string, password: string) => dispatch(loginActions.login(userName, password))
-  }
+    onLogin: (userName: string, password: string) =>
+      dispatch(loginActions.login(userName, password)),
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

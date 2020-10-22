@@ -1,9 +1,10 @@
 import React, { FC, useState } from "react";
 import { Property } from "../types/property";
-import Loader from "./loader";
 import { triggerAndSubscribe } from "../utils/react-redux-utils";
 import { propertyActions } from "../actions/property-actions";
 import { propertySelectors } from "../selectors/property-selectors";
+import Loader from "./widgets/loader";
+import Error from "./widgets/error";
 
 interface PropertyProps {
   property: Property;
@@ -45,7 +46,7 @@ const Property: FC<PropertyProps> = (props: PropertyProps) => {
             <button type="button" onClick={() => addToFavorite()}>
               {isLoading ? <Loader text="updating" /> : "Add to favorites"}
             </button>
-            {favoritesError && <span>{favoritesError.message}</span>}
+            {favoritesError && <Error error={favoritesError} smallDisplay />}
           </>
         )}
         {props.property.isFavorite && <span>Is favorite</span>}
@@ -56,7 +57,7 @@ const Property: FC<PropertyProps> = (props: PropertyProps) => {
             value={comment}
             placeholder="comment property"
           />
-          {commentError && <span>{commentError.message}</span>}
+          {commentError && <Error error={commentError} smallDisplay />}
           <button
             onClick={() => {
               setComment("");
