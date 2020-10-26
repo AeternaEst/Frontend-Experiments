@@ -1,4 +1,10 @@
-import { LoginActions, SET_ACTIVE_USER, UNSUCCESSFUL_LOGIN } from "../actions/login-actions";
+import {
+  LoginActions,
+  SET_ACTIVE_USER,
+  UNSUCCESSFUL_LOGIN,
+  CLEAR_ACTIVE_USER,
+  SUCCESSFUL_LOGIN,
+} from "../actions/login-actions";
 import { AppUser } from "../types/app-user";
 
 export interface LoginState {
@@ -21,20 +27,20 @@ const loginReducer = (
         ...state,
         activeUser: action.user,
       };
-    case SET_ACTIVE_USER:
+    case CLEAR_ACTIVE_USER:
       return {
         ...state,
         activeUser: undefined,
+      };
+    case SUCCESSFUL_LOGIN:
+      return {
+        ...state,
+        unsuccessfulLogin: false,
       };
     case UNSUCCESSFUL_LOGIN:
       return {
         ...state,
         unsuccessfulLogin: true,
-      };
-    case UNSUCCESSFUL_LOGIN:
-      return {
-        ...state,
-        unsuccessfulLogin: false,
       };
     default:
       return state;
