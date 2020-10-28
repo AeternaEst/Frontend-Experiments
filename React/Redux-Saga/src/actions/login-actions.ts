@@ -7,6 +7,7 @@ export const UNSUCCESSFUL_LOGIN = "UNSUCCESSFUL_LOGIN";
 export const SUCCESSFUL_LOGIN = "SUCCESSFUL_LOGIN";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
+export const LOGIN_STARTED = "LOGIN_STARTED";
 
 export interface SetUserAction {
     type: typeof SET_ACTIVE_USER;
@@ -34,14 +35,19 @@ export interface LoginAction {
 export interface LogoutAction {
     type: typeof LOGOUT;
   }
-  
+
+  export interface LoginStartedAction {
+    type: typeof LOGIN_STARTED;
+  }
+
 export type LoginActions =
     | SetUserAction
     | ClearUserAction
     | UnsuccessfulLoginAction
     | SuccessfulLoginAction
     | LoginAction
-    | LogoutAction;
+    | LogoutAction
+    | LoginStartedAction;
 
 const setUser = (user: AppUser): SetUserAction => actionCreator(SET_ACTIVE_USER, { user });
 
@@ -58,6 +64,8 @@ const loginAction = (userName: string, password: string): LoginAction =>
   
 const logoutAction: LogoutAction = actionCreator(LOGOUT);
 
+const loginStartedAction: LoginStartedAction = actionCreator(LOGIN_STARTED);
+
 export const loginActions = {
     setUser: setUser,
     clearUser: clearUser,
@@ -65,4 +73,5 @@ export const loginActions = {
     successfulLogin,
     login: loginAction,
     logout: logoutAction,
+    loginStarted: loginStartedAction,
 };

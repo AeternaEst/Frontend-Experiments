@@ -1,4 +1,6 @@
-import { put, call, takeLatest, take, fork } from "redux-saga/effects";
+import { AnyAction } from "redux";
+import { Task } from "redux-saga";
+import { put, call, takeLatest, take, fork, cancel, ForkEffect } from "redux-saga/effects";
 import {
   LOGIN,
   LoginAction,
@@ -8,12 +10,13 @@ import {
   UNSUCCESSFUL_LOGIN,
 } from "../actions/login-actions";
 import LoginService from "../services/login-service";
+import { AppUser } from "../types/app-user";
 
 const loginService = new LoginService();
 
 function* loginUser(userName: string, password: string) {
   try {
-    const user = yield call(loginService.login, userName, password);
+    const user: AppUser = yield call(loginService.login, userName, password);
     yield put(loginActions.successfulLogin);
     yield put(loginActions.setUser(user));
     return user;
@@ -30,18 +33,15 @@ function* logoutUser() {
   }
 }
 
-/*
-  TODO: Add spinner during login/logout
-        Add better typings -> user = any
-        add cancel action for logout during login
-*/
 function* loginFlow() {
   while (true) {
-    const { userName, password } = yield (take(
-      LOGIN
-    ) as unknown) as LoginAction;
-    yield fork(loginUser, userName, password);
-    yield take([LOGOUT, UNSUCCESSFUL_LOGIN]);
+    const { userName, password }: LoginAction = yield take(LOGIN);
+    yield put(loginActions.loginStarted);
+    const loginTask: Task = yield fork(loginUser, userName, password);
+    const action: AnyAction = yield take([LOGOUT, UNSUCCESSFUL_LOGIN]);
+    if(action.type === LOGOUT && loginTask.isRunning()) {
+      cancel(loginTask)
+    }
     yield logoutUser();
   }
 }
