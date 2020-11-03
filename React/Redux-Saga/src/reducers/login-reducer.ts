@@ -4,17 +4,20 @@ import {
   UNSUCCESSFUL_LOGIN,
   CLEAR_ACTIVE_USER,
   SUCCESSFUL_LOGIN,
+  LOGIN_STARTED,
 } from "../actions/login-actions";
 import { AppUser } from "../types/app-user";
 
 export interface LoginState {
   activeUser?: AppUser;
-  unsuccessfulLogin?: boolean;
+  unsuccessfulLogin: boolean;
+  isLoginInProgress: boolean;
 }
 
 const defaultState: LoginState = {
   activeUser: undefined,
   unsuccessfulLogin: false,
+  isLoginInProgress: false
 };
 
 const loginReducer = (
@@ -36,12 +39,19 @@ const loginReducer = (
       return {
         ...state,
         unsuccessfulLogin: false,
+        isLoginInProgress: false
       };
     case UNSUCCESSFUL_LOGIN:
       return {
         ...state,
         unsuccessfulLogin: true,
+        isLoginInProgress: false
       };
+    case LOGIN_STARTED:
+      return {
+        ...state,
+        isLoginInProgress: true
+      }
     default:
       return state;
   }

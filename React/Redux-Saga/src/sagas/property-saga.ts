@@ -20,14 +20,15 @@ import {
   GET_PROPERTY_ADDRESS,
 } from "../actions/property-actions";
 import { AppError, ErrorCode } from "../types/app-error";
-import { stringify } from "querystring";
+import { AppUser } from "../types/app-user";
+import { Property } from "../types/property";
 
 const propertyService = new PropertyService();
 
 /* Saga actions */
 export function* fetchProperties() {
   try {
-    const properties = yield call(propertyService.getProperties);
+    const properties: Property[] = yield call(propertyService.getProperties);
     yield put(propertyActions.setPropertiesAction(properties));
   } catch (e) {
     yield put(
@@ -64,7 +65,7 @@ export function* addFavoriteProperty(action: AddFavoritePropertyRequestAction) {
 
 export function* addPropertyComment(action: AddPropertyCommentRequestAction) {
   try {
-    const user = yield select((state: State) => state.loginState.activeUser);
+    const user: AppUser = yield select((state: State) => state.loginState.activeUser);
     yield call(propertyService.addComment, action.propertyId, {
       text: action.comment,
       user,
