@@ -1,6 +1,9 @@
 import React, { FC, useState } from "react";
 import { Property } from "../types/property";
-import { triggerAndSubscribe } from "../utils/react-redux-utils";
+import {
+  triggerAndSubscribe,
+  fetchAndSubscribe,
+} from "../utils/react-redux-utils";
 import { propertyActions } from "../actions/property-actions";
 import { propertySelectors } from "../selectors/property-selectors";
 import Loader from "./widgets/loader";
@@ -30,14 +33,28 @@ const Property: FC<PropertyProps> = (props: PropertyProps) => {
     propertySelectors.isAddingComment,
     propertySelectors.commentError
   );
+  const {
+    data: address,
+    isLoading: isLoadingAddress,
+  } = fetchAndSubscribe(
+    propertyActions.getAddressAction(props.property.id),
+    propertySelectors.addedAddresses(props.property.id),
+    propertySelectors.isAddressBeingAdded(props.property.id),
+    [props.property]
+  );
 
   const isLoading = favoritesBeingAdded.includes(props.property.id);
+
+  console.log("address", address);
 
   return (
     <div className="property">
       <img src={props.property.imageUrl} />
       <div>
-        <b>{props.property.address}</b>
+        {isLoadingAddress && <Loader text=" loading address" />}
+        {!isLoadingAddress && address && (
+          <b>{`${address.streetName}, ${address.city}, ${address.zipCode}`}</b>
+        )}
       </div>
       <p>{props.property.description}</p>
       <div className="property__actions">

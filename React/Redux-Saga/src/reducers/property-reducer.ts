@@ -1,8 +1,5 @@
-import { Property } from "../types/property";
-import {
-  reducerCreator,
-  HandlerParams,
-} from "../utils/redux-utils";
+import { Property, PropertyAddress } from "../types/property";
+import { reducerCreator, HandlerParams } from "../utils/redux-utils";
 import {
   FETCH_PROPERTIES_SUCCESS,
   ADD_PROPERTY_COMMENT_SUCCESS,
@@ -13,9 +10,24 @@ import {
   AddFavoritePropertyRequestAction,
   ADD_FAVORITE_PROPERTY_REQUEST,
   ADD_PROPERTY_COMMENT_REQUEST,
-  PropertyActions, FETCH_PROPERTIES_ERROR, FetchPropertiesErrorAction, AddFavoritePropertyErrorAction, ADD_FAVORITE_PROPERTY_ERROR, ADD_PROPERTY_COMMENT_ERROR, AddPropertyCommentErrorAction, ADD_FAVORITE_PROPERTY_MESSAGE, AddFavoritePropertyMessage
+  PropertyActions,
+  FETCH_PROPERTIES_ERROR,
+  FetchPropertiesErrorAction,
+  AddFavoritePropertyErrorAction,
+  ADD_FAVORITE_PROPERTY_ERROR,
+  ADD_PROPERTY_COMMENT_ERROR,
+  AddPropertyCommentErrorAction,
+  ADD_FAVORITE_PROPERTY_MESSAGE,
+  AddFavoritePropertyMessageAction,
+  GET_PROPERTY_ADDRESS,
+  GetAddressAction,
+  GET_PROPERTY_ADDRESS_SUCCESS,
+  GetAddressSuccessAction,
+  GET_PROPERTY_ADDRESS_FAILURE,
+  GetAddressFailureAction,
 } from "../actions/property-actions";
 import { AppError } from "../types/app-error";
+import propertySaga from "../sagas/property-saga";
 
 export interface PropertyState {
   properties: Property[];
@@ -26,6 +38,8 @@ export interface PropertyState {
   isAddingComment: boolean;
   commentError: AppError | undefined;
   showFavoritePropertyMessage: boolean;
+  addresses: PropertyAddress[];
+  currentAddressesBeingAdded: Property["id"][];
 }
 
 const defaultState: PropertyState = {
@@ -36,7 +50,9 @@ const defaultState: PropertyState = {
   favoritesError: undefined,
   isAddingComment: false,
   commentError: undefined,
-  showFavoritePropertyMessage: false
+  showFavoritePropertyMessage: false,
+  addresses: [],
+  currentAddressesBeingAdded: [],
 };
 
 const reducerMapping: ReadonlyArray<HandlerParams<
@@ -59,7 +75,7 @@ const reducerMapping: ReadonlyArray<HandlerParams<
         ...state,
         properties: [...action.properties],
         isFetching: false,
-        fetchError: undefined
+        fetchError: undefined,
       };
     },
   },
@@ -69,7 +85,7 @@ const reducerMapping: ReadonlyArray<HandlerParams<
       return {
         ...state,
         isFetching: false,
-        fetchError: action.error
+        fetchError: action.error,
       };
     },
   },
@@ -101,7 +117,7 @@ const reducerMapping: ReadonlyArray<HandlerParams<
       return {
         ...state,
         currentFavoritesBeingAdded: updatedFavorites,
-        favoritesError: undefined
+        favoritesError: undefined,
       };
     },
   },
@@ -110,8 +126,8 @@ const reducerMapping: ReadonlyArray<HandlerParams<
     handle: (state, action: AddFavoritePropertyErrorAction) => {
       return {
         ...state,
-        currentFavoritesBeingAdded: [], /* This should only remove the failed one*/
-        favoritesError: action.error
+        currentFavoritesBeingAdded: [] /* This should only remove the failed one*/,
+        favoritesError: action.error,
       };
     },
   },
@@ -130,7 +146,7 @@ const reducerMapping: ReadonlyArray<HandlerParams<
       return {
         ...state,
         isAddingComment: false,
-        commentError: undefined
+        commentError: undefined,
       };
     },
   },
@@ -140,16 +156,66 @@ const reducerMapping: ReadonlyArray<HandlerParams<
       return {
         ...state,
         isAddingComment: false,
-        commentError: action.error
+        commentError: action.error,
       };
     },
   },
   {
     type: ADD_FAVORITE_PROPERTY_MESSAGE,
-    handle: (state, action: AddFavoritePropertyMessage) => {
+    handle: (state, action: AddFavoritePropertyMessageAction) => {
       return {
         ...state,
-        showFavoritePropertyMessage: true
+        showFavoritePropertyMessage: true,
+      };
+    },
+  },
+  {
+    type: GET_PROPERTY_ADDRESS,
+    handle: (state, action: GetAddressAction) => {
+      return {
+        ...state,
+        currentAddressesBeingAdded: state.currentAddressesBeingAdded.some(
+          (propertyId) => action.propertyId === propertyId
+        )
+          ? state.currentAddressesBeingAdded
+          : [...state.currentAddressesBeingAdded, action.propertyId],
+      };
+    },
+  },
+  {
+    type: GET_PROPERTY_ADDRESS_SUCCESS,
+    handle: (state, action: GetAddressSuccessAction) => {
+      const indexToRemove = state.currentAddressesBeingAdded.findIndex(
+        (id) => id === action.propertyId
+      );
+      return {
+        ...state,
+        currentAddressesBeingAdded:
+          indexToRemove !== -1
+            ? [
+                ...state.currentAddressesBeingAdded.slice(0, indexToRemove),
+                ...state.currentAddressesBeingAdded.slice(indexToRemove + 1),
+              ]
+            : state.currentAddressesBeingAdded,
+        addresses: [...state.addresses, action.address],
+      };
+    },
+  },
+  {
+    type: GET_PROPERTY_ADDRESS_FAILURE,
+    handle: (state, action: GetAddressFailureAction) => {
+      const indexToRemove = state.currentAddressesBeingAdded.findIndex(
+        (id) => id === action.propertyId
+      );
+      return {
+        ...state,
+        currentAddressesBeingAdded:
+          indexToRemove !== -1
+            ? [
+                ...state.currentAddressesBeingAdded.slice(0, indexToRemove),
+                ...state.currentAddressesBeingAdded.slice(indexToRemove + 1),
+              ]
+            : state.currentAddressesBeingAdded,
       };
     },
   },

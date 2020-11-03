@@ -18,6 +18,23 @@ const totalCommentsSelector = createSelector(propertySelector, (properties) =>
   )
 );
 
+const addressesBeingAddedSelector = (state: State) =>
+  state.propertyState.currentAddressesBeingAdded;
+
+const isAddressBeingAddedSelector = (propertyId) => {
+  return createSelector(addressesBeingAddedSelector, (addresses) =>
+    addresses.some((addedPropertyId) => addedPropertyId === propertyId)
+  );
+};
+
+const addedAddressesSelector = (state: State) => state.propertyState.addresses;
+
+const getAddressSelector = (propertyId) => {
+  return createSelector(addedAddressesSelector, (addresses) =>
+    addresses.find((address) => address.propertyId === propertyId)
+  );
+};
+
 export const propertySelectors = {
   properties: propertySelector,
   favorites: favoritesSelector,
@@ -32,5 +49,8 @@ export const propertySelectors = {
   fetchError: (state: State) => state.propertyState.fetchError,
   favoritesError: (state: State) => state.propertyState.favoritesError,
   commentError: (state: State) => state.propertyState.commentError,
-  showFavoritePropertiesMessage: (state: State) => state.propertyState.showFavoritePropertyMessage
+  showFavoritePropertiesMessage: (state: State) =>
+    state.propertyState.showFavoritePropertyMessage,
+  isAddressBeingAdded: isAddressBeingAddedSelector,
+  addedAddresses: getAddressSelector,
 };

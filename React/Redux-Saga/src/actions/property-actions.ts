@@ -1,5 +1,5 @@
 import { AppError } from "../types/app-error";
-import { Property } from "../types/property";
+import { Property, PropertyAddress } from "../types/property";
 import { actionCreator } from "../utils/redux-utils";
 
 export const FETCH_PROPERTIES_SUCCESS = "FETCH_PROPERTIES_SUCCESS";
@@ -12,6 +12,9 @@ export const ADD_FAVORITE_PROPERTY_ERROR = "ADD_FAVORITE_PROPERTY_ERROR";
 export const FETCH_PROPERTIES_ERROR = "FETCH_PROPERTIES_ERROR";
 export const ADD_PROPERTY_COMMENT_ERROR = "ADD_PROPERTY_COMMENT_ERROR";
 export const ADD_FAVORITE_PROPERTY_MESSAGE = "ADD_FAVORITE_PROPERTY_MESSAGE";
+export const GET_PROPERTY_ADDRESS = "GET_PROPERTY_ADDRESS";
+export const GET_PROPERTY_ADDRESS_SUCCESS = "GET_PROPERTY_ADDRESS_SUCCESS";
+export const GET_PROPERTY_ADDRESS_FAILURE = "GET_PROPERTY_ADDRESS_FAILURE";
 
 export interface FetchPropertiesRequestAction {
   type: typeof FETCH_PROPERTIES_REQUEST;
@@ -57,8 +60,24 @@ export interface AddPropertyCommentErrorAction {
   error: AppError;
 }
 
-export interface AddFavoritePropertyMessage {
+export interface AddFavoritePropertyMessageAction {
   type: typeof ADD_FAVORITE_PROPERTY_MESSAGE;
+}
+
+export interface GetAddressAction {
+  type: typeof GET_PROPERTY_ADDRESS;
+  propertyId: number;
+}
+
+export interface GetAddressSuccessAction {
+  type: typeof GET_PROPERTY_ADDRESS_SUCCESS;
+  propertyId: number;
+  address: PropertyAddress;
+}
+
+export interface GetAddressFailureAction {
+  type: typeof GET_PROPERTY_ADDRESS_FAILURE;
+  propertyId: number;
 }
 
 export type PropertyActions =
@@ -71,9 +90,14 @@ export type PropertyActions =
   | FetchPropertiesErrorAction
   | AddFavoritePropertyErrorAction
   | AddPropertyCommentErrorAction
-  | AddFavoritePropertyMessage;
+  | AddFavoritePropertyMessageAction
+  | GetAddressAction
+  | GetAddressSuccessAction
+  | GetAddressFailureAction;
 
-const setPropertiesAction = (properties: Property[]): FetchPropertiesSuccessAction =>
+const setPropertiesAction = (
+  properties: Property[]
+): FetchPropertiesSuccessAction =>
   actionCreator(FETCH_PROPERTIES_SUCCESS, { properties });
 
 const setAddPropertyCommentSuccessAction: AddPropertyCommentSuccessAction = actionCreator(
@@ -85,37 +109,50 @@ const setAddFavoritePropertySuccessAction = (
 ): AddFavoritePropertySuccessAction =>
   actionCreator(ADD_FAVORITE_PROPERTY_SUCCESS, { propertyId });
 
-  const addFavoritePropertyAction = (
-    propertyId: number
-  ): AddFavoritePropertyRequestAction =>
-    actionCreator(ADD_FAVORITE_PROPERTY_REQUEST, { propertyId });
-  
-  const addPropertyCommentAction = (
-    propertyId: number,
-    comment: string
-  ): AddPropertyCommentRequestAction =>
-    actionCreator(ADD_PROPERTY_COMMENT_REQUEST, { propertyId, comment });
-  
-  const fetchPropertiesRequestAction: FetchPropertiesRequestAction = {
-    type: FETCH_PROPERTIES_REQUEST,
-  };
+const addFavoritePropertyAction = (
+  propertyId: number
+): AddFavoritePropertyRequestAction =>
+  actionCreator(ADD_FAVORITE_PROPERTY_REQUEST, { propertyId });
 
-  const setAddPropertyCommentErrorAction = (error: AppError): AddPropertyCommentErrorAction => actionCreator(
-    ADD_PROPERTY_COMMENT_ERROR,
-    { error }
-  );
+const addPropertyCommentAction = (
+  propertyId: number,
+  comment: string
+): AddPropertyCommentRequestAction =>
+  actionCreator(ADD_PROPERTY_COMMENT_REQUEST, { propertyId, comment });
 
-  const addFavoritePropertyErrorAction = (error: AppError): AddFavoritePropertyErrorAction => actionCreator(
-    ADD_FAVORITE_PROPERTY_ERROR,
-    { error }
-  );
+const fetchPropertiesRequestAction: FetchPropertiesRequestAction = {
+  type: FETCH_PROPERTIES_REQUEST,
+};
 
-  const fetchPropertiesErrorAction = (error: AppError): FetchPropertiesErrorAction => actionCreator(
-    FETCH_PROPERTIES_ERROR,
-    { error }
-  );
+const setAddPropertyCommentErrorAction = (
+  error: AppError
+): AddPropertyCommentErrorAction =>
+  actionCreator(ADD_PROPERTY_COMMENT_ERROR, { error });
 
-  const addFavoritePropertyMessageAction = (): AddFavoritePropertyMessage => actionCreator(ADD_FAVORITE_PROPERTY_MESSAGE);
+const addFavoritePropertyErrorAction = (
+  error: AppError
+): AddFavoritePropertyErrorAction =>
+  actionCreator(ADD_FAVORITE_PROPERTY_ERROR, { error });
+
+const fetchPropertiesErrorAction = (
+  error: AppError
+): FetchPropertiesErrorAction =>
+  actionCreator(FETCH_PROPERTIES_ERROR, { error });
+
+const addFavoritePropertyMessageAction = (): AddFavoritePropertyMessageAction =>
+  actionCreator(ADD_FAVORITE_PROPERTY_MESSAGE);
+
+const getAddressAction = (propertyId: number): GetAddressAction =>
+  actionCreator(GET_PROPERTY_ADDRESS, { propertyId });
+
+const getAddressSuccessAction = (
+  propertyId: number,
+  address: PropertyAddress
+): GetAddressSuccessAction =>
+  actionCreator(GET_PROPERTY_ADDRESS_SUCCESS, { propertyId, address });
+
+const getAddressFailureAction = (propertyId: number): GetAddressFailureAction =>
+  actionCreator(GET_PROPERTY_ADDRESS_FAILURE, { propertyId });
 
 export const propertyActions = {
   setPropertiesAction,
@@ -127,5 +164,8 @@ export const propertyActions = {
   setAddPropertyCommentErrorAction,
   addFavoritePropertyErrorAction,
   fetchPropertiesErrorAction,
-  addFavoritePropertyMessageAction
+  addFavoritePropertyMessageAction,
+  getAddressAction,
+  getAddressSuccessAction,
+  getAddressFailureAction,
 };

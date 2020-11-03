@@ -1,4 +1,12 @@
-import { put, takeEvery, select, takeLatest, call, take } from "redux-saga/effects";
+import {
+  put,
+  takeEvery,
+  select,
+  takeLatest,
+  call,
+  take,
+  all,
+} from "redux-saga/effects";
 import PropertyService from "../services/property-service";
 import { State } from "../reducers/root-reducer";
 import {
@@ -8,8 +16,11 @@ import {
   AddFavoritePropertyRequestAction,
   AddPropertyCommentRequestAction,
   propertyActions,
+  GetAddressAction,
+  GET_PROPERTY_ADDRESS,
 } from "../actions/property-actions";
 import { AppError, ErrorCode } from "../types/app-error";
+import { stringify } from "querystring";
 
 const propertyService = new PropertyService();
 
@@ -74,17 +85,38 @@ export function* addPropertyComment(action: AddPropertyCommentRequestAction) {
 }
 
 export function* favoriteCounter() {
-  for(let i = 0; i < 3; i++) {
+  for (let i = 0; i < 3; i++) {
     const action = yield take(ADD_FAVORITE_PROPERTY_REQUEST);
     console.log("favorite actions received: ", i);
   }
-  yield put(propertyActions.addFavoritePropertyMessageAction())
+  yield put(propertyActions.addFavoritePropertyMessageAction());
+}
+
+export function* getAddress(action: GetAddressAction) {
+  try {
+    const [streetName, city, zip]: string[] = yield all([
+      call(propertyService.getStreetName, action.propertyId),
+      call(propertyService.getCity, action.propertyId),
+      call(propertyService.getZip, action.propertyId),
+    ]);
+    yield put(
+      propertyActions.getAddressSuccessAction(action.propertyId, {
+        streetName,
+        propertyId: action.propertyId,
+        city,
+        zipCode: zip,
+      })
+    );
+  } catch {
+    yield put(propertyActions.getAddressFailureAction(action.propertyId));
+  }
 }
 
 function* propertySaga() {
   yield takeLatest(FETCH_PROPERTIES_REQUEST, fetchProperties);
   yield takeEvery(ADD_FAVORITE_PROPERTY_REQUEST, addFavoriteProperty);
   yield takeEvery(ADD_PROPERTY_COMMENT_REQUEST, addPropertyComment);
+  yield takeEvery(GET_PROPERTY_ADDRESS, getAddress);
 }
 
 export default propertySaga;
