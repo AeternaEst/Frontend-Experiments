@@ -1,13 +1,23 @@
 import { AnyAction } from "redux";
 import { Task } from "redux-saga";
-import { put, call, takeLatest, take, fork, cancel, ForkEffect } from "redux-saga/effects";
+import {
+  put,
+  call,
+  takeLatest,
+  take,
+  fork,
+  cancel,
+  ForkEffect,
+  throttle,
+} from "redux-saga/effects";
 import {
   LOGIN,
   LoginAction,
   loginActions,
   LOGOUT,
-  LogoutAction,
   UNSUCCESSFUL_LOGIN,
+  SET_NEW_USER_NAME_TYPING,
+  NewUserNameTypingAction,
 } from "../actions/login-actions";
 import LoginService from "../services/login-service";
 import { AppUser } from "../types/app-user";
@@ -33,17 +43,25 @@ function* logoutUser() {
   }
 }
 
-function* loginFlow() {
+export function* loginFlow() {
   while (true) {
     const { userName, password }: LoginAction = yield take(LOGIN);
     yield put(loginActions.loginStarted);
     const loginTask: Task = yield fork(loginUser, userName, password);
     const action: AnyAction = yield take([LOGOUT, UNSUCCESSFUL_LOGIN]);
-    if(action.type === LOGOUT && loginTask.isRunning()) {
-      cancel(loginTask)
+    if (action.type === LOGOUT && loginTask.isRunning()) {
+      cancel(loginTask);
     }
     yield logoutUser();
   }
 }
 
-export default loginFlow;
+function* loginUserNameCapture(action: NewUserNameTypingAction) {
+  yield put(loginActions.currentUserNameTyping(action.newTypedInUserName));
+}
+
+function* loginSaga() {
+  yield throttle(2000, SET_NEW_USER_NAME_TYPING, loginUserNameCapture);
+}
+
+export default loginSaga;

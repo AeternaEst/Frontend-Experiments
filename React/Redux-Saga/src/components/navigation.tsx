@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import { AppUser } from "../types/app-user";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { State } from "../reducers/root-reducer";
 import { propertySelectors } from "../selectors/property-selectors";
 import { loginActions } from "../actions/login-actions";
@@ -29,6 +29,8 @@ const Navigation: FC<NavigationProps> = (props) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatchUserNameUpdate = useDispatch();
+
   useEffect(() => {
     if (!props.unsuccessfulLogin && props.user) {
       setUserName("");
@@ -37,39 +39,48 @@ const Navigation: FC<NavigationProps> = (props) => {
   }, [props.unsuccessfulLogin, props.user]);
 
   const renderLogin = (): React.ReactElement => {
-    if(props.isLoginInProgress) {
-      return <Loader text="Login in progress..." />
+    if (props.isLoginInProgress) {
+      return <Loader text="Login in progress..." />;
     }
-    if(props.user)
-      return (<>
-        <div>Hello {props.user.userName}</div>
-        <button onClick={props.onLogout}>Logout</button>
-      </>)
-    if(!props.user) {
-      return (<div>
-        <div className="navigation__login">
-          <input
-            onChange={(event) => setUserName(event.currentTarget.value)}
-            type="text"
-            value={userName}
-            placeholder="username"
-          />
-          <input
-            onChange={(event) => setPassword(event.currentTarget.value)}
-            type="text"
-            value={password}
-            placeholder="password"
-          />
-          <button onClick={() => props.onLogin(userName, password)}>
-            Login
-          </button>
-          {props.unsuccessfulLogin && (
-            <span>Incorrect username or password</span>
-          )}
+    if (props.user)
+      return (
+        <>
+          <div>Hello {props.user.userName}</div>
+          <button onClick={props.onLogout}>Logout</button>
+        </>
+      );
+    if (!props.user) {
+      return (
+        <div>
+          <div className="navigation__login">
+            <input
+              onChange={(event) => {
+                setUserName(event.currentTarget.value);
+                dispatchUserNameUpdate(
+                  loginActions.newUserNameTyping(event.currentTarget.value)
+                );
+              }}
+              type="text"
+              value={userName}
+              placeholder="username"
+            />
+            <input
+              onChange={(event) => setPassword(event.currentTarget.value)}
+              type="text"
+              value={password}
+              placeholder="password"
+            />
+            <button onClick={() => props.onLogin(userName, password)}>
+              Login
+            </button>
+            {props.unsuccessfulLogin && (
+              <span>Incorrect username or password</span>
+            )}
+          </div>
         </div>
-      </div>)
-    }   
-  } 
+      );
+    }
+  };
 
   return (
     <div className="navigation">
@@ -96,9 +107,7 @@ const Navigation: FC<NavigationProps> = (props) => {
               </div>
             )}
         </div>
-        {
-          renderLogin()
-        }
+        {renderLogin()}
       </div>
     </div>
   );
@@ -116,7 +125,7 @@ function mapStateToProps(state: State) {
     showFavoritePropertiesMessage: propertySelectors.showFavoritePropertiesMessage(
       state
     ),
-    isLoginInProgress: loginSelectors.isLoginInProgress(state)
+    isLoginInProgress: loginSelectors.isLoginInProgress(state),
   };
 }
 

@@ -45,8 +45,6 @@ const Property: FC<PropertyProps> = (props: PropertyProps) => {
 
   const isLoading = favoritesBeingAdded.includes(props.property.id);
 
-  console.log("address", address);
-
   return (
     <div className="property">
       <img src={props.property.imageUrl} />
