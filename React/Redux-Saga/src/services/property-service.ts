@@ -8,7 +8,7 @@ const propertyDatabase: Property[] = [
     address: "Somestreet 34D, 2900 Hellerup",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-    imageUrl: "https://via.placeholder.com/500x250",
+    imageUrl: "https://via.placeholder.com/500x150",
     comments: [],
     isFavorite: false,
   },
@@ -17,7 +17,7 @@ const propertyDatabase: Property[] = [
     address: "Somestreet 34D, 2900 Hellerup",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-    imageUrl: "https://via.placeholder.com/500x250",
+    imageUrl: "https://via.placeholder.com/500x150",
     comments: [],
     isFavorite: false,
   },
@@ -26,7 +26,7 @@ const propertyDatabase: Property[] = [
     address: "Somestreet 34D, 2900 Hellerup",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-    imageUrl: "https://via.placeholder.com/500x250",
+    imageUrl: "https://via.placeholder.com/500x150",
     comments: [],
     isFavorite: false,
   },

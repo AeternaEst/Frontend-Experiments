@@ -3,6 +3,7 @@ import loginFlow from "./login-saga";
 import deprecatedSaga from "./app-setup/deprecated-saga";
 import propertySaga, { favoriteCounter } from "./property-saga";
 import { loggerSaga } from "./logger-saga";
+import userSaga from "./user-saga";
 
 // TODO: enable logger conditionally
 export default function* rootSaga() {
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     // loggerSaga(),
     favoriteCounter(),
     deprecatedSaga(),
+    userSaga(),
   ]);
 }
