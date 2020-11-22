@@ -6,9 +6,7 @@ import {
 import { call, race, put, takeLatest } from "redux-saga/effects";
 import UserService from "../services/user-service";
 
-var userService = new UserService();
-
-function* fetchCriticalMessage(action: FetchCriticalMessageAction) {
+function* fetchCriticalMessage(userService: UserService, action: FetchCriticalMessageAction) {
   try {
     const criticalMessage: string = yield race([
       call(userService.getSecurityMessage, 0),
@@ -25,6 +23,6 @@ function* fetchCriticalMessage(action: FetchCriticalMessageAction) {
   }
 }
 
-export default function* userSaga() {
-  yield takeLatest(FETCH_CRITICAL_MESSAGE, fetchCriticalMessage);
+export default function* userSaga(userService: UserService) {
+  yield takeLatest(FETCH_CRITICAL_MESSAGE, fetchCriticalMessage, userService);
 }

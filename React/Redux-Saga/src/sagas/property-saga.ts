@@ -23,10 +23,8 @@ import { AppError, ErrorCode } from "../types/app-error";
 import { AppUser } from "../types/app-user";
 import { Property } from "../types/property";
 
-const propertyService = new PropertyService();
-
 /* Saga actions */
-export function* fetchProperties() {
+export function* fetchProperties(propertyService: PropertyService) {
   try {
     const properties: Property[] = yield call(propertyService.getProperties);
     yield put(propertyActions.setPropertiesAction(properties));
@@ -43,7 +41,7 @@ export function* fetchProperties() {
   }
 }
 
-export function* addFavoriteProperty(action: AddFavoritePropertyRequestAction) {
+export function* addFavoriteProperty(propertyService: PropertyService, action: AddFavoritePropertyRequestAction) {
   try {
     yield call(propertyService.addToFavorite, action.propertyId);
     yield put(propertyActions.fetch);
@@ -63,7 +61,7 @@ export function* addFavoriteProperty(action: AddFavoritePropertyRequestAction) {
   }
 }
 
-export function* addPropertyComment(action: AddPropertyCommentRequestAction) {
+export function* addPropertyComment(propertyService: PropertyService, action: AddPropertyCommentRequestAction) {
   try {
     const user: AppUser = yield select((state: State) => state.loginState.activeUser);
     yield call(propertyService.addComment, action.propertyId, {
@@ -93,7 +91,7 @@ export function* favoriteCounter() {
   yield put(propertyActions.addFavoritePropertyMessageAction());
 }
 
-export function* getAddress(action: GetAddressAction) {
+export function* getAddress(propertyService: PropertyService, action: GetAddressAction) {
   try {
     const [streetName, city, zip]: string[] = yield all([
       call(propertyService.getStreetName, action.propertyId),
@@ -113,11 +111,11 @@ export function* getAddress(action: GetAddressAction) {
   }
 }
 
-function* propertySaga() {
-  yield takeLatest(FETCH_PROPERTIES_REQUEST, fetchProperties);
-  yield takeEvery(ADD_FAVORITE_PROPERTY_REQUEST, addFavoriteProperty);
-  yield takeEvery(ADD_PROPERTY_COMMENT_REQUEST, addPropertyComment);
-  yield takeEvery(GET_PROPERTY_ADDRESS, getAddress);
+function* propertySaga(propertyService: PropertyService) {
+  yield takeLatest(FETCH_PROPERTIES_REQUEST, fetchProperties, propertyService);
+  yield takeEvery(ADD_FAVORITE_PROPERTY_REQUEST, addFavoriteProperty, propertyService);
+  yield takeEvery(ADD_PROPERTY_COMMENT_REQUEST, addPropertyComment, propertyService);
+  yield takeEvery(GET_PROPERTY_ADDRESS, getAddress, propertyService);
 }
 
 export default propertySaga;
