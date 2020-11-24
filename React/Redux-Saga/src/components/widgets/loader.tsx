@@ -1,11 +1,14 @@
-import React, { FC } from "react";
+import React, { FC } from 'react';
 
 export interface LoaderProps {
   text: string;
 }
 
-const Loader: FC<LoaderProps> = (props) => {
-  return <div className="loader">... {props.text}</div>;
-};
+const Loader: FC<LoaderProps> = ({ text }) => (
+  <div className="loader">
+    ...
+    {text}
+  </div>
+);
 
 export default Loader;

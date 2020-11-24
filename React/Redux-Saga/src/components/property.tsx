@@ -1,70 +1,70 @@
-import React, { FC, useState } from "react";
-import { Property } from "../types/property";
+import React, { FC, useState } from 'react';
+import { Property as AppProperty } from '../types/property';
 import {
   triggerAndSubscribe,
   fetchAndSubscribe,
-} from "../utils/react-redux-utils";
-import { propertyActions } from "../actions/property-actions";
-import { propertySelectors } from "../selectors/property-selectors";
-import Loader from "./widgets/loader";
-import Error from "./widgets/error";
+} from '../utils/react-redux-utils';
+import { propertyActions } from '../actions/property-actions';
+import propertySelectors from '../selectors/property-selectors';
+import Loader from './widgets/loader';
+import Error from './widgets/error';
 
 interface PropertyProps {
-  property: Property;
+  property: AppProperty;
 }
 
-const Property: FC<PropertyProps> = (props: PropertyProps) => {
-  const [comment, setComment] = useState("");
+const Property: FC<PropertyProps> = ({ property }) => {
+  const [comment, setComment] = useState('');
   const {
     data: favoritesBeingAdded,
     trigger: addToFavorite,
     error: favoritesError,
   } = triggerAndSubscribe(
-    propertyActions.addToFavorite(props.property.id),
+    propertyActions.addToFavorite(property.id),
     propertySelectors.favoritesBeingAdded,
-    propertySelectors.favoritesError
+    propertySelectors.favoritesError,
   );
   const {
     data: isAddingComment,
     trigger: addComment,
     error: commentError,
   } = triggerAndSubscribe(
-    propertyActions.addComment(props.property.id, comment),
+    propertyActions.addComment(property.id, comment),
     propertySelectors.isAddingComment,
-    propertySelectors.commentError
+    propertySelectors.commentError,
   );
   const {
     data: address,
     isLoading: isLoadingAddress,
   } = fetchAndSubscribe(
-    propertyActions.getAddressAction(props.property.id),
-    propertySelectors.addedAddresses(props.property.id),
-    propertySelectors.isAddressBeingAdded(props.property.id),
-    [props.property]
+    propertyActions.getAddressAction(property.id),
+    propertySelectors.addedAddresses(property.id),
+    propertySelectors.isAddressBeingAdded(property.id),
+    [property],
   );
 
-  const isLoading = favoritesBeingAdded.includes(props.property.id);
+  const isLoading = favoritesBeingAdded.includes(property.id);
 
   return (
     <div className="property">
-      <img src={props.property.imageUrl} />
+      <img alt={property.description} src={property.imageUrl} />
       <div>
         {isLoadingAddress && <Loader text=" loading address" />}
         {!isLoadingAddress && address && (
           <b>{`${address.streetName}, ${address.city}, ${address.zipCode}`}</b>
         )}
       </div>
-      <p>{props.property.description}</p>
+      <p>{property.description}</p>
       <div className="property__actions">
-        {!props.property.isFavorite && (
+        {!property.isFavorite && (
           <>
             <button type="button" onClick={() => addToFavorite()}>
-              {isLoading ? <Loader text="updating" /> : "Add to favorites"}
+              {isLoading ? <Loader text="updating" /> : 'Add to favorites'}
             </button>
             {favoritesError && <Error error={favoritesError} smallDisplay />}
           </>
         )}
-        {props.property.isFavorite && <span>Is favorite</span>}
+        {property.isFavorite && <span>Is favorite</span>}
         <div>
           <textarea
             onChange={(event) => setComment(event.currentTarget.value)}
@@ -74,12 +74,13 @@ const Property: FC<PropertyProps> = (props: PropertyProps) => {
           />
           {commentError && <Error error={commentError} smallDisplay />}
           <button
+            type="button"
             onClick={() => {
-              setComment("");
+              setComment('');
               addComment();
             }}
           >
-            {isAddingComment ? <Loader text="updating" /> : "Submit Comment"}
+            {isAddingComment ? <Loader text="updating" /> : 'Submit Comment'}
           </button>
         </div>
       </div>

@@ -1,9 +1,9 @@
-import { combineReducers } from "redux";
-import deprecatedReducerOne from "./app-setup/deprecated-reducer-one";
-import deprecatedReducerTwo from "./app-setup/deprecated-reducer-two";
-import loginReducer, { LoginState } from "./login-reducer";
-import propertyReducer from "./property-reducer";
-import userReducer from "./user-reducer";
+import { combineReducers } from 'redux';
+import deprecatedReducerOne from './app-setup/deprecated-reducer-one';
+import deprecatedReducerTwo from './app-setup/deprecated-reducer-two';
+import loginReducer, { LoginState } from './login-reducer';
+import propertyReducer from './property-reducer';
+import userReducer from './user-reducer';
 
 export const rootReducer = combineReducers({
   counterState: deprecatedReducerOne,

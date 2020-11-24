@@ -1,20 +1,21 @@
-import { AppError } from "../types/app-error";
-import { Property, PropertyAddress } from "../types/property";
-import { actionCreator } from "../utils/redux-utils";
+/* eslint-disable max-len */
+import { AppError } from '../types/app-error';
+import { Property, PropertyAddress } from '../types/property';
+import { actionCreator } from '../utils/redux-utils';
 
-export const FETCH_PROPERTIES_SUCCESS = "FETCH_PROPERTIES_SUCCESS";
-export const ADD_FAVORITE_PROPERTY_SUCCESS = "ADD_FAVORITE_PROPERTY_SUCCESS";
-export const ADD_PROPERTY_COMMENT_SUCCESS = "ADD_PROPERTY_COMMENT_SUCCESS";
-export const FETCH_PROPERTIES_REQUEST = "FETCH_PROPERTIES_REQUEST";
-export const ADD_FAVORITE_PROPERTY_REQUEST = "ADD_FAVORITE_PROPERTY_REQUEST";
-export const ADD_PROPERTY_COMMENT_REQUEST = "ADD_PROPERTY_COMMENT_REQUEST";
-export const ADD_FAVORITE_PROPERTY_ERROR = "ADD_FAVORITE_PROPERTY_ERROR";
-export const FETCH_PROPERTIES_ERROR = "FETCH_PROPERTIES_ERROR";
-export const ADD_PROPERTY_COMMENT_ERROR = "ADD_PROPERTY_COMMENT_ERROR";
-export const ADD_FAVORITE_PROPERTY_MESSAGE = "ADD_FAVORITE_PROPERTY_MESSAGE";
-export const GET_PROPERTY_ADDRESS = "GET_PROPERTY_ADDRESS";
-export const GET_PROPERTY_ADDRESS_SUCCESS = "GET_PROPERTY_ADDRESS_SUCCESS";
-export const GET_PROPERTY_ADDRESS_FAILURE = "GET_PROPERTY_ADDRESS_FAILURE";
+export const FETCH_PROPERTIES_SUCCESS = 'FETCH_PROPERTIES_SUCCESS';
+export const ADD_FAVORITE_PROPERTY_SUCCESS = 'ADD_FAVORITE_PROPERTY_SUCCESS';
+export const ADD_PROPERTY_COMMENT_SUCCESS = 'ADD_PROPERTY_COMMENT_SUCCESS';
+export const FETCH_PROPERTIES_REQUEST = 'FETCH_PROPERTIES_REQUEST';
+export const ADD_FAVORITE_PROPERTY_REQUEST = 'ADD_FAVORITE_PROPERTY_REQUEST';
+export const ADD_PROPERTY_COMMENT_REQUEST = 'ADD_PROPERTY_COMMENT_REQUEST';
+export const ADD_FAVORITE_PROPERTY_ERROR = 'ADD_FAVORITE_PROPERTY_ERROR';
+export const FETCH_PROPERTIES_ERROR = 'FETCH_PROPERTIES_ERROR';
+export const ADD_PROPERTY_COMMENT_ERROR = 'ADD_PROPERTY_COMMENT_ERROR';
+export const ADD_FAVORITE_PROPERTY_MESSAGE = 'ADD_FAVORITE_PROPERTY_MESSAGE';
+export const GET_PROPERTY_ADDRESS = 'GET_PROPERTY_ADDRESS';
+export const GET_PROPERTY_ADDRESS_SUCCESS = 'GET_PROPERTY_ADDRESS_SUCCESS';
+export const GET_PROPERTY_ADDRESS_FAILURE = 'GET_PROPERTY_ADDRESS_FAILURE';
 
 export interface FetchPropertiesRequestAction {
   type: typeof FETCH_PROPERTIES_REQUEST;
@@ -96,63 +97,52 @@ export type PropertyActions =
   | GetAddressFailureAction;
 
 const setPropertiesAction = (
-  properties: Property[]
-): FetchPropertiesSuccessAction =>
-  actionCreator(FETCH_PROPERTIES_SUCCESS, { properties });
+  properties: Property[],
+): FetchPropertiesSuccessAction => actionCreator(FETCH_PROPERTIES_SUCCESS, { properties });
 
 const setAddPropertyCommentSuccessAction: AddPropertyCommentSuccessAction = actionCreator(
-  ADD_PROPERTY_COMMENT_SUCCESS
+  ADD_PROPERTY_COMMENT_SUCCESS,
 );
 
 const setAddFavoritePropertySuccessAction = (
-  propertyId: number
-): AddFavoritePropertySuccessAction =>
-  actionCreator(ADD_FAVORITE_PROPERTY_SUCCESS, { propertyId });
+  propertyId: number,
+): AddFavoritePropertySuccessAction => actionCreator(ADD_FAVORITE_PROPERTY_SUCCESS, { propertyId });
 
 const addFavoritePropertyAction = (
-  propertyId: number
-): AddFavoritePropertyRequestAction =>
-  actionCreator(ADD_FAVORITE_PROPERTY_REQUEST, { propertyId });
+  propertyId: number,
+): AddFavoritePropertyRequestAction => actionCreator(ADD_FAVORITE_PROPERTY_REQUEST, { propertyId });
 
 const addPropertyCommentAction = (
   propertyId: number,
-  comment: string
-): AddPropertyCommentRequestAction =>
-  actionCreator(ADD_PROPERTY_COMMENT_REQUEST, { propertyId, comment });
+  comment: string,
+): AddPropertyCommentRequestAction => actionCreator(ADD_PROPERTY_COMMENT_REQUEST, { propertyId, comment });
 
 const fetchPropertiesRequestAction: FetchPropertiesRequestAction = {
   type: FETCH_PROPERTIES_REQUEST,
 };
 
 const setAddPropertyCommentErrorAction = (
-  error: AppError
-): AddPropertyCommentErrorAction =>
-  actionCreator(ADD_PROPERTY_COMMENT_ERROR, { error });
+  error: AppError,
+): AddPropertyCommentErrorAction => actionCreator(ADD_PROPERTY_COMMENT_ERROR, { error });
 
 const addFavoritePropertyErrorAction = (
-  error: AppError
-): AddFavoritePropertyErrorAction =>
-  actionCreator(ADD_FAVORITE_PROPERTY_ERROR, { error });
+  error: AppError,
+): AddFavoritePropertyErrorAction => actionCreator(ADD_FAVORITE_PROPERTY_ERROR, { error });
 
 const fetchPropertiesErrorAction = (
-  error: AppError
-): FetchPropertiesErrorAction =>
-  actionCreator(FETCH_PROPERTIES_ERROR, { error });
+  error: AppError,
+): FetchPropertiesErrorAction => actionCreator(FETCH_PROPERTIES_ERROR, { error });
 
-const addFavoritePropertyMessageAction = (): AddFavoritePropertyMessageAction =>
-  actionCreator(ADD_FAVORITE_PROPERTY_MESSAGE);
+const addFavoritePropertyMessageAction = (): AddFavoritePropertyMessageAction => actionCreator(ADD_FAVORITE_PROPERTY_MESSAGE);
 
-const getAddressAction = (propertyId: number): GetAddressAction =>
-  actionCreator(GET_PROPERTY_ADDRESS, { propertyId });
+const getAddressAction = (propertyId: number): GetAddressAction => actionCreator(GET_PROPERTY_ADDRESS, { propertyId });
 
 const getAddressSuccessAction = (
   propertyId: number,
-  address: PropertyAddress
-): GetAddressSuccessAction =>
-  actionCreator(GET_PROPERTY_ADDRESS_SUCCESS, { propertyId, address });
+  address: PropertyAddress,
+): GetAddressSuccessAction => actionCreator(GET_PROPERTY_ADDRESS_SUCCESS, { propertyId, address });
 
-const getAddressFailureAction = (propertyId: number): GetAddressFailureAction =>
-  actionCreator(GET_PROPERTY_ADDRESS_FAILURE, { propertyId });
+const getAddressFailureAction = (propertyId: number): GetAddressFailureAction => actionCreator(GET_PROPERTY_ADDRESS_FAILURE, { propertyId });
 
 export const propertyActions = {
   setPropertiesAction,

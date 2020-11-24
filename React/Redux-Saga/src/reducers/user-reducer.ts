@@ -1,10 +1,10 @@
-import { AnyAction } from "redux";
+import { AnyAction } from 'redux';
 import {
   UserActions,
   FETCH_CRITICAL_MESSAGE,
   FETCH_CRITICAL_MESSAGE_SUCCESS,
   FETCH_CRITICAL_MESSAGE_FAILURE,
-} from "../actions/user-actions";
+} from '../actions/user-actions';
 
 export interface UserState {
   criticalMessage: string;

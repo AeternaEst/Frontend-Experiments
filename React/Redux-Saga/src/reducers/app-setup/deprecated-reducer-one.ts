@@ -1,8 +1,8 @@
-import { AnyAction } from "redux";
+import { AnyAction } from 'redux';
 
 /* Actions */
-const INCREMENT = "INCREMENT";
-const DECREMENT = "DECREMENT";
+const INCREMENT = 'INCREMENT';
+const DECREMENT = 'DECREMENT';
 
 /* Action types */
 interface IncrementAction {
@@ -25,8 +25,8 @@ const decrement: DecrementAction = {
 };
 
 export const deprecatedReducerOneActions = {
-  increment: increment,
-  decrement: decrement,
+  increment,
+  decrement,
 };
 
 /* State */
@@ -41,7 +41,7 @@ const defaultState: DeprecatedReducerOneState = {
 /* Reducer */
 const deprecatedReducerOne = (
   state = defaultState,
-  action: DeprecatedReducerOneActions
+  action: DeprecatedReducerOneActions,
 ): DeprecatedReducerOneState => {
   switch (action.type) {
     case INCREMENT:

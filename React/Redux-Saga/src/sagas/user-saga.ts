@@ -1,10 +1,12 @@
 import {
+  call, race, put, takeLatest,
+} from 'redux-saga/effects';
+import {
   FetchCriticalMessageAction,
   userActions,
   FETCH_CRITICAL_MESSAGE,
-} from "../actions/user-actions";
-import { call, race, put, takeLatest } from "redux-saga/effects";
-import UserService from "../services/user-service";
+} from '../actions/user-actions';
+import UserService from '../services/user-service';
 
 function* fetchCriticalMessage(userService: UserService, action: FetchCriticalMessageAction) {
   try {
@@ -17,8 +19,8 @@ function* fetchCriticalMessage(userService: UserService, action: FetchCriticalMe
   } catch {
     yield put(
       userActions.fetchCriticalMessageFailureAction(
-        "Unable to get critical message"
-      )
+        'Unable to get critical message',
+      ),
     );
   }
 }

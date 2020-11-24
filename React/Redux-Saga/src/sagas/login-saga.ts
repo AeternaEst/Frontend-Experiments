@@ -1,5 +1,5 @@
-import { AnyAction } from "redux";
-import { Task } from "redux-saga";
+import { AnyAction } from 'redux';
+import { Task } from 'redux-saga';
 import {
   put,
   call,
@@ -9,7 +9,7 @@ import {
   cancel,
   ForkEffect,
   throttle,
-} from "redux-saga/effects";
+} from 'redux-saga/effects';
 import {
   LOGIN,
   LoginAction,
@@ -18,9 +18,9 @@ import {
   UNSUCCESSFUL_LOGIN,
   SET_NEW_USER_NAME_TYPING,
   NewUserNameTypingAction,
-} from "../actions/login-actions";
-import LoginService from "../services/login-service";
-import { AppUser } from "../types/app-user";
+} from '../actions/login-actions';
+import LoginService from '../services/login-service';
+import { AppUser } from '../types/app-user';
 
 function* loginUser(loginService: LoginService, userName: string, password: string) {
   try {
@@ -37,7 +37,7 @@ function* logoutUser() {
   try {
     yield put(loginActions.clearUser);
   } catch (e) {
-    throw new Error("Error during logout");
+    throw new Error('Error during logout');
   }
 }
 

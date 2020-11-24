@@ -1,15 +1,15 @@
-import { AnyAction } from "redux";
-import { State } from "../reducers/root-reducer";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { AppError } from "../types/app-error";
+import { AnyAction } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { DependencyList, useEffect } from 'react';
+import { State } from '../reducers/root-reducer';
+import { AppError } from '../types/app-error';
 
 export const fetchAndSubscribe = <T>(
   action: AnyAction,
   selector: (state: State) => T,
   isLoadingSelector: (state: State) => boolean,
-  deps: React.DependencyList,
-  errorSelector?: (state: State) => AppError
+  deps: DependencyList,
+  errorSelector?: (state: State) => AppError,
 ) => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -26,7 +26,7 @@ export const fetchAndSubscribe = <T>(
 export const triggerAndSubscribe = <T>(
   action: AnyAction,
   selector: (state: State) => T,
-  errorSelector: (state: State) => AppError
+  errorSelector: (state: State) => AppError,
 ) => {
   const dispatch = useDispatch();
 

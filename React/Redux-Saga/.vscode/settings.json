@@ -1,5 +1,9 @@
 {
     "exclude": [
         "node_modules"
-    ]
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+      },
+    "files.eol": "\n"
 }

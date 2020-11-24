@@ -6,8 +6,8 @@ import {
   SUCCESSFUL_LOGIN,
   LOGIN_STARTED,
   SET_CURRENT_USER_NAME_TYPING,
-} from "../actions/login-actions";
-import { AppUser } from "../types/app-user";
+} from '../actions/login-actions';
+import { AppUser } from '../types/app-user';
 
 export interface LoginState {
   activeUser?: AppUser;
@@ -20,12 +20,12 @@ const defaultState: LoginState = {
   activeUser: undefined,
   unsuccessfulLogin: false,
   isLoginInProgress: false,
-  currentlyTypedInUserName: "",
+  currentlyTypedInUserName: '',
 };
 
 const loginReducer = (
   state = defaultState,
-  action: LoginActions
+  action: LoginActions,
 ): LoginState => {
   switch (action.type) {
     case SET_ACTIVE_USER:

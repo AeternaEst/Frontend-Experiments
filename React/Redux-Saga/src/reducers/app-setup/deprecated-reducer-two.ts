@@ -1,8 +1,8 @@
-import { AnyAction } from "redux";
+import { AnyAction } from 'redux';
 
 /* Actions */
-const SET_MESSAGE = "SET_MESSAGE";
-const CLEAR_MESSAGE = "CLEAR_MESSAGE";
+const SET_MESSAGE = 'SET_MESSAGE';
+const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
 
 /* Action types */
 interface SetMessageAction {
@@ -17,20 +17,18 @@ interface ClearMessageAction {
 type DeprecatedReducerTwoActions = SetMessageAction | ClearMessageAction;
 
 /* Action creators */
-const setMessage = (message: string): SetMessageAction => {
-  return {
-    type: SET_MESSAGE,
-    message: message,
-  };
-};
+const setMessage = (message: string): SetMessageAction => ({
+  type: SET_MESSAGE,
+  message,
+});
 
 const clearMessage: ClearMessageAction = {
   type: CLEAR_MESSAGE,
 };
 
 export const deprecatedReducerTwoActions = {
-  setMessage: setMessage,
-  clearMessage: clearMessage,
+  setMessage,
+  clearMessage,
 };
 
 /* State */
@@ -45,7 +43,7 @@ const defaultState: DeprecatedReducerTwoState = {
 /* Reducer */
 const deprecatedReducerTwo = (
   state = defaultState,
-  action: DeprecatedReducerTwoActions
+  action: DeprecatedReducerTwoActions,
 ): DeprecatedReducerTwoState => {
   switch (action.type) {
     case SET_MESSAGE:

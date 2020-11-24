@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-shadow
 export enum ErrorCode {
   FETCH_PROPERTIES_ERROR,
   ADD_FAVORITES_ERROR,

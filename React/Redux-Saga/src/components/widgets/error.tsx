@@ -1,22 +1,20 @@
-import React from "react";
-import { AppError } from "../../types/app-error";
+import React from 'react';
+import { AppError } from '../../types/app-error';
 
 interface ErrorProps {
   error: AppError;
   smallDisplay?: boolean;
 }
 
-const ERROR_TITLE = "An error has occured";
+const ERROR_TITLE = 'An error has occured';
 
-const Error: React.FC<ErrorProps> = (props) => {
-  return (
-    <div className="error">
-      {props.smallDisplay && <h5>{ERROR_TITLE}</h5>}
-      {!props.smallDisplay && <h1>{ERROR_TITLE}</h1>}
-      <p>{`${props.error.name} : ${props.error.code}`}</p>
-      <span>{props.error.message}</span>
-    </div>
-  );
-};
+const Error: React.FC<ErrorProps> = ({ smallDisplay, error }) => (
+  <div className="error">
+    {smallDisplay && <h5>{ERROR_TITLE}</h5>}
+    {!smallDisplay && <h1>{ERROR_TITLE}</h1>}
+    <p>{`${error.name} : ${error.code}`}</p>
+    <span>{error.message}</span>
+  </div>
+);
 
 export default Error;
