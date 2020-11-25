@@ -2,8 +2,13 @@
     "exclude": [
         "node_modules"
     ],
+    "editor.formatOnSave": false,
+    "javascript.format.enable": false,
+    "eslint.alwaysShowStatus": true,
+    "files.eol": "\n",
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
-      },
-    "files.eol": "\n"
+    },
+    "eslint.format.enable": true,
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
 }

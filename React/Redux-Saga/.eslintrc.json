@@ -27,7 +27,8 @@
         "no-unused-vars": "off", /* Using @typescript-eslint/no-unused-vars instead */
         "consistent-return": "off",
         "react/prop-types": "off",
-        "react/jsx-props-no-spreading": "off"
+        "react/jsx-props-no-spreading": "off",
+        "indent": "off"
     },
     "settings": {
         "import/resolver": {

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Property } from '../types/property';
 import { Comment } from '../types/comment';
 import sleep from '../utils/general-utils';
@@ -53,8 +54,7 @@ export default class PropertyService {
     }, 2000);
   })
 
-  addComment = (propertyId: number, comment: Comment):
-   Promise<void> => new Promise((resolve, reject) => {
+  addComment = (propertyId: number, comment: Comment): Promise<void> => new Promise((resolve, reject) => {
     setTimeout(() => {
       const propertyToAddComment = propertyDatabase.find(
         (property) => property.id === propertyId,

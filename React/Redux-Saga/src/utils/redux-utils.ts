@@ -14,13 +14,12 @@ export const reducerCreator = <S, T extends AnyAction>(
   initialState: S,
   handlers: ReadonlyArray<HandlerParams<S, T>>,
 ): ReducerParams<S, T> => function reducer(state = initialState, action) {
-    const handle = handlers.find((handler) => handler.type === action.type)
-      ?.handle;
-    if (handle) {
-      return handle(state, action);
-    }
-    return state;
-  };
+  const handle = handlers.find((handler) => handler.type === action.type)?.handle;
+  if (handle) {
+    return handle(state, action);
+  }
+  return state;
+};
 
 // taken from redux docs, implement later
 // function createReducer(initialState, handlers) {
