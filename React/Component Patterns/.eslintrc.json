@@ -4,12 +4,13 @@
     "es6": true
   },
   "extends": [
-    "airbnb-typescript",
-    "plugin:prettier/recommended",
-    "prettier",
-    "prettier/@typescript-eslint",
-    "prettier/react"
+    "airbnb-typescript", "prettier", "prettier/react", "prettier/@typescript-eslint"
   ],
+  "settings": {
+    "import/resolver": {
+      "typescript": {} // this loads <rootdir>/tsconfig.json to eslint
+    }
+  },
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -20,22 +21,15 @@
       "jsx": true
     },
     "ecmaVersion": 2018,
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
-  "plugins": ["react", "@typescript-eslint", "eslint-plugin-prettier"],
+  "plugins": ["react", "prettier", "@typescript-eslint"],
   "rules": {
-    "prettier/prettier": "off",
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "off",
-    "linebreak-style": ["error", "windows"],
-    "eol-last": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
     "no-console": "off",
     "react/destructuring-assignment": "off",
-    "react/jsx-one-expression-per-line": "off",
-    "max-len": "off",
-    "prefer-destructuring": "warn",
-    "react/prefer-stateless-function": "off",
-    "@typescript-eslint/indent": ["off"],
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "prefer-destructuring": ["error", {"object": true, "array": false}]
   }
 }

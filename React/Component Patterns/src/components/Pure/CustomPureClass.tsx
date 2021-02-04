@@ -9,13 +9,13 @@ interface CustomPureClassState {
 }
 
 class CustomPureClass extends React.Component<
-CustomPureClassProps,
-CustomPureClassState
+  CustomPureClassProps,
+  CustomPureClassState
 > {
   constructor(props: CustomPureClassProps) {
     super(props);
     this.state = {
-      isOpen: true
+      isOpen: true,
     };
   }
 

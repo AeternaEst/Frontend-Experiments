@@ -10,13 +10,13 @@ interface SimplePureClassState {
 
 // extend React.Component to rerender everytime with the same props
 class SimplePureClass extends React.PureComponent<
-SimplePureClassProps,
-SimplePureClassState
+  SimplePureClassProps,
+  SimplePureClassState
 > {
   constructor(props: SimplePureClassProps) {
     super(props);
     this.state = {
-      isOpen: true
+      isOpen: true,
     };
   }
 

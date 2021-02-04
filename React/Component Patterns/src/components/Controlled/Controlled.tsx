@@ -16,7 +16,7 @@ class Controlled extends Component<{}, ControlledState> {
       selectVal: "Cat",
       multiSelectVal: [],
       textAreaVal: "",
-      radioVal: ""
+      radioVal: "",
     };
     this.onFormChange = this.onFormChange.bind(this);
   }
@@ -31,39 +31,39 @@ class Controlled extends Component<{}, ControlledState> {
     switch (name) {
       case "controlled-text":
         this.setState({
-          textVal: value
+          textVal: value,
         });
         break;
       case "controlled-select":
         this.setState({
-          selectVal: value
+          selectVal: value,
         });
         break;
       case "controlled-multi-select": {
         const currentValues = this.state.multiSelectVal;
-        const index = currentValues.findIndex(val => val === value);
+        const index = currentValues.findIndex((val) => val === value);
         const multiSelectValue =
           index === -1
             ? [...currentValues, value]
             : [
-              ...currentValues.slice(0, index),
-              ...currentValues.slice(index + 1, currentValues.length)
-            ];
+                ...currentValues.slice(0, index),
+                ...currentValues.slice(index + 1, currentValues.length),
+              ];
         console.log(index);
         console.log(multiSelectValue);
         this.setState({
-          multiSelectVal: multiSelectValue
+          multiSelectVal: multiSelectValue,
         });
         break;
       }
       case "controlled-text-area":
         this.setState({
-          textAreaVal: value
+          textAreaVal: value,
         });
         break;
       case "controlled-radio":
         this.setState({
-          radioVal: value
+          radioVal: value,
         });
         break;
       default:
@@ -78,7 +78,7 @@ class Controlled extends Component<{}, ControlledState> {
       selectVal,
       multiSelectVal,
       textAreaVal,
-      radioVal
+      radioVal,
     } = this.state;
     return (
       <div className="controlled">

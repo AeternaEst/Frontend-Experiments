@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import Button from './Button';
+import React, { useEffect, useRef } from "react";
+import Button from "./Button";
 
 const ForwardRef: React.FC = () => {
   const ref = useRef<HTMLButtonElement>();
@@ -14,7 +14,7 @@ const ForwardRef: React.FC = () => {
     return () => clearTimeout(id);
   }, []);
 
-  return <Button ref={ref} />
-}
+  return <Button ref={ref} />;
+};
 
 export default ForwardRef;

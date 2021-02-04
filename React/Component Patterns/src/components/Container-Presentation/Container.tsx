@@ -11,14 +11,14 @@ class Container extends Component<{}, ContainerState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      count: 0
+      count: 0,
     };
   }
 
   componentDidMount() {
     this.intervalId = setInterval(() => {
-      this.setState(prevState => ({
-        count: prevState.count + 1
+      this.setState((prevState) => ({
+        count: prevState.count + 1,
       }));
     }, 1000);
   }

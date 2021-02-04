@@ -20,13 +20,13 @@ function createAndSortLargeArray(): Person[] {
   return array.sort((first, second) => (first.age < second.age ? -1 : 1));
 }
 
-const RenderPeople: React.FC<RenderPeopleProps> = props => {
+const RenderPeople: React.FC<RenderPeopleProps> = (props) => {
   const largeArray: Person[] = useMemo(() => createAndSortLargeArray(), []);
 
   return (
     <div className="render-people">
       <h3>{props.message}</h3>
-      {largeArray.map(person => (
+      {largeArray.map((person) => (
         <div>
           <p>Name: {person.name}</p>
           <p>Age: {person.age}</p>
