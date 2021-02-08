@@ -10,7 +10,7 @@ export interface MousePositionProps {
 const MousePosition: React.FunctionComponent<MousePositionProps> = ({
   render,
   children,
-  renderUsingChildren,
+  renderUsingChildren
 }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 

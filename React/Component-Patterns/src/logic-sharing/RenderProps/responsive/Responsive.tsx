@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   Breakpoint,
-  getBreakpointFromWidth,
+  getBreakpointFromWidth
 } from "../../../utils/responsive-utils";
 
 export interface ResponsiveProps {
@@ -20,7 +20,7 @@ const Responsive: React.FunctionComponent<ResponsiveProps> = (
   const [currentBreakpoints, setCurrentBreakpoints] = useState<ResponsiveState>(
     {
       targetBreakpoint: Breakpoint.LARGE,
-      windowBreakpoint: Breakpoint.LARGE,
+      windowBreakpoint: Breakpoint.LARGE
     }
   );
   const ref = useRef<HTMLDivElement>();
@@ -30,7 +30,7 @@ const Responsive: React.FunctionComponent<ResponsiveProps> = (
     const targetWidth = ref.current.clientWidth;
     setCurrentBreakpoints({
       targetBreakpoint: getBreakpointFromWidth(targetWidth),
-      windowBreakpoint: getBreakpointFromWidth(windowWidth),
+      windowBreakpoint: getBreakpointFromWidth(windowWidth)
     });
   };
 

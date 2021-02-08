@@ -4,7 +4,7 @@ import Layer2 from "./Layer2";
 
 const Layer1 = () => (
   <ConfigContext.Consumer>
-    {(config) => (
+    {config => (
       <div>
         <h2>Layer 1</h2>
         <span>

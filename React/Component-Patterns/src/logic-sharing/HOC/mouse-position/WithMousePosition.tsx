@@ -20,7 +20,7 @@ const WithMousePosition = <P extends WithMousePositionProps>(
       super(props);
       this.state = {
         x: 0,
-        y: 0,
+        y: 0
       };
       this.onMouseMove = this.onMouseMove.bind(this);
     }
@@ -36,7 +36,7 @@ const WithMousePosition = <P extends WithMousePositionProps>(
     onMouseMove(e: MouseEvent) {
       this.setState({
         x: e.clientX,
-        y: e.clientY,
+        y: e.clientY
       });
     }
 

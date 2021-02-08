@@ -15,7 +15,7 @@ class CustomPureClass extends React.Component<
   constructor(props: CustomPureClassProps) {
     super(props);
     this.state = {
-      isOpen: true,
+      isOpen: true
     };
   }
 

@@ -10,12 +10,12 @@ const ContextApp = () => {
 
   const configContext: ConfigContext = {
     language: config.language,
-    isAuthenticated: config.authenticated,
+    isAuthenticated: config.authenticated
   };
 
   const themeContext: ThemeContext = {
     theme,
-    setTheme,
+    setTheme
   };
 
   return (

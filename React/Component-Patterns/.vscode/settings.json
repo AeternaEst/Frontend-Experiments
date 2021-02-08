@@ -1,19 +1,17 @@
 {
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "files.autoSave": "off",
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.organizeImports": true
+    "source.fixAll.eslint": true,
   },
   "typescript.tsdk": "./node_modules/typescript/lib",
-  "editor.detectIndentation": false,
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true,
   "files.exclude": { 
     "node_modules/": true,
 	".vscode/": true,
 	"dist/": true
   },
-  "eslint.format.enable": true,
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  "editor.formatOnSave": false
 }

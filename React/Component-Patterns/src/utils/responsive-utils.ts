@@ -1,7 +1,7 @@
 export enum Breakpoint {
   SMALL = "Small",
   MEDIUM = "Medium",
-  LARGE = "Large",
+  LARGE = "Large"
 }
 
 export const getBreakpointFromWidth = (width: number) => {

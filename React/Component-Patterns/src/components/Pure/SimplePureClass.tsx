@@ -16,7 +16,7 @@ class SimplePureClass extends React.PureComponent<
   constructor(props: SimplePureClassProps) {
     super(props);
     this.state = {
-      isOpen: true,
+      isOpen: true
     };
   }
 
