@@ -1,5 +1,5 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -13,5 +13,6 @@
 	".vscode/": true,
 	"dist/": true
   },
-  "editor.formatOnSave": false
+  "editor.formatOnSave": false,
+  "eslint.format.enable": true
 }

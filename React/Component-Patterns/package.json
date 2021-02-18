@@ -6,7 +6,8 @@
   "scripts": {
     "build": "npx webpack",
     "watch": "npx webpack --watch",
-    "prettier": "npx prettier \"./src/**/*{ts,tsx}\" --write"
+    "prettier": "npx prettier \"./src/**/*{ts,tsx}\" --write",
+    "eslint": "./node_modules/.bin/eslint \"./src/**\" --fix --ext .ts,.tsx"
   },
   "keywords": [
     "component-patterns"
