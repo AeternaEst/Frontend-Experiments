@@ -1,10 +1,10 @@
 import React from "react";
-import { ConfigContext, ThemeContext } from "./ContextService";
+import { configContext, themeContext } from "./ContextService";
 
 const Layer4 = () => (
-  <ConfigContext.Consumer>
+  <configContext.Consumer>
     {({ language, isAuthenticated }) => (
-      <ThemeContext.Consumer>
+      <themeContext.Consumer>
         {({ theme, setTheme }) => (
           <div>
             <h2>Layer 4 - Recap layer</h2>
@@ -24,9 +24,9 @@ const Layer4 = () => (
             </button>
           </div>
         )}
-      </ThemeContext.Consumer>
+      </themeContext.Consumer>
     )}
-  </ConfigContext.Consumer>
+  </configContext.Consumer>
 );
 
 export default Layer4;

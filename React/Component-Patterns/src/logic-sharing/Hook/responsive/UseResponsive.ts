@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   Breakpoint,
-  getBreakpointFromWidth
+  getBreakpointFromWidth,
 } from "../../../utils/responsive-utils";
 
 interface UseResponsiveState {
@@ -12,16 +12,20 @@ interface UseResponsiveState {
 const UseResponsive = (
   ref: React.MutableRefObject<HTMLElement>
 ): UseResponsiveState => {
-  const [currentBreakpoint, setCurrentBreakpoint] = useState<
-    UseResponsiveState
-  >({ windowBreakpoint: Breakpoint.LARGE, targetBreakpoint: Breakpoint.LARGE });
+  const [
+    currentBreakpoint,
+    setCurrentBreakpoint,
+  ] = useState<UseResponsiveState>({
+    windowBreakpoint: Breakpoint.LARGE,
+    targetBreakpoint: Breakpoint.LARGE,
+  });
 
   const onResize = () => {
     const windowWidth = window.innerWidth;
     const targetWidth = ref.current.clientWidth;
     setCurrentBreakpoint({
       targetBreakpoint: getBreakpointFromWidth(targetWidth),
-      windowBreakpoint: getBreakpointFromWidth(windowWidth)
+      windowBreakpoint: getBreakpointFromWidth(windowWidth),
     });
     console.log("body width resize", windowWidth, targetWidth);
   };

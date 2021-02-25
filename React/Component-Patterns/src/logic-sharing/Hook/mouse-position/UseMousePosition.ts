@@ -8,7 +8,7 @@ export interface MousePosition {
 const UseMousePosition = (): MousePosition => {
   const [mousePosition, setMousePosition] = useState<MousePosition>({
     x: 0,
-    y: 0
+    y: 0,
   });
 
   const onMouseMove = (e: MouseEvent) => {
@@ -25,7 +25,7 @@ const UseMousePosition = (): MousePosition => {
 
   return {
     x: mousePosition.x,
-    y: mousePosition.y
+    y: mousePosition.y,
   };
 };
 

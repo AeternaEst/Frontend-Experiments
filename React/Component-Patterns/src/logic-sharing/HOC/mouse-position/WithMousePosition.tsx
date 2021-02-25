@@ -11,8 +11,8 @@ export interface WithMousePositionProps {
 
 const WithMousePosition = <P extends WithMousePositionProps>(
   Component: React.ComponentType<P>
-) => {
-  return class MousePosition extends React.Component<
+) =>
+  class MousePosition extends React.Component<
     P & WithMousePositionProps,
     MousePositionState
   > {
@@ -20,7 +20,7 @@ const WithMousePosition = <P extends WithMousePositionProps>(
       super(props);
       this.state = {
         x: 0,
-        y: 0
+        y: 0,
       };
       this.onMouseMove = this.onMouseMove.bind(this);
     }
@@ -36,14 +36,18 @@ const WithMousePosition = <P extends WithMousePositionProps>(
     onMouseMove(e: MouseEvent) {
       this.setState({
         x: e.clientX,
-        y: e.clientY
+        y: e.clientY,
       });
     }
 
     render() {
-      return <Component {...this.props} mousePosition={this.state} />;
+      return (
+        <Component
+          {...this.props}
+          mousePosition={{ x: this.state.x, y: this.state.y }}
+        />
+      );
     }
   };
-};
 
 export default WithMousePosition;

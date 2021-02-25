@@ -7,7 +7,9 @@ interface WithResponsiveConsumerProps extends WithResponsiveProps {
   targetBreakpointMessage: string;
 }
 
-const WithResponsiveConsumer: React.FunctionComponent<WithResponsiveConsumerProps> = props => (
+const WithResponsiveConsumer: React.FunctionComponent<WithResponsiveConsumerProps> = (
+  props
+) => (
   <div className="with-responsive-consumer" style={{ width: "50%" }}>
     <p>
       {props.windowBreakpointMessage} {props.responsive.windowBreakpoint}

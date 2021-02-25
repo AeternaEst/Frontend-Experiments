@@ -8,7 +8,7 @@
     "allowJs": true,
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
-    "lib": ["es7", "dom"]
+    "lib": ["es7", "dom"],
   },
   "exclude": [
     "./node_modules/**/*"

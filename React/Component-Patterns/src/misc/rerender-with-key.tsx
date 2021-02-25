@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 
-const RerenderWithKey: React.FunctionComponent = (): React.ReactElement => {
-  return (
-    <div className="rerender-with-key">
-      <p>The time is {new Date(Date.now()).toLocaleTimeString()}</p>
-    </div>
-  );
-};
+const RerenderWithKey: React.FunctionComponent = (): React.ReactElement => (
+  <div className="rerender-with-key">
+    <p>The time is {new Date(Date.now()).toLocaleTimeString()}</p>
+  </div>
+);
 
 const RerenderWithKeyContainer: React.FunctionComponent = (): React.ReactElement => {
   const randomNumber = () => {

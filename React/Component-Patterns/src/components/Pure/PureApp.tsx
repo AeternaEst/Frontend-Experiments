@@ -11,12 +11,12 @@ interface PureAppState {
   number: number;
 }
 
-class PureApp extends React.Component<{}, PureAppState> {
-  constructor(props: {}) {
+class PureApp extends React.Component<unknown, PureAppState> {
+  constructor(props: unknown) {
     super(props);
     this.state = {
       message: messages[0],
-      number: 0
+      number: 0,
     };
   }
 
@@ -35,7 +35,7 @@ class PureApp extends React.Component<{}, PureAppState> {
       }
       this.setState({
         message: newMessage,
-        number: newNumber
+        number: newNumber,
       });
     }, 5000);
   }

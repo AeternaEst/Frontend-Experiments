@@ -1,11 +1,11 @@
 import React, { FunctionComponent, memo, useState } from "react";
 
-interface SimplePureFunctionComponent {
+interface SimplePureFunctionComponentProps {
   message: string;
 }
 
-const SimplePureFunctionComponent: FunctionComponent<SimplePureFunctionComponent> = (
-  props: SimplePureFunctionComponent
+const SimplePureFunctionComponent: FunctionComponent<SimplePureFunctionComponentProps> = (
+  props: SimplePureFunctionComponentProps
 ) => {
   const { message } = props;
   const [isOpen, setIsOpen] = useState(true);

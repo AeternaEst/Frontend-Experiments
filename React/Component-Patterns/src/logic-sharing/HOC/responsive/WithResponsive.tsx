@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Breakpoint,
-  getBreakpointFromWidth
+  getBreakpointFromWidth,
 } from "../../../utils/responsive-utils";
 
 export interface WithResponsiveProps {
@@ -25,7 +25,7 @@ const WithResponsive = <T extends WithResponsiveProps>(
       super(props);
       this.state = {
         targetBreakpoint: Breakpoint.LARGE,
-        windowBreakpoint: Breakpoint.LARGE
+        windowBreakpoint: Breakpoint.LARGE,
       };
       this.onResize = this.onResize.bind(this);
     }
@@ -45,12 +45,20 @@ const WithResponsive = <T extends WithResponsiveProps>(
         .clientWidth;
       this.setState({
         targetBreakpoint: getBreakpointFromWidth(targetWidth),
-        windowBreakpoint: getBreakpointFromWidth(windowWidth)
+        windowBreakpoint: getBreakpointFromWidth(windowWidth),
       });
     }
 
     render() {
-      return <Component {...(this.props as T)} responsive={this.state} />;
+      return (
+        <Component
+          {...(this.props as T)}
+          responsive={{
+            windowBreakpoint: this.state.windowBreakpoint,
+            targetBreakpoint: this.state.targetBreakpoint,
+          }}
+        />
+      );
     }
   };
 

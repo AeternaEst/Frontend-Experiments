@@ -5,20 +5,20 @@ interface ContainerState {
   count: number;
 }
 
-class Container extends Component<{}, ContainerState> {
-  intervalId: number;
+class Container extends Component<unknown, ContainerState> {
+  intervalId: ReturnType<typeof setTimeout>;
 
-  constructor(props: {}) {
+  constructor(props: unknown) {
     super(props);
     this.state = {
-      count: 0
+      count: 0,
     };
   }
 
   componentDidMount() {
     this.intervalId = setInterval(() => {
-      this.setState(prevState => ({
-        count: prevState.count + 1
+      this.setState((prevState) => ({
+        count: prevState.count + 1,
       }));
     }, 1000);
   }

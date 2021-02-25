@@ -12,18 +12,18 @@ export interface ThemeContext {
 
 const defaultConfigContext: ConfigContext = {
   language: "DK",
-  isAuthenticated: false
+  isAuthenticated: false,
 };
 
 const defaultThemeContext: ThemeContext = {
   theme: "Dark",
-  setTheme: (theme: string) => console.log(theme)
+  setTheme: (theme: string) => console.log(theme),
 };
 
-export const ConfigContext = React.createContext<ConfigContext>(
+export const configContext = React.createContext<ConfigContext>(
   defaultConfigContext
 );
 
-export const ThemeContext = React.createContext<ThemeContext>(
+export const themeContext = React.createContext<ThemeContext>(
   defaultThemeContext
 );

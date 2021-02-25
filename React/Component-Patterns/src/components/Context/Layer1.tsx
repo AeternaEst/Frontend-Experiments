@@ -1,10 +1,10 @@
 import React from "react";
-import { ConfigContext } from "./ContextService";
+import { configContext } from "./ContextService";
 import Layer2 from "./Layer2";
 
 const Layer1 = () => (
-  <ConfigContext.Consumer>
-    {config => (
+  <configContext.Consumer>
+    {(config) => (
       <div>
         <h2>Layer 1</h2>
         <span>
@@ -13,7 +13,7 @@ const Layer1 = () => (
         <Layer2 />
       </div>
     )}
-  </ConfigContext.Consumer>
+  </configContext.Consumer>
 );
 
 export default Layer1;

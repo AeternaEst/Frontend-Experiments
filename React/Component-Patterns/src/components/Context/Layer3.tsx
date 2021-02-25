@@ -1,5 +1,5 @@
 import React from "react";
-import { ConfigContext } from "./ContextService";
+import { configContext, ConfigContext } from "./ContextService";
 import Layer4 from "./Layer4";
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -19,6 +19,6 @@ class Layer3 extends React.Component {
     );
   }
 }
-Layer3.contextType = ConfigContext;
+Layer3.contextType = configContext;
 
 export default Layer3;

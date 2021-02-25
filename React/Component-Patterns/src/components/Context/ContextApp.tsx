@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { ConfigContext, ThemeContext } from "./ContextService";
+import {
+  ConfigContext,
+  ThemeContext,
+  configContext,
+  themeContext,
+} from "./ContextService";
 import Layer1 from "./Layer1";
 
 const ContextApp = () => {
@@ -8,22 +13,22 @@ const ContextApp = () => {
 
   const [theme, setTheme] = useState<string>(config.theme);
 
-  const configContext: ConfigContext = {
+  const defaultConfigContext: ConfigContext = {
     language: config.language,
-    isAuthenticated: config.authenticated
+    isAuthenticated: config.authenticated,
   };
 
-  const themeContext: ThemeContext = {
+  const defaultThemeContext: ThemeContext = {
     theme,
-    setTheme
+    setTheme,
   };
 
   return (
-    <ConfigContext.Provider value={configContext}>
-      <ThemeContext.Provider value={themeContext}>
+    <configContext.Provider value={defaultConfigContext}>
+      <themeContext.Provider value={defaultThemeContext}>
         <Layer1 />
-      </ThemeContext.Provider>
-    </ConfigContext.Provider>
+      </themeContext.Provider>
+    </configContext.Provider>
   );
 };
 
