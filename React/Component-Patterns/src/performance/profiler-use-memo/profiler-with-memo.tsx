@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import RenderPeople from "./RenderPeople";
+import RenderPeople from "./render-people";
 
 const ProfilerWithMemo: React.FC = () => {
   const [message, setMessage] = useState("Hello World");

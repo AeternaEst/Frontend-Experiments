@@ -4,8 +4,8 @@ import {
   ThemeContext,
   configContext,
   themeContext,
-} from "./ContextService";
-import Layer1 from "./Layer1";
+} from "./context-service";
+import Layer1 from "./layer1";
 
 const ContextApp = () => {
   const configRoot = document.getElementById("config");

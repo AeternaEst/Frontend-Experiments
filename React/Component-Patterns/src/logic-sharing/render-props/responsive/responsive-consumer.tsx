@@ -1,5 +1,5 @@
 import React from "react";
-import Responsive, { ResponsiveState } from "./Responsive";
+import Responsive, { ResponsiveState } from "./responsive";
 
 const ResponsiveConsumer: React.FunctionComponent = () => (
   <div className="responsive-consumer" style={{ width: "50%" }}>

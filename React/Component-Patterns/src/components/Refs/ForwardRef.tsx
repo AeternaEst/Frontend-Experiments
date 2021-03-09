@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import Button from "./Button";
+import Button from "./button";
 
 const ForwardRef: React.FC = () => {
   const ref = useRef<HTMLButtonElement>();

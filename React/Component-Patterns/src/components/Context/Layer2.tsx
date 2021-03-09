@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { themeContext } from "./ContextService";
-import Layer3 from "./Layer3";
+import { themeContext } from "./context-service";
+import Layer3 from "./layer3";
 
 const Layer2 = () => {
   const context = useContext(themeContext);

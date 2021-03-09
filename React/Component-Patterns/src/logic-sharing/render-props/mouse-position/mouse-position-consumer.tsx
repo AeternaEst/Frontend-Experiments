@@ -1,5 +1,5 @@
 import React from "react";
-import MousePosition from "./MousePosition";
+import MousePosition from "./mouse-position";
 
 const MousePositionConstumer = () => (
   <div className="mouse-position-consumer">

@@ -1,5 +1,5 @@
 import React from "react";
-import { configContext, themeContext } from "./ContextService";
+import { configContext, themeContext } from "./context-service";
 
 const Layer4 = () => (
   <configContext.Consumer>

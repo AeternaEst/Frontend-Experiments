@@ -1,10 +1,11 @@
 import React from "react";
-import CustomPureClass from "./CustomPureClass";
-import SimplePureClass from "./SimplePureClass";
-import SimplePureFunctionComponent from "./SimplePureFunctionComponent";
+import CustomPureClass from "./custom-pure-class";
+import SimplePureClass from "./simple-pure-class";
+import SimplePureFunctionComponent from "./simple-pure-function-component";
 
 const messages = ["Hello World", "Deus Vult", "Horatius, Captain of the gate"];
-// const messages = ['Hello World', 'Hello World', 'Hello World'];
+/* Enable below messages to check pure components */
+// const messages = ["Hello World", "Hello World", "Hello World"];
 
 interface PureAppState {
   message: string;

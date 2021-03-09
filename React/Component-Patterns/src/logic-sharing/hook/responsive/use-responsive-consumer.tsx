@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import UseResponsive from "./UseResponsive";
+import UseResponsive from "./use-responsive";
 
 const UseResponsiveConsumer: React.FunctionComponent = (): React.ReactElement => {
   const ref = useRef<HTMLDivElement>();

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import SubComponent from "./SubComponent";
+import SubComponent from "./sub-component";
 
 const RerenderFunction: React.FC = () => {
   console.log("rendering parent component");

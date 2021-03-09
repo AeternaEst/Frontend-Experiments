@@ -1,5 +1,5 @@
 import React from "react";
-import UseMousePosition from "./UseMousePosition";
+import UseMousePosition from "./use-mouse-position";
 
 const UseMousePositionConsumer: React.FunctionComponent = () => {
   const mousePosition = UseMousePosition();

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import RerenderFunction from "./performance/rerender-function/RerenderFunction";
+import PureApp from "./components/pure/pure-app";
 
 const injectTarget = document.querySelector(".root");
 
-ReactDOM.render(<RerenderFunction />, injectTarget);
+ReactDOM.render(<PureApp />, injectTarget);

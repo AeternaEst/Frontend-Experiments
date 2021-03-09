@@ -1,5 +1,7 @@
 import React from "react";
-import WithMousePosition, { WithMousePositionProps } from "./WithMousePosition";
+import WithMousePosition, {
+  WithMousePositionProps,
+} from "./with-mouse-position";
 
 const WithMousePositionConstumer: React.FC<WithMousePositionProps> = ({
   mousePosition,

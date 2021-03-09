@@ -1,5 +1,5 @@
 import React from "react";
-import { configContext } from "./ContextService";
+import { configContext } from "./context-service";
 import Layer2 from "./Layer2";
 
 const Layer1 = () => (

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import WithResponsive, { WithResponsiveProps } from "./WithResponsive";
+import WithResponsive, { WithResponsiveProps } from "./with-responsive";
 
 interface WithResponsiveConsumerProps extends WithResponsiveProps {
   windowBreakpointMessage: string;

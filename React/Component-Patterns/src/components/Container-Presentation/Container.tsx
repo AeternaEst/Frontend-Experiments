@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Presentation from "./Presentation";
+import Presentation from "./presentation";
 
 interface ContainerState {
   count: number;
