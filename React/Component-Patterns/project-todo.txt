@@ -1,0 +1,8 @@
+Project TODO:
+sanity check
+storybook
+final-form
+react testing
+run from dev server
+react-query
+add components representing common use cases

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import PureApp from "./components/pure/pure-app";
+import PureApp from "./performance/pure-component/pure-app";
 
 const injectTarget = document.querySelector(".root");
 
