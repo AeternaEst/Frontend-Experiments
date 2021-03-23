@@ -1,14 +1,18 @@
 {
-    "exclude": [
-        "node_modules"
-    ],
-    "editor.formatOnSave": false,
-    "javascript.format.enable": false,
-    "eslint.alwaysShowStatus": true,
-    "files.eol": "\n",
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
-    "eslint.format.enable": true,
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.autoSave": "off",
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "files.exclude": { 
+    "node_modules/": true,
+	".vscode/": true,
+	"dist/": true
+  },
+  "editor.formatOnSave": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.endOfLine": "auto",
 }
