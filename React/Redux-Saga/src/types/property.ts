@@ -1,4 +1,4 @@
-import { Comment } from './comment';
+import { Comment } from "./comment";
 
 export interface Property {
   id: number;
@@ -10,7 +10,7 @@ export interface Property {
 }
 
 export interface PropertyAddress {
-  propertyId: Property['id'];
+  propertyId: Property["id"];
   streetName: string;
   zipCode: string;
   city: string;

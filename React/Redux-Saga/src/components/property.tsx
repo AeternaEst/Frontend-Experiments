@@ -1,20 +1,20 @@
-import React, { FC, useState } from 'react';
-import { Property as AppProperty } from '../types/property';
+import React, { FC, useState } from "react";
+import { Property as AppProperty } from "../types/property";
 import {
   triggerAndSubscribe,
   fetchAndSubscribe,
-} from '../utils/react-redux-utils';
-import { propertyActions } from '../actions/property-actions';
-import propertySelectors from '../selectors/property-selectors';
-import Loader from './widgets/loader';
-import Error from './widgets/error';
+} from "../utils/react-redux-utils";
+import { propertyActions } from "../actions/property-actions";
+import propertySelectors from "../selectors/property-selectors";
+import Loader from "./widgets/loader";
+import Error from "./widgets/error";
 
 interface PropertyProps {
   property: AppProperty;
 }
 
 const Property: FC<PropertyProps> = ({ property }) => {
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const {
     data: favoritesBeingAdded,
     trigger: addToFavorite,
@@ -22,7 +22,7 @@ const Property: FC<PropertyProps> = ({ property }) => {
   } = triggerAndSubscribe(
     propertyActions.addToFavorite(property.id),
     propertySelectors.favoritesBeingAdded,
-    propertySelectors.favoritesError,
+    propertySelectors.favoritesError
   );
   const {
     data: isAddingComment,
@@ -31,7 +31,7 @@ const Property: FC<PropertyProps> = ({ property }) => {
   } = triggerAndSubscribe(
     propertyActions.addComment(property.id, comment),
     propertySelectors.isAddingComment,
-    propertySelectors.commentError,
+    propertySelectors.commentError
   );
   const {
     data: address,
@@ -40,7 +40,7 @@ const Property: FC<PropertyProps> = ({ property }) => {
     propertyActions.getAddressAction(property.id),
     propertySelectors.addedAddresses(property.id),
     propertySelectors.isAddressBeingAdded(property.id),
-    [property],
+    [property]
   );
 
   const isLoading = favoritesBeingAdded.includes(property.id);
@@ -59,7 +59,7 @@ const Property: FC<PropertyProps> = ({ property }) => {
         {!property.isFavorite && (
           <>
             <button type="button" onClick={() => addToFavorite()}>
-              {isLoading ? <Loader text="updating" /> : 'Add to favorites'}
+              {isLoading ? <Loader text="updating" /> : "Add to favorites"}
             </button>
             {favoritesError && <Error error={favoritesError} smallDisplay />}
           </>
@@ -76,11 +76,11 @@ const Property: FC<PropertyProps> = ({ property }) => {
           <button
             type="button"
             onClick={() => {
-              setComment('');
+              setComment("");
               addComment();
             }}
           >
-            {isAddingComment ? <Loader text="updating" /> : 'Submit Comment'}
+            {isAddingComment ? <Loader text="updating" /> : "Submit Comment"}
           </button>
         </div>
       </div>

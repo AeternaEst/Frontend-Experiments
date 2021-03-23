@@ -1,6 +1,6 @@
-import { AppUser } from './app-user';
+import { AppUser } from "./app-user";
 
 export interface Comment {
-    text: string;
-    user?: AppUser;
+  text: string;
+  user?: AppUser;
 }

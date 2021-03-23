@@ -1,8 +1,8 @@
-import { AnyAction } from 'redux';
+import { AnyAction } from "redux";
 
 /* Actions */
-const SET_MESSAGE = 'SET_MESSAGE';
-const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
+const SET_MESSAGE = "SET_MESSAGE";
+const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 
 /* Action types */
 interface SetMessageAction {
@@ -43,7 +43,7 @@ const defaultState: DeprecatedReducerTwoState = {
 /* Reducer */
 const deprecatedReducerTwo = (
   state = defaultState,
-  action: DeprecatedReducerTwoActions,
+  action: DeprecatedReducerTwoActions
 ): DeprecatedReducerTwoState => {
   switch (action.type) {
     case SET_MESSAGE:

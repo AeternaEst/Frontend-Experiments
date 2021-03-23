@@ -1,4 +1,4 @@
-import { State } from '../reducers/root-reducer';
+import { State } from "../reducers/root-reducer";
 
 const userSelectors = {
   criticalmessage: (state: State) => state.user.criticalMessage,

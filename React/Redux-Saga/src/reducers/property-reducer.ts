@@ -1,5 +1,5 @@
-import { Property, PropertyAddress } from '../types/property';
-import { reducerCreator, HandlerParams } from '../utils/redux-utils';
+import { Property, PropertyAddress } from "../types/property";
+import { reducerCreator, HandlerParams } from "../utils/redux-utils";
 import {
   FETCH_PROPERTIES_SUCCESS,
   ADD_PROPERTY_COMMENT_SUCCESS,
@@ -25,9 +25,9 @@ import {
   GetAddressSuccessAction,
   GET_PROPERTY_ADDRESS_FAILURE,
   GetAddressFailureAction,
-} from '../actions/property-actions';
-import { AppError } from '../types/app-error';
-import propertySaga from '../sagas/property-saga';
+} from "../actions/property-actions";
+import { AppError } from "../types/app-error";
+import propertySaga from "../sagas/property-saga";
 
 export interface PropertyState {
   properties: Property[];
@@ -39,7 +39,7 @@ export interface PropertyState {
   commentError: AppError | undefined;
   showFavoritePropertyMessage: boolean;
   addresses: PropertyAddress[];
-  currentAddressesBeingAdded: Property['id'][];
+  currentAddressesBeingAdded: Property["id"][];
 }
 
 const defaultState: PropertyState = {
@@ -55,10 +55,9 @@ const defaultState: PropertyState = {
   currentAddressesBeingAdded: [],
 };
 
-const reducerMapping: ReadonlyArray<HandlerParams<
-  PropertyState,
-  PropertyActions
->> = [
+const reducerMapping: ReadonlyArray<
+  HandlerParams<PropertyState, PropertyActions>
+> = [
   {
     type: FETCH_PROPERTIES_REQUEST,
     handle: (state, action) => ({
@@ -97,13 +96,13 @@ const reducerMapping: ReadonlyArray<HandlerParams<
     type: ADD_FAVORITE_PROPERTY_SUCCESS,
     handle: (state, action: AddFavoritePropertySuccessAction) => {
       const indexToRemove = state.currentFavoritesBeingAdded.findIndex(
-        (id) => id === action.propertyId,
+        (id) => id === action.propertyId
       );
       const updatedFavorites = [
         ...state.currentFavoritesBeingAdded.slice(0, indexToRemove),
         ...state.currentFavoritesBeingAdded.slice(
           indexToRemove + 1,
-          state.currentFavoritesBeingAdded.length,
+          state.currentFavoritesBeingAdded.length
         ),
       ];
       return {
@@ -156,7 +155,7 @@ const reducerMapping: ReadonlyArray<HandlerParams<
     handle: (state, action: GetAddressAction) => ({
       ...state,
       currentAddressesBeingAdded: state.currentAddressesBeingAdded.some(
-        (propertyId) => action.propertyId === propertyId,
+        (propertyId) => action.propertyId === propertyId
       )
         ? state.currentAddressesBeingAdded
         : [...state.currentAddressesBeingAdded, action.propertyId],
@@ -166,16 +165,16 @@ const reducerMapping: ReadonlyArray<HandlerParams<
     type: GET_PROPERTY_ADDRESS_SUCCESS,
     handle: (state, action: GetAddressSuccessAction) => {
       const indexToRemove = state.currentAddressesBeingAdded.findIndex(
-        (id) => id === action.propertyId,
+        (id) => id === action.propertyId
       );
       return {
         ...state,
         currentAddressesBeingAdded:
           indexToRemove !== -1
             ? [
-              ...state.currentAddressesBeingAdded.slice(0, indexToRemove),
-              ...state.currentAddressesBeingAdded.slice(indexToRemove + 1),
-            ]
+                ...state.currentAddressesBeingAdded.slice(0, indexToRemove),
+                ...state.currentAddressesBeingAdded.slice(indexToRemove + 1),
+              ]
             : state.currentAddressesBeingAdded,
         addresses: [...state.addresses, action.address],
       };
@@ -185,16 +184,16 @@ const reducerMapping: ReadonlyArray<HandlerParams<
     type: GET_PROPERTY_ADDRESS_FAILURE,
     handle: (state, action: GetAddressFailureAction) => {
       const indexToRemove = state.currentAddressesBeingAdded.findIndex(
-        (id) => id === action.propertyId,
+        (id) => id === action.propertyId
       );
       return {
         ...state,
         currentAddressesBeingAdded:
           indexToRemove !== -1
             ? [
-              ...state.currentAddressesBeingAdded.slice(0, indexToRemove),
-              ...state.currentAddressesBeingAdded.slice(indexToRemove + 1),
-            ]
+                ...state.currentAddressesBeingAdded.slice(0, indexToRemove),
+                ...state.currentAddressesBeingAdded.slice(indexToRemove + 1),
+              ]
             : state.currentAddressesBeingAdded,
       };
     },
@@ -203,7 +202,7 @@ const reducerMapping: ReadonlyArray<HandlerParams<
 
 const propertyReducer = reducerCreator<PropertyState, PropertyActions>(
   defaultState,
-  reducerMapping,
+  reducerMapping
 );
 
 export default propertyReducer;

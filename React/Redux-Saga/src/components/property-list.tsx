@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
-import Property from './property';
-import { fetchAndSubscribe } from '../utils/react-redux-utils';
-import { propertyActions } from '../actions/property-actions';
-import propertySelectors from '../selectors/property-selectors';
-import withErrorHandling from './hoc/with-error-handling';
-import Loader from './widgets/loader';
+import React, { FC } from "react";
+import Property from "./property";
+import { fetchAndSubscribe } from "../utils/react-redux-utils";
+import { propertyActions } from "../actions/property-actions";
+import propertySelectors from "../selectors/property-selectors";
+import withErrorHandling from "./hoc/with-error-handling";
+import Loader from "./widgets/loader";
 
 interface PropertyListProps {
   headline: string;
@@ -15,7 +15,7 @@ const PropertyList: FC<PropertyListProps> = ({ headline }) => {
     propertyActions.fetch,
     propertySelectors.properties,
     propertySelectors.isFetching,
-    [],
+    []
   );
 
   return (

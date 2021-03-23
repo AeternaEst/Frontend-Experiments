@@ -1,15 +1,18 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { State } from '../../reducers/root-reducer';
-import { deperactedSagaActions } from '../../sagas/app-setup/deprecated-saga';
+import React from "react";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { State } from "../../reducers/root-reducer";
+import { deperactedSagaActions } from "../../sagas/app-setup/deprecated-saga";
 
 interface CounterDispatcherProps {
   increment: () => void;
   message: string;
 }
 
-const CounterDispatcher: React.FC<CounterDispatcherProps> = ({ message, increment }) => (
+const CounterDispatcher: React.FC<CounterDispatcherProps> = ({
+  message,
+  increment,
+}) => (
   <div className="counter-dispatcher">
     <h3>Counter Dispatcher</h3>
     <p>

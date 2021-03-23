@@ -1,8 +1,8 @@
-import { AnyAction } from 'redux';
+import { AnyAction } from "redux";
 
 export const actionCreator = <T extends string, P extends object>(
   type: T,
-  props?: P,
+  props?: P
 ): { type: T } & P => ({ type, ...props });
 
 export type ReducerParams<S, T extends AnyAction> = (state: S, action: T) => S;
@@ -12,14 +12,16 @@ export type HandlerParams<S, T extends AnyAction> = AnyAction & {
 
 export const reducerCreator = <S, T extends AnyAction>(
   initialState: S,
-  handlers: ReadonlyArray<HandlerParams<S, T>>,
-): ReducerParams<S, T> => function reducer(state = initialState, action) {
-  const handle = handlers.find((handler) => handler.type === action.type)?.handle;
-  if (handle) {
-    return handle(state, action);
-  }
-  return state;
-};
+  handlers: ReadonlyArray<HandlerParams<S, T>>
+): ReducerParams<S, T> =>
+  function reducer(state = initialState, action) {
+    const handle = handlers.find((handler) => handler.type === action.type)
+      ?.handle;
+    if (handle) {
+      return handle(state, action);
+    }
+    return state;
+  };
 
 // taken from redux docs, implement later
 // function createReducer(initialState, handlers) {
