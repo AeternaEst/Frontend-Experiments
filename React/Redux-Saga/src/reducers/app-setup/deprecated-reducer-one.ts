@@ -1,5 +1,3 @@
-import { AnyAction } from "redux";
-
 /* Actions */
 const INCREMENT = "INCREMENT";
 const DECREMENT = "DECREMENT";

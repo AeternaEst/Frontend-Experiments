@@ -18,7 +18,6 @@ import {
   ADD_PROPERTY_COMMENT_ERROR,
   AddPropertyCommentErrorAction,
   ADD_FAVORITE_PROPERTY_MESSAGE,
-  AddFavoritePropertyMessageAction,
   GET_PROPERTY_ADDRESS,
   GetAddressAction,
   GET_PROPERTY_ADDRESS_SUCCESS,
@@ -27,7 +26,6 @@ import {
   GetAddressFailureAction,
 } from "../actions/property-actions";
 import { AppError } from "../types/app-error";
-import propertySaga from "../sagas/property-saga";
 
 export interface PropertyState {
   properties: Property[];
@@ -60,7 +58,7 @@ const reducerMapping: ReadonlyArray<
 > = [
   {
     type: FETCH_PROPERTIES_REQUEST,
-    handle: (state, action) => ({
+    handle: (state) => ({
       ...state,
       isFetching: true,
     }),
@@ -122,14 +120,14 @@ const reducerMapping: ReadonlyArray<
   },
   {
     type: ADD_PROPERTY_COMMENT_REQUEST,
-    handle: (state, action) => ({
+    handle: (state) => ({
       ...state,
       isAddingComment: true,
     }),
   },
   {
     type: ADD_PROPERTY_COMMENT_SUCCESS,
-    handle: (state, action) => ({
+    handle: (state) => ({
       ...state,
       isAddingComment: false,
       commentError: undefined,
@@ -145,7 +143,7 @@ const reducerMapping: ReadonlyArray<
   },
   {
     type: ADD_FAVORITE_PROPERTY_MESSAGE,
-    handle: (state, action: AddFavoritePropertyMessageAction) => ({
+    handle: (state) => ({
       ...state,
       showFavoritePropertyMessage: true,
     }),

@@ -1,4 +1,4 @@
-import { put, takeEvery, takeLatest } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 import { AnyAction } from "redux";
 import { deprecatedReducerOneActions } from "../../reducers/app-setup/deprecated-reducer-one";
 import { deprecatedReducerTwoActions } from "../../reducers/app-setup/deprecated-reducer-two";

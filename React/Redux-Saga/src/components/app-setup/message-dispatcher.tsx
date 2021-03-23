@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deprecatedReducerTwoActions } from "../../reducers/app-setup/deprecated-reducer-two";
 import { State } from "../../reducers/root-reducer";
 import { deperactedSagaActions } from "../../sagas/app-setup/deprecated-saga";
 

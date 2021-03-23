@@ -1,4 +1,3 @@
-import { AnyAction } from "redux";
 import {
   UserActions,
   FETCH_CRITICAL_MESSAGE,

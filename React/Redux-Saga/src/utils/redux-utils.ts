@@ -1,5 +1,6 @@
 import { AnyAction } from "redux";
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export const actionCreator = <T extends string, P extends object>(
   type: T,
   props?: P

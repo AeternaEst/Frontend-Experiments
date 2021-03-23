@@ -93,7 +93,7 @@ export function* addPropertyComment(
 
 export function* favoriteCounter() {
   for (let i = 0; i < 3; i += 1) {
-    const action = yield take(ADD_FAVORITE_PROPERTY_REQUEST);
+    yield take(ADD_FAVORITE_PROPERTY_REQUEST);
     console.log("favorite actions received: ", i);
   }
   yield put(propertyActions.addFavoritePropertyMessageAction());

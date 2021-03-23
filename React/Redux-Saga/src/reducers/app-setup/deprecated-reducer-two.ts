@@ -1,5 +1,3 @@
-import { AnyAction } from "redux";
-
 /* Actions */
 const SET_MESSAGE = "SET_MESSAGE";
 const CLEAR_MESSAGE = "CLEAR_MESSAGE";

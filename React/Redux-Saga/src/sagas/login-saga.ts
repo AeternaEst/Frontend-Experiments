@@ -1,15 +1,6 @@
 import { AnyAction } from "redux";
 import { Task } from "redux-saga";
-import {
-  put,
-  call,
-  takeLatest,
-  take,
-  fork,
-  cancel,
-  ForkEffect,
-  throttle,
-} from "redux-saga/effects";
+import { put, call, take, fork, cancel, throttle } from "redux-saga/effects";
 import {
   LOGIN,
   LoginAction,
