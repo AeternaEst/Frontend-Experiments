@@ -26,8 +26,8 @@ import { Property } from "../types/property";
 /* Saga actions */
 export function* fetchProperties(propertyService: PropertyService) {
   try {
-    const properties: Property[] = yield call(propertyService.getProperties);
-    yield put(propertyActions.setPropertiesAction(properties));
+    const response: Property[] = yield call(propertyService.getProperties);
+    yield put(propertyActions.setPropertiesAction(response));
   } catch (e) {
     yield put(
       propertyActions.fetchPropertiesErrorAction(
