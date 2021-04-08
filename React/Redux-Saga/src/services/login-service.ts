@@ -1,20 +1,6 @@
 /* eslint-disable max-len */
+import { userDatabase } from "../data/database";
 import { AppUser } from "../types/app-user";
-
-const userDatabase: AppUser[] = [
-  {
-    userName: "Arnold",
-    password: "password",
-  },
-  {
-    userName: "Sylvester",
-    password: "password",
-  },
-  {
-    userName: "Jean Claud",
-    password: "password",
-  },
-];
 
 export default class LoginService {
   login = (userName: string, password: string): Promise<AppUser> =>

@@ -1,3 +1,4 @@
+import { AppUser } from "../types/app-user";
 import { Property } from "../types/property";
 
 export const propertyDatabase: Property[] = [
@@ -33,3 +34,24 @@ export const propertyDatabase: Property[] = [
 export const streetNames = ["Jagtvej", "Strandvejen", "Kongevejen"];
 export const cityNames = ["Copenhagen", "London", "New York"];
 export const zipCodes = ["2100", "2900", "3000"];
+
+export const userDatabase: AppUser[] = [
+  {
+    userName: "Arnold",
+    password: "password",
+  },
+  {
+    userName: "Sylvester",
+    password: "password",
+  },
+  {
+    userName: "Jean Claud",
+    password: "password",
+  },
+];
+
+export const SECURITY_MESSAGES = [
+  "Very important security message",
+  "You have been hacked",
+  "Change your password",
+];

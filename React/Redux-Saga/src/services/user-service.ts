@@ -1,10 +1,5 @@
+import { SECURITY_MESSAGES } from "../data/database";
 import sleep from "../utils/general-utils";
-
-const SECURITY_MESSAGES = [
-  "Very important security message",
-  "You have been hacked",
-  "Change your password",
-];
 
 export default class UserService {
   getSecurityMessage = async (index: number) => {

@@ -7,7 +7,7 @@ import {
   propertyDatabase,
   streetNames,
   zipCodes,
-} from "../data/properties";
+} from "../data/database";
 
 export default class PropertyService {
   getProperties = (): Promise<Property[]> =>
