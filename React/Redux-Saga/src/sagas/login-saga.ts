@@ -10,16 +10,12 @@ import {
   SET_NEW_USER_NAME_TYPING,
   NewUserNameTypingAction,
 } from "../actions/login-actions";
-import LoginService from "../services/login-service";
 import { AppUser } from "../types/app-user";
+import WebApi from "../web-api";
 
-function* loginUser(
-  loginService: LoginService,
-  userName: string,
-  password: string
-) {
+function* loginUser(webApi: WebApi, userName: string, password: string) {
   try {
-    const user: AppUser = yield call(loginService.login, userName, password);
+    const user: AppUser = yield call(webApi.login, userName, password);
     yield put(loginActions.successfulLogin);
     yield put(loginActions.setUser(user));
     return user;
@@ -36,16 +32,11 @@ function* logoutUser() {
   }
 }
 
-export function* loginFlow(loginService: LoginService) {
+export function* loginFlow(webApi: WebApi) {
   while (true) {
     const { userName, password }: LoginAction = yield take(LOGIN);
     yield put(loginActions.loginStarted);
-    const loginTask: Task = yield fork(
-      loginUser,
-      loginService,
-      userName,
-      password
-    );
+    const loginTask: Task = yield fork(loginUser, webApi, userName, password);
     const action: AnyAction = yield take([LOGOUT, UNSUCCESSFUL_LOGIN]);
     if (action.type === LOGOUT && loginTask.isRunning()) {
       cancel(loginTask);

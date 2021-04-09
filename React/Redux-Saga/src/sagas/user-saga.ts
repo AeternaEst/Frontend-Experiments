@@ -1,13 +1,13 @@
 import { call, race, put, takeLatest } from "redux-saga/effects";
 import { userActions, FETCH_CRITICAL_MESSAGE } from "../actions/user-actions";
-import UserService from "../services/user-service";
+import WebApi from "../web-api";
 
-function* fetchCriticalMessage(userService: UserService) {
+function* fetchCriticalMessage(webApi: WebApi) {
   try {
     const criticalMessage: string = yield race([
-      call(userService.getSecurityMessage, 0),
-      call(userService.getSecurityMessage, 1),
-      call(userService.getSecurityMessage, 2),
+      call(webApi.getSecurityMessage),
+      call(webApi.getSecurityMessage),
+      call(webApi.getSecurityMessage),
     ]);
     yield put(userActions.fetchCriticalMessageSuccessAction(criticalMessage));
   } catch {
@@ -19,6 +19,6 @@ function* fetchCriticalMessage(userService: UserService) {
   }
 }
 
-export default function* userSaga(userService: UserService) {
-  yield takeLatest(FETCH_CRITICAL_MESSAGE, fetchCriticalMessage, userService);
+export default function* userSaga(webApi: WebApi) {
+  yield takeLatest(FETCH_CRITICAL_MESSAGE, fetchCriticalMessage, webApi);
 }

@@ -3,17 +3,21 @@ import deprecatedSaga from "./app-setup/deprecated-saga";
 import propertySaga, { favoriteCounter } from "./property-saga";
 import userSaga from "./user-saga";
 import loginSaga, { loginFlow } from "./login-saga";
-import webApi from "../web-api";
+import WebApi from "../web-api";
+
+const webApi = new WebApi();
 
 // TODO: enable logger conditionally
 export default function* rootSaga() {
+  console.log("root saga");
+
   yield all([
-    propertySaga(webApi.propertyService),
-    loginFlow(webApi.loginService),
+    propertySaga(webApi),
+    loginFlow(webApi),
     // loggerSaga(),
     favoriteCounter(),
     deprecatedSaga(),
-    userSaga(webApi.userService),
+    userSaga(webApi),
     loginSaga(),
   ]);
 }

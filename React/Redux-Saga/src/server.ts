@@ -1,5 +1,6 @@
 import * as express from "express";
 import { Request, Response } from "express";
+import { endpoints, PORT } from "./data/endpoints";
 import LoginService from "./services/login-service";
 import PropertyService from "./services/property-service";
 import UserService from "./services/user-service";
@@ -11,7 +12,12 @@ const userService = new UserService();
 const app = express();
 app.use(express.json());
 
-const { PORT = 3000 } = process.env;
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Content-Type", "application/json");
+  res.header("Access-Control-Allow-Headers", "*");
+  next();
+});
 
 app.get("/", (req: Request, res: Response) => {
   res.send({
@@ -19,11 +25,12 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
-app.get("/property/properties", (req: Request, res: Response) => {
+app.get(endpoints.getProperties, (req: Request, res: Response) => {
   console.log("getting properties");
 
   const getProperties = async () => {
     const properties = await propertyService.getProperties();
+    res.set;
     res.send({
       properties,
     });
@@ -32,7 +39,7 @@ app.get("/property/properties", (req: Request, res: Response) => {
   getProperties();
 });
 
-app.post("/property/favorite", (req: Request, res: Response) => {
+app.post(endpoints.addFavorite, (req: Request, res: Response) => {
   console.log("adding favorite", req.body);
   const propertyId = Number.parseInt(req.body.propertyId);
 
@@ -48,7 +55,7 @@ app.post("/property/favorite", (req: Request, res: Response) => {
   addFavoriteProperty();
 });
 
-app.post("/property/comment", (req: Request, res: Response) => {
+app.post(endpoints.addComment, (req: Request, res: Response) => {
   console.log("adding comment", req.body);
   const propertyId = Number.parseInt(req.body.propertyId);
 
@@ -64,7 +71,7 @@ app.post("/property/comment", (req: Request, res: Response) => {
   addPropertyComment();
 });
 
-app.get("/property/streetName", (req: Request, res: Response) => {
+app.get(endpoints.getStreetName, (req: Request, res: Response) => {
   console.log("getting street name", req.query);
   const propertyId = Number.parseInt(req.query.propertyId as string);
 
@@ -80,7 +87,7 @@ app.get("/property/streetName", (req: Request, res: Response) => {
   getStreetName();
 });
 
-app.get("/property/city", (req: Request, res: Response) => {
+app.get(endpoints.getCity, (req: Request, res: Response) => {
   console.log("getting city", req.query);
   const propertyId = Number.parseInt(req.query.propertyId as string);
 
@@ -96,7 +103,7 @@ app.get("/property/city", (req: Request, res: Response) => {
   getCity();
 });
 
-app.get("/property/zip", (req: Request, res: Response) => {
+app.get(endpoints.getZip, (req: Request, res: Response) => {
   console.log("getting zip", req.query);
   const propertyId = Number.parseInt(req.query.propertyId as string);
 
@@ -112,7 +119,7 @@ app.get("/property/zip", (req: Request, res: Response) => {
   getZip();
 });
 
-app.post("/login", (req: Request, res: Response) => {
+app.post(endpoints.login, (req: Request, res: Response) => {
   console.log("Logging in", req.body);
   const userName = req.body.userName;
   const password = req.body.password;
@@ -129,7 +136,7 @@ app.post("/login", (req: Request, res: Response) => {
   performLogin();
 });
 
-app.get("/user/securitymessage", (req: Request, res: Response) => {
+app.get(endpoints.getSecurityMessage, (req: Request, res: Response) => {
   console.log("getting security message", req.query);
 
   const getSecurityMessage = async (): Promise<void> => {

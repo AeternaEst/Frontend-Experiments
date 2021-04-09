@@ -34,6 +34,10 @@ module.exports = [
         https: false,
         stream: false,
         crypto: false,
+        querystring: false,
+        url: false,
+        buffer: false,
+        util: false,
       },
     },
     output: {
@@ -67,6 +71,10 @@ module.exports = [
         https: false,
         stream: false,
         crypto: false,
+        querystring: false,
+        url: false,
+        buffer: false,
+        util: false,
       },
     },
     output: {
