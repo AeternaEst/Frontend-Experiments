@@ -45,7 +45,7 @@ app.post(endpoints.addFavorite, (req: Request, res: Response) => {
 
   const addFavoriteProperty = async () => {
     try {
-      await propertyService.addToFavorite(propertyId);
+      await propertyService.addFavoriteProperty(propertyId);
       res.sendStatus(200);
     } catch (e) {
       res.sendStatus(404);
@@ -61,7 +61,7 @@ app.post(endpoints.addComment, (req: Request, res: Response) => {
 
   const addPropertyComment = async () => {
     try {
-      await propertyService.addComment(propertyId, req.body.comment);
+      await propertyService.addPropertyComment(propertyId, req.body.comment);
       res.sendStatus(200);
     } catch (e) {
       res.sendStatus(404);

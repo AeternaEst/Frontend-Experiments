@@ -4,6 +4,7 @@
   "description": "basic setup and implementation of redux, react-redux and sagas",
   "main": "index.jsx",
   "scripts": {
+    "start": "npx webpack --env useServer && npm run start-server",
     "build": "npx webpack",
     "watch": "npx webpack --watch",
     "start-server": "node dist/server.js",

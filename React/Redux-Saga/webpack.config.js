@@ -1,7 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const ESLintPlugin = require("eslint-webpack-plugin");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const webpack = require("webpack");
 
-module.exports = [
+module.exports = (env) => [
   {
     name: "client",
     target: "web",
@@ -22,6 +24,11 @@ module.exports = [
         },
       ],
     },
+    plugins: [
+      new webpack.DefinePlugin({
+        FETCH_DATA_FROM_SERVER: JSON.stringify(env.useServer),
+      }),
+    ],
     resolve: {
       extensions: [".ts", ".tsx", ".jsx", ".js", ".css"],
       fallback: {

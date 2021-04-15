@@ -11,11 +11,16 @@ import {
   NewUserNameTypingAction,
 } from "../actions/login-actions";
 import { AppUser } from "../types/app-user";
-import WebApi from "../web-api";
+import WebApi from "../data/web-api";
+import { DataFetcher } from "../data/data-fetcher";
 
-function* loginUser(webApi: WebApi, userName: string, password: string) {
+function* loginUser(
+  dataFetcher: DataFetcher,
+  userName: string,
+  password: string
+) {
   try {
-    const user: AppUser = yield call(webApi.login, userName, password);
+    const user: AppUser = yield call(dataFetcher.login, userName, password);
     yield put(loginActions.successfulLogin);
     yield put(loginActions.setUser(user));
     return user;

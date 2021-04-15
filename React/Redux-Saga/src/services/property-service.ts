@@ -17,7 +17,7 @@ export default class PropertyService {
       }, 2000);
     });
 
-  addToFavorite = (propertyId: number): Promise<void> =>
+  addFavoriteProperty = (propertyId: number): Promise<void> =>
     new Promise((resolve, reject) => {
       setTimeout(() => {
         const propertyToFavorite = propertyDatabase.find(
@@ -31,7 +31,7 @@ export default class PropertyService {
       }, 2000);
     });
 
-  addComment = (propertyId: number, comment: Comment): Promise<void> =>
+  addPropertyComment = (propertyId: number, comment: Comment): Promise<void> =>
     new Promise((resolve, reject) => {
       setTimeout(() => {
         const propertyToAddComment = propertyDatabase.find(

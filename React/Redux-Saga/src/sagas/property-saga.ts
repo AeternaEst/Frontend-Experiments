@@ -21,12 +21,12 @@ import {
 import { AppError, ErrorCode } from "../types/app-error";
 import { AppUser } from "../types/app-user";
 import { Property } from "../types/property";
-import WebApi from "../web-api";
+import { DataFetcher } from "../data/data-fetcher";
 
 /* Saga actions */
-export function* fetchProperties(webApi: WebApi) {
+export function* fetchProperties(dataFetcher: DataFetcher) {
   try {
-    const response: Property[] = yield call(webApi.getProperties);
+    const response: Property[] = yield call(dataFetcher.getProperties);
     yield put(propertyActions.setPropertiesAction(response));
   } catch (e) {
     yield put(
@@ -42,11 +42,11 @@ export function* fetchProperties(webApi: WebApi) {
 }
 
 export function* addFavoriteProperty(
-  webApi: WebApi,
+  dataFetcher: DataFetcher,
   action: AddFavoritePropertyRequestAction
 ) {
   try {
-    yield call(webApi.addFavoriteProperty, action.propertyId);
+    yield call(dataFetcher.addFavoriteProperty, action.propertyId);
     yield put(propertyActions.fetch);
     yield put(
       propertyActions.setAddFavoritePropertySuccessAction(action.propertyId)
@@ -65,14 +65,14 @@ export function* addFavoriteProperty(
 }
 
 export function* addPropertyComment(
-  webApi: WebApi,
+  dataFetcher: DataFetcher,
   action: AddPropertyCommentRequestAction
 ) {
   try {
     const user: AppUser = yield select(
       (state: State) => state.loginState.activeUser
     );
-    yield call(webApi.addPropertyComment, action.propertyId, {
+    yield call(dataFetcher.addPropertyComment, action.propertyId, {
       text: action.comment,
       user,
     });
@@ -99,12 +99,15 @@ export function* favoriteCounter() {
   yield put(propertyActions.addFavoritePropertyMessageAction());
 }
 
-export function* getAddress(webApi: WebApi, action: GetAddressAction) {
+export function* getAddress(
+  dataFetcher: DataFetcher,
+  action: GetAddressAction
+) {
   try {
     const [streetName, city, zip]: string[] = yield all([
-      call(webApi.getStreetName, action.propertyId),
-      call(webApi.getCity, action.propertyId),
-      call(webApi.getZip, action.propertyId),
+      call(dataFetcher.getStreetName, action.propertyId),
+      call(dataFetcher.getCity, action.propertyId),
+      call(dataFetcher.getZip, action.propertyId),
     ]);
     yield put(
       propertyActions.getAddressSuccessAction(action.propertyId, {
@@ -119,11 +122,19 @@ export function* getAddress(webApi: WebApi, action: GetAddressAction) {
   }
 }
 
-function* propertySaga(webApi: WebApi) {
-  yield takeLatest(FETCH_PROPERTIES_REQUEST, fetchProperties, webApi);
-  yield takeEvery(ADD_FAVORITE_PROPERTY_REQUEST, addFavoriteProperty, webApi);
-  yield takeEvery(ADD_PROPERTY_COMMENT_REQUEST, addPropertyComment, webApi);
-  yield takeEvery(GET_PROPERTY_ADDRESS, getAddress, webApi);
+function* propertySaga(dataFetcher: DataFetcher) {
+  yield takeLatest(FETCH_PROPERTIES_REQUEST, fetchProperties, dataFetcher);
+  yield takeEvery(
+    ADD_FAVORITE_PROPERTY_REQUEST,
+    addFavoriteProperty,
+    dataFetcher
+  );
+  yield takeEvery(
+    ADD_PROPERTY_COMMENT_REQUEST,
+    addPropertyComment,
+    dataFetcher
+  );
+  yield takeEvery(GET_PROPERTY_ADDRESS, getAddress, dataFetcher);
 }
 
 export default propertySaga;

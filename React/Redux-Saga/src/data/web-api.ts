@@ -1,16 +1,17 @@
 import axios from "axios"; //Suspect problem is here
-import { endpoints, getEndpointUrl } from "./data/endpoints";
-import { AppUser } from "./types/app-user";
-import { Comment } from "./types/comment";
-import { Property } from "./types/property";
+import { endpoints, getEndpointUrl } from "./endpoints";
+import { AppUser } from "../types/app-user";
+import { Comment } from "../types/comment";
+import { Property } from "../types/property";
+import { DataFetcher } from "./data-fetcher";
 
-class WebApi {
+class WebApi implements DataFetcher {
   constructor() {
     console.log("Initializing web api");
   }
 
   public async getProperties() {
-    const result = await axios.get<{ properties: ReadonlyArray<Property> }>(
+    const result = await axios.get<{ properties: Property[] }>(
       getEndpointUrl(endpoints.getProperties)
     );
 
