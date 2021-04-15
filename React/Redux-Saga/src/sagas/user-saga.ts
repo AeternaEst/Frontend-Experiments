@@ -5,9 +5,9 @@ import WebApi from "../web-api";
 function* fetchCriticalMessage(webApi: WebApi) {
   try {
     const criticalMessage: string = yield race([
-      call(webApi.getSecurityMessage),
-      call(webApi.getSecurityMessage),
-      call(webApi.getSecurityMessage),
+      call(webApi.getSecurityMessage, 0),
+      call(webApi.getSecurityMessage, 1),
+      call(webApi.getSecurityMessage, 2),
     ]);
     yield put(userActions.fetchCriticalMessageSuccessAction(criticalMessage));
   } catch {

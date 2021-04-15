@@ -138,14 +138,11 @@ app.post(endpoints.login, (req: Request, res: Response) => {
 
 app.get(endpoints.getSecurityMessage, (req: Request, res: Response) => {
   console.log("getting security message", req.query);
+  const index = Number.parseInt(req.query.index as string);
 
   const getSecurityMessage = async (): Promise<void> => {
     try {
-      const message = await Promise.race([
-        await userService.getSecurityMessage(0),
-        await userService.getSecurityMessage(1),
-        await userService.getSecurityMessage(2),
-      ]);
+      const message = await userService.getSecurityMessage(index);
       res.send({ message });
     } catch (e) {
       res.sendStatus(404);

@@ -49,6 +49,7 @@ const Navigation: FC<NavigationProps> = ({
     if (!unsuccessfulLogin && user) {
       setUserName("");
       setPassword("");
+      dispatchUserNameUpdate(loginActions.newUserNameTyping(""));
     }
   }, [unsuccessfulLogin, user]);
 
@@ -59,10 +60,7 @@ const Navigation: FC<NavigationProps> = ({
     if (user) {
       return (
         <>
-          <div>
-            Hello
-            {user.userName}
-          </div>
+          <div>{`Hello ${user.userName}`}</div>
           <button type="button" onClick={onLogout}>
             Logout
           </button>

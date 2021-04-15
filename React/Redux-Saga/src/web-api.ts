@@ -70,17 +70,25 @@ class WebApi {
   }
 
   public async login(userName: string, password: string) {
-    const result = await axios.post<AppUser>(getEndpointUrl(endpoints.login), {
-      userName,
-      password,
-    });
+    const result = await axios.post<{ user: AppUser }>(
+      getEndpointUrl(endpoints.login),
+      {
+        userName,
+        password,
+      }
+    );
 
-    return result.data;
+    return result.data.user;
   }
 
-  public async getSecurityMessage() {
+  public async getSecurityMessage(index: number) {
     const result = await axios.get<{ message: string }>(
-      getEndpointUrl(endpoints.getSecurityMessage)
+      getEndpointUrl(endpoints.getSecurityMessage),
+      {
+        params: {
+          index,
+        },
+      }
     );
 
     return result.data.message;
