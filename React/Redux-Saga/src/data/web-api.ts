@@ -9,12 +9,14 @@ import { mockWebApi } from "./mock-web-api";
 
 class WebApi implements DataFetcher {
   constructor() {
-    const mockAdapter = new MockAdapter(axios, {
-      delayResponse: 2000,
-      onNoMatch: "throwException",
-    });
-    mockWebApi(mockAdapter);
     console.log("Initializing web api");
+    if (USE_MOCK_ADAPTER) {
+      const mockAdapter = new MockAdapter(axios, {
+        delayResponse: 2000,
+        onNoMatch: "throwException",
+      });
+      mockWebApi(mockAdapter);
+    }
   }
 
   public async getProperties() {

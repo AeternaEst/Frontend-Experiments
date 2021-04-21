@@ -27,6 +27,7 @@ module.exports = (env) => [
     plugins: [
       new webpack.DefinePlugin({
         FETCH_DATA_FROM_SERVER: JSON.stringify(env.useServer),
+        USE_MOCK_ADAPTER: JSON.stringify(env.useMockData),
       }),
     ],
     resolve: {

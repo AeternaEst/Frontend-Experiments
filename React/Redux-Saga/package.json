@@ -5,6 +5,7 @@
   "main": "index.jsx",
   "scripts": {
     "start": "npx webpack --env useServer && npm run start-server",
+    "start:mock": "npx webpack --env useServer useMockData && npm run start-server",
     "build": "npx webpack",
     "watch": "npx webpack --watch",
     "start-server": "node dist/server.js",
