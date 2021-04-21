@@ -1,12 +1,19 @@
-import axios from "axios"; //Suspect problem is here
+import axios from "axios";
 import { endpoints, getEndpointUrl } from "./endpoints";
 import { AppUser } from "../types/app-user";
 import { Comment } from "../types/comment";
 import { Property } from "../types/property";
 import { DataFetcher } from "./data-fetcher";
+import MockAdapter from "axios-mock-adapter";
+import { mockWebApi } from "./mock-web-api";
 
 class WebApi implements DataFetcher {
   constructor() {
+    const mockAdapter = new MockAdapter(axios, {
+      delayResponse: 2000,
+      onNoMatch: "throwException",
+    });
+    mockWebApi(mockAdapter);
     console.log("Initializing web api");
   }
 

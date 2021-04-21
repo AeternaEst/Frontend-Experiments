@@ -11,7 +11,6 @@ import {
   NewUserNameTypingAction,
 } from "../actions/login-actions";
 import { AppUser } from "../types/app-user";
-import WebApi from "../data/web-api";
 import { DataFetcher } from "../data/data-fetcher";
 
 function* loginUser(
@@ -37,7 +36,7 @@ function* logoutUser() {
   }
 }
 
-export function* loginFlow(webApi: WebApi) {
+export function* loginFlow(webApi: DataFetcher) {
   while (true) {
     const { userName, password }: LoginAction = yield take(LOGIN);
     yield put(loginActions.loginStarted);

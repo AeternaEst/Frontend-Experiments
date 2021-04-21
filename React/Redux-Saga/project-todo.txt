@@ -1,3 +1,4 @@
 TODO:
-add webserver
 add axios using mock data
+base axios request
+implement faker

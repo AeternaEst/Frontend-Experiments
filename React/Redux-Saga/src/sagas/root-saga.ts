@@ -10,9 +10,6 @@ const dataFetcher = FETCH_DATA_FROM_SERVER ? new WebApi() : rootService;
 
 // TODO: enable logger conditionally
 export default function* rootSaga() {
-  console.log("root saga");
-  console.log("FETCH_DATA_FROM_SERVER", FETCH_DATA_FROM_SERVER);
-
   yield all([
     propertySaga(dataFetcher),
     loginFlow(dataFetcher),
