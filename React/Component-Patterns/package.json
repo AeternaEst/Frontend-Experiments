@@ -2,7 +2,7 @@
   "name": "component-patterns",
   "version": "1.0.0",
   "description": "component-patterns",
-  "main": "index.js",
+  "main": "src/index.tsx",
   "scripts": {
     "build": "npx webpack",
     "watch": "npx webpack --watch",
@@ -15,8 +15,10 @@
   "author": "Nicholas Lindboe",
   "license": "ISC",
   "dependencies": {
+    "final-form": "^4.20.2",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "react-final-form": "^6.5.3"
   },
   "devDependencies": {
     "@types/react": "^16.14.4",

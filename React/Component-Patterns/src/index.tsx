@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import PureApp from "./performance/pure-component/pure-app";
+import PersonalInformationForm from "./forms/final-form/personal-information-form";
 
 const injectTarget = document.querySelector(".root");
 
-ReactDOM.render(<PureApp />, injectTarget);
+ReactDOM.render(<PersonalInformationForm />, injectTarget);
