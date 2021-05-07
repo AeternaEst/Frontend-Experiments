@@ -1,6 +1,14 @@
 import { FormApi } from "final-form";
 import React from "react";
 import { Form, Field } from "react-final-form";
+import {
+  composeValidators,
+  getValidationRules,
+  isRequired,
+  maxLength,
+  minLength,
+  ValidationType,
+} from "./validation-rules";
 
 interface PersonalInformationFormValues {
   contactInformation: {
@@ -14,6 +22,19 @@ interface PersonalInformationFormValues {
     favoriteRapper: string;
   };
 }
+
+const initialValues: PersonalInformationFormValues = {
+  contactInformation: {
+    firstName: "",
+    lastName: "",
+    gender: "male",
+  },
+  preferences: {
+    food: [],
+    vegan: false,
+    favoriteRapper: "tupac",
+  },
+};
 
 const PersonalInformationForm: React.FC = () => {
   const onSubmit = (
@@ -38,88 +59,168 @@ const PersonalInformationForm: React.FC = () => {
   return (
     <Form<PersonalInformationFormValues>
       onSubmit={onSubmit}
-      // validate={validate}
-      render={({ handleSubmit }) => (
+      initialValues={initialValues}
+      render={({
+        handleSubmit,
+        form,
+        submitting,
+        pristine,
+        hasValidationErrors,
+      }) => (
         <>
           <h3>Please fill out your personal information</h3>
           <form onSubmit={handleSubmit}>
             <div>
-              <h5>Contact Information</h5>
-              <Field name="contactInformation.firstName">
-                {(props) => (
-                  <input
-                    placeholder="first name"
-                    type="text"
-                    {...props.input}
+              <h4>Contact Information</h4>
+              <div>
+                <label>
+                  First Name:{" "}
+                  <Field
+                    name="contactInformation.firstName"
+                    validate={composeValidators(
+                      isRequired("Is required"),
+                      minLength("The minimum length required is 3", 3),
+                      maxLength("The maximum length required is 10", 10)
+                    )}
+                  >
+                    {({ input, meta }) => (
+                      <>
+                        <input
+                          placeholder="first name"
+                          type="text"
+                          {...input}
+                        />{" "}
+                        {meta.error && meta.touched && (
+                          <span>{meta.error}</span>
+                        )}
+                      </>
+                    )}
+                  </Field>
+                </label>
+              </div>
+              <div>
+                <label>
+                  Last Name:{" "}
+                  <Field
+                    name="contactInformation.lastName"
+                    validate={getValidationRules([
+                      {
+                        type: ValidationType.MaxLength,
+                        priority: 3,
+                        errorMessage: "The maximum length required is 10",
+                      },
+                      {
+                        type: ValidationType.MinLength,
+                        priority: 2,
+                        errorMessage: "The minimum length required is 3",
+                      },
+                      {
+                        type: ValidationType.Required,
+                        priority: 1,
+                        errorMessage: "Is required",
+                      },
+                    ])}
+                    render={({ input, meta }) => (
+                      <>
+                        <input placeholder="last name" type="text" {...input} />{" "}
+                        {meta.error && meta.touched && (
+                          <span>{meta.error}</span>
+                        )}
+                      </>
+                    )}
                   />
-                )}
-              </Field>
+                </label>
+              </div>
               <br />
-              <Field
-                name="contactInformation.lastName"
-                render={(props) => (
-                  <input placeholder="last name" type="text" {...props.input} />
-                )}
-              />
-              <br />
-              <Field
-                defaultValue="male"
-                component="select"
-                name="contactInformation.gender"
-              >
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </Field>
+              <div>
+                <label>
+                  Gender:{" "}
+                  <Field component="select" name="contactInformation.gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </Field>
+                </label>
+              </div>
             </div>
             <div>
-              <h5>Preferences</h5>
-              <Field name="preferences.food" component="select" multiple>
-                <option value="pizza">Pizza</option>
-                <option value="pasta">Pasta</option>
-                <option value="steak">Steak</option>
-              </Field>
-              <label htmlFor="vegan"> Is Vegan ? </label>
-              <Field id="vegan" name="preferences.vegan" type="checkbox">
-                {(props) => (
-                  <input
-                    type="checkbox"
-                    value="vegan"
-                    onChange={(e) => {
-                      props.input.onChange(e);
-                      console.log("vegan onChange", e.target.value);
-                    }}
-                    {...props}
+              <h4>Preferences</h4>
+              <div>
+                <label htmlFor="food">Favorite Food: </label>
+                <br />
+                <Field
+                  id="food"
+                  name="preferences.food"
+                  component="select"
+                  multiple
+                >
+                  <option value="pizza">Pizza</option>
+                  <option value="pasta">Pasta</option>
+                  <option value="steak">Steak</option>
+                </Field>
+              </div>
+              <div>
+                <label htmlFor="vegan"> Is Vegan ? </label>
+                <Field id="vegan" name="preferences.vegan" type="checkbox">
+                  {(props) => (
+                    <input
+                      type="checkbox"
+                      value="vegan"
+                      onChange={(e) => {
+                        props.input.onChange(e);
+                        console.log("vegan onChange", e.target.value);
+                      }}
+                      {...props}
+                    />
+                  )}
+                </Field>
+              </div>
+              <div>
+                <span>Who is your favorite rapper ? </span>
+                <div>
+                  <label htmlFor="tupac">Tupac</label>
+                  <Field
+                    id="tupac"
+                    name="preferences.favoriteRapper"
+                    component="input"
+                    type="radio"
+                    value="tupac"
                   />
-                )}
-              </Field>
-              <p>Who is your favorite rapper ?</p>
-              <label htmlFor="tupac">Tupac</label>
-              <Field
-                id="tupac"
-                name="preferences.favoriteRapper"
-                component="input"
-                type="radio"
-                value="tupac"
-              />
-              <label htmlFor="biggie">Biggie</label>
-              <Field
-                id="biggie"
-                name="preferences.favoriteRapper"
-                component="input"
-                type="radio"
-                value="biggie"
-              />
-              <label htmlFor="eminem">Eminem</label>
-              <Field
-                id="eminem"
-                name="preferences.favoriteRapper"
-                component="input"
-                type="radio"
-                value="eminem"
-              />
+                </div>
+                <div>
+                  <label htmlFor="biggie">Biggie</label>
+                  <Field
+                    id="biggie"
+                    name="preferences.favoriteRapper"
+                    component="input"
+                    type="radio"
+                    value="biggie"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="eminem">Eminem</label>
+                  <Field
+                    id="eminem"
+                    name="preferences.favoriteRapper"
+                    component="input"
+                    type="radio"
+                    value="eminem"
+                  />
+                </div>
+              </div>
             </div>
-            <br />
-            <button type="submit">Submit</button>
+            <button
+              type="submit"
+              disabled={submitting || pristine || hasValidationErrors}
+            >
+              Submit
+            </button>
+            <button
+              onClick={() => form.reset()}
+              type="button"
+              disabled={pristine}
+            >
+              Reset
+            </button>
           </form>
         </>
       )}
