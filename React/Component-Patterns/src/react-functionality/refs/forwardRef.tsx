@@ -14,7 +14,7 @@ const ForwardRef: React.FC = () => {
     return () => clearTimeout(id);
   }, []);
 
-  return <Button ref={ref} />;
+  return <Button text="Hello" ref={ref} />;
 };
 
 export default ForwardRef;

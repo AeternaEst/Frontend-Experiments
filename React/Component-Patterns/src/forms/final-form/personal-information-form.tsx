@@ -23,6 +23,22 @@ interface PersonalInformationFormValues {
   };
 }
 
+type ContactInformationErrors = Omit<
+  PersonalInformationFormValues,
+  "preferences"
+>;
+type PreferencesErrors = {
+  preferences: {
+    food: string;
+    vegan: string;
+    favoriteRapper: string;
+  };
+};
+
+type PersonalInformationErrors = DeepPartial<
+  ContactInformationErrors & PreferencesErrors
+>;
+
 const initialValues: PersonalInformationFormValues = {
   contactInformation: {
     firstName: "",
@@ -60,6 +76,19 @@ const PersonalInformationForm: React.FC = () => {
     <Form<PersonalInformationFormValues>
       onSubmit={onSubmit}
       initialValues={initialValues}
+      validate={(values) => {
+        const errors: PersonalInformationErrors = {
+          contactInformation: {},
+          preferences: {},
+        };
+        if (values.contactInformation.firstName?.toLowerCase() !== "arnold") {
+          errors.contactInformation.firstName = "Useless name! Must be Arnold";
+        }
+        if (values.preferences.vegan === true) {
+          errors.preferences.vegan = "Vegans not allowed.";
+        }
+        return errors;
+      }}
       render={({
         handleSubmit,
         form,
@@ -103,7 +132,7 @@ const PersonalInformationForm: React.FC = () => {
                   Last Name:{" "}
                   <Field
                     name="contactInformation.lastName"
-                    validate={getValidationRules([
+                    validate={getValidationRules(
                       {
                         type: ValidationType.MaxLength,
                         priority: 3,
@@ -118,8 +147,8 @@ const PersonalInformationForm: React.FC = () => {
                         type: ValidationType.Required,
                         priority: 1,
                         errorMessage: "Is required",
-                      },
-                    ])}
+                      }
+                    )}
                     render={({ input, meta }) => (
                       <>
                         <input placeholder="last name" type="text" {...input} />{" "}

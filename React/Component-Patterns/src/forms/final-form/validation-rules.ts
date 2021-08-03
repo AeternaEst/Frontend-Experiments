@@ -27,7 +27,7 @@ export interface ValidationRule {
   errorMessage: string;
 }
 
-export const getValidationRules = (validationRules: ValidationRule[]) => {
+export const getValidationRules = (...validationRules: ValidationRule[]) => {
   const sortedRules = [...validationRules].sort(
     (a, b) => a.priority - b.priority
   );
