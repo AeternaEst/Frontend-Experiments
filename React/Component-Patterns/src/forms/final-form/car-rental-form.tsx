@@ -1,6 +1,6 @@
-import { FormApi, FORM_ERROR } from "final-form";
+import { FormApi, FormState, FORM_ERROR } from "final-form";
 import React from "react";
-import { Form } from "react-final-form";
+import { Form, FormSpy, useField, useForm } from "react-final-form";
 import DropdownField from "./fields/dropdown-field";
 import TextField from "./fields/text-field";
 import { ValidationType } from "./validation-rules";
@@ -8,11 +8,13 @@ import { ValidationType } from "./validation-rules";
 interface CarRentalFormValues {
   selectedCar: string;
   carComment: string;
+  rentalPrice: string;
 }
 
 const initialValues: CarRentalFormValues = {
   selectedCar: "ford_fiesta",
   carComment: "",
+  rentalPrice: "",
 };
 
 const CarRentalForm: React.FC = () => {
@@ -20,6 +22,7 @@ const CarRentalForm: React.FC = () => {
     values: CarRentalFormValues,
     formApi: FormApi<CarRentalFormValues>
   ) => {
+    console.log("submit clicked");
     if (values.selectedCar === "ford_fiesta") {
       return { [FORM_ERROR]: "Unacceptable selection" };
     }
@@ -28,12 +31,19 @@ const CarRentalForm: React.FC = () => {
     return undefined;
   };
 
+  const onFormSpy = (formState: FormState<CarRentalFormValues>) => {
+    if (formState.values.selectedCar === "tesla_cybertruck") {
+      console.log("Elon musk sucks");
+    }
+  };
+
   return (
     <div className="car-rental-form">
       <Form<CarRentalFormValues>
+        subscription={{ submitError: true }}
         initialValues={initialValues}
         onSubmit={submit}
-        render={({ handleSubmit, values, submitError }) => (
+        render={({ handleSubmit, submitError }) => (
           <form onSubmit={handleSubmit}>
             <DropdownField
               fieldId="selectedCar"
@@ -62,10 +72,34 @@ const CarRentalForm: React.FC = () => {
               label="Write a comment for you car"
               placeholderText="Car comment"
             />
-            Current price for selection: {values.selectedCar} Price:{" "}
-            {values.selectedCar === "ford_fiesta" ? 700 : 1700}
+            <FormSpy<CarRentalFormValues> subscription={{ values: true }}>
+              {({ values }) => (
+                <pre>
+                  Current price for selection: {values.selectedCar} Price:{" "}
+                  {values.selectedCar === "ford_fiesta" ? 700 : 1700}
+                </pre>
+              )}
+            </FormSpy>
+            <FormSpy subscription={{ values: true }}>
+              {() => {
+                const selectedCar = useField("selectedCar");
+                const form = useForm<CarRentalFormValues>();
+                console.log("use field selected car", selectedCar);
+                const rentalPrice =
+                  selectedCar.input.value === "ford_fiesta" ? "700" : "1700";
+                form.change("rentalPrice", rentalPrice);
+                return <></>;
+              }}
+            </FormSpy>
+            <TextField
+              fieldId="rentalPrice"
+              validationRules={[]}
+              label="Price"
+              disabled
+            />
             {submitError && <h3>{submitError}</h3>}
             <button type="submit">Submit</button>
+            <FormSpy onChange={onFormSpy} />
           </form>
         )}
       />

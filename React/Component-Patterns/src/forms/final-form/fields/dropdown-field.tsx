@@ -17,21 +17,24 @@ const DropdownField: React.FC<DropdownFieldProps> = ({
   validationRules,
   options,
   label,
-}) => (
-  <div className="dropdown-field">
-    {label && <label htmlFor={fieldId}>{label}</label>}
-    <Field
-      name={fieldId}
-      validate={getValidationRules(validationRules)}
-      component="select"
-    >
-      {options.map(({ text, value }) => (
-        <option key={value} value={value}>
-          {text}
-        </option>
-      ))}
-    </Field>
-  </div>
-);
+}) => {
+  console.log("Rendering dropdown-field");
+  return (
+    <div className="dropdown-field">
+      {label && <label htmlFor={fieldId}>{label}</label>}
+      <Field
+        name={fieldId}
+        validate={getValidationRules(validationRules)}
+        component="select"
+      >
+        {options.map(({ text, value }) => (
+          <option key={value} value={value}>
+            {text}
+          </option>
+        ))}
+      </Field>
+    </div>
+  );
+};
 
 export default DropdownField;
